@@ -1,3 +1,4 @@
+set shell=/bin/bash
 scripte utf-8
 " vim: set fenc=utf-8 tw=0:
 
