@@ -90,3 +90,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 "vmap <C-c> "*y
 
 au FileType haskell,python,javascript,c,cpp call rainbow#load()
+
+set ttimeoutlen=0
+set wildmenu
