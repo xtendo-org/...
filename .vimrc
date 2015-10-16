@@ -93,3 +93,6 @@ au FileType haskell,python,javascript,c,cpp call rainbow#load()
 
 set ttimeoutlen=0
 set wildmenu
+
+set swapfile
+set dir=~/tmp
