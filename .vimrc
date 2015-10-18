@@ -3,20 +3,20 @@ scripte utf-8
 set fencs=ucs-bom,cp949,utf-8
 
 set nocompatible
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Bundle 'christoomey/vim-tmux-navigator'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-markdown'
-Plugin 'bling/vim-airline'
-Plugin 'oblitum/rainbow'
-Plugin 'kshenoy/vim-signature'
-Plugin 'raichoo/purescript-vim'
-Plugin 'raichoo/haskell-vim'
-call vundle#end()
+
+call plug#begin('~/.vim/plugged')
+Plug 'gmarik/Vundle.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-markdown'
+Plug 'bling/vim-airline'
+Plug 'oblitum/rainbow'
+Plug 'kshenoy/vim-signature'
+Plug 'raichoo/purescript-vim'
+Plug 'raichoo/haskell-vim'
+call plug#end()
 filetype plugin indent on
 filetype on
 
