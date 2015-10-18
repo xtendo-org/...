@@ -1,0 +1,17 @@
+#!/bin/bash
+if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+	eval `dbus-launch --sh-syntax --exit-with-session`
+fi
+compiz --replace ccp & wmpid=$!
+sleep 1
+if [ -f ~/.compiz-session ]; then
+	source ~/.compiz-session &
+else
+    xscreensaver &
+    nautilus &
+    gvim ~/memo.md &
+    /home/user/Package/prospect &
+    xset b 50
+fi
+# Wait for WM
+wait $wmpid
