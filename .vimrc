@@ -1,6 +1,6 @@
 set shell=/bin/bash
 scripte utf-8
-" vim: set fenc=utf-8 tw=0:
+set fencs=ucs-bom,cp949,utf-8
 
 set nocompatible
 set rtp+=~/.vim/bundle/Vundle.vim
