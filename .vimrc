@@ -12,7 +12,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-markdown'
 Plug 'bling/vim-airline'
-Plug 'oblitum/rainbow'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'raichoo/haskell-vim'
@@ -89,7 +89,10 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 "" ctrl+c to copy
 "vmap <C-c> "*y
 
-au FileType haskell,python,javascript,c,cpp call rainbow#load()
+augroup rainbow
+    autocmd!
+    autocmd FileType haskell,python,javascript RainbowParentheses
+augroup END
 
 set ttimeoutlen=0
 set wildmenu
