@@ -19,3 +19,4 @@ for p in (find $HOME/.apps/**/bin | ag /bin\$)
 end
 
 alias apt-get "apt-get --no-install-recommends"
+set TERM xterm-256color
