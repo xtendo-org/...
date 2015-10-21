@@ -5,7 +5,6 @@ set fencs=ucs-bom,cp949,utf-8
 set nocompatible
 
 call plug#begin('~/.vim/plugged')
-Plug 'gmarik/Vundle.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-vinegar'
@@ -24,6 +23,7 @@ set ru
 set sc
 set nu
 
+" Restore the last editing position
 au BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line("$") |
 \ exe "norm g`\"" |
@@ -39,6 +39,7 @@ set softtabstop=4
 " set smarttab
 set expandtab
 
+" :w!! to save with sudo
 cmap w!! %!sudo tee > /dev/null %
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
@@ -59,17 +60,12 @@ endfunction
 " Run :FixWhitespace to remove end of line white space
 command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
 
-" always show file name
-set ls=2
-
 set fillchars+=vert:│
 hi VertSplit ctermfg=White ctermbg=Black term=NONE
 
 if filereadable($HOME . "/.vim/local.vim")
     so ~/.vim/local.vim
 endif
-
-" call pathogen#infect()
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -99,3 +95,10 @@ set wildmenu
 
 set swapfile
 set dir=~/tmp
+
+:command! Saha
+    \ execute ':w'
+    \ | execute ':silent !saha compile'
+    \ | execute ':redraw!'
+
+autocmd FileType md,markdown nnoremap <F9> :Saha<CR>
