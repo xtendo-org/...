@@ -10,6 +10,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-abolish'
 Plug 'bling/vim-airline'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kshenoy/vim-signature'
@@ -17,11 +21,13 @@ Plug 'raichoo/purescript-vim'
 Plug 'raichoo/haskell-vim'
 call plug#end()
 filetype plugin indent on
+filetype indent on
 filetype on
 
-set ru
-set sc
-set nu
+set ruler
+set showcmd
+set number
+set cursorline
 
 " Restore the last editing position
 au BufReadPost *
@@ -29,8 +35,9 @@ au BufReadPost *
 \ exe "norm g`\"" |
 \ endif
 
-set hls
+set hlsearch
 set incsearch
+set ignorecase
 
 sy enable
 set tabstop=4
@@ -64,9 +71,11 @@ set fillchars+=vert:│
 hi VertSplit ctermfg=White ctermbg=Black term=NONE
 
 if filereadable($HOME . "/.vim/local.vim")
-    so ~/.vim/local.vim
+    source ~/.vim/local.vim
 endif
 
+" airline settings
+set laststatus=2
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
@@ -96,9 +105,19 @@ set wildmenu
 set swapfile
 set dir=~/tmp
 
+nnoremap  :w<CR>
+inoremap  <ESC>:w<CR>
+
 :command! Saha
     \ execute ':w'
     \ | execute ':silent !saha compile'
     \ | execute ':redraw!'
 
-autocmd FileType md,markdown nnoremap <F9> :Saha<CR>
+autocmd FileType md,markdown nnoremap <F5> :Saha<CR>
+autocmd FileType md,markdown inoremap <F5> <ESC>:Saha<CR>
+
+" visually select the last inserted text
+nnoremap gV `[v`]
+
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
