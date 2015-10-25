@@ -1,8 +1,8 @@
 set shell=/bin/bash
-scripte utf-8
-set fencs=ucs-bom,cp949,utf-8
-
 set nocompatible
+
+scripte utf-8
+" set fencs=ucs-bom,cp949,utf-8
 
 call plug#begin('~/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
@@ -20,14 +20,21 @@ Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'raichoo/haskell-vim'
 call plug#end()
+
 filetype plugin indent on
 filetype indent on
 filetype on
+
+set title
 
 set ruler
 set showcmd
 set number
 set cursorline
+set cursorcolumn
+hi CursorLine cterm=NONE ctermbg=lightgray
+hi clear SpellBad
+hi SpellBad cterm=bold ctermbg=lightmagenta
 
 " Restore the last editing position
 au BufReadPost *
@@ -38,6 +45,8 @@ au BufReadPost *
 set hlsearch
 set incsearch
 set ignorecase
+set backspace=indent,eol,start
+set autoindent
 
 sy enable
 set tabstop=4
@@ -82,6 +91,7 @@ let g:airline_right_sep=''
 hi Search ctermbg=LightYellow ctermfg=Black
 hi Constant ctermfg=DarkBlue
 hi Comment ctermfg=Red term=italic
+hi Visual ctermbg=LightMagenta
 
 hi clear SignColumn
 hi GitGutterAdd ctermfg=Green
@@ -113,8 +123,9 @@ inoremap  <ESC>:w<CR>
     \ | execute ':silent !saha compile'
     \ | execute ':redraw!'
 
-autocmd FileType md,markdown nnoremap <F5> :Saha<CR>
-autocmd FileType md,markdown inoremap <F5> <ESC>:Saha<CR>
+autocmd FileType markdown nnoremap <F5> :Saha<CR>
+autocmd FileType markdown inoremap <F5> <ESC>:Saha<CR>
+autocmd FileType markdown setlocal spell spelllang=en_us
 
 " visually select the last inserted text
 nnoremap gV `[v`]
