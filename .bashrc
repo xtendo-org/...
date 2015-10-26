@@ -11,14 +11,25 @@ export HALCYON_GHC_VERSION=7.10.1
 export HALCYON_CABAL_VERSION=1.22.6.0
 
 # Always have only one instance of ssh-agent
-if ! pgrep -u $USER ssh-agent > /dev/null; then
-    ssh-agent > ~/..ssh-agent
-fi
 if [[ "$SSH_AGENT_PID" == "" ]]; then
-    eval `head -n 2 ~/..ssh-agent`
+    if ! pgrep ssh-agent > /dev/null; then
+        ssh-agent > ~/..ssh-agent
+        eval `head -n 2 ~/..ssh-agent`
+        echo "ssh-agent initialized"
+    else
+        eval `head -n 2 ~/..ssh-agent`
+        echo "ssh-agent exported"
+    fi
 fi
 
 # Stop the pesky Ctrl-S behavior.
 # Seriously, it's 2015 and we don't need
 # the legacy of teletype speed control.
 stty stop undef
+
+# PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# if rbenv exists, execute "rbenv init -"
+type -P "rbenv" > /dev/null && eval "$(rbenv init -)"
