@@ -19,6 +19,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'raichoo/haskell-vim'
+Plug 'wavded/vim-stylus'
 call plug#end()
 
 filetype plugin indent on
