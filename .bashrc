@@ -30,6 +30,11 @@ stty stop undef
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+# if pyenv exists, execute "pyenv init -"
+type -P "pyenv" > /dev/null && eval "$(pyenv init -)"
 
 # if rbenv exists, execute "rbenv init -"
 type -P "rbenv" > /dev/null && eval "$(rbenv init -)"
