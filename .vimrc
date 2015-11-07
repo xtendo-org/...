@@ -133,3 +133,6 @@ nnoremap gV `[v`]
 
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
+
+" visual mode backspace is now "delete without copy"
+vnoremap <backspace> "_d
