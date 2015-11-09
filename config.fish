@@ -5,9 +5,15 @@ end
 function fish_prompt
     set_color -b blue
     set_color white
-    echo -n (prompt_long_pwd) ''
-    set_color -b normal
+    echo -n '💻 ' (hostname) ''
+    set_color -b 9CF
     set_color blue
+    echo -n ''
+    set_color -b 9CF
+    set_color black
+    echo -n '' (prompt_long_pwd) ''
+    set_color -b normal
+    set_color 9CF
     echo -n ' '
     set_color normal
 end

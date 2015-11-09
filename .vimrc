@@ -20,6 +20,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'raichoo/haskell-vim'
 Plug 'wavded/vim-stylus'
+Plug 'dag/vim-fish'
 call plug#end()
 
 filetype plugin indent on
