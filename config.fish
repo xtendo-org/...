@@ -12,6 +12,10 @@ function fish_prompt
     set_color normal
 end
 
+function hunt
+    ps aux | grep $argv | grep -v grep | awk '{print $2}'
+end
+
 set PATH $HOME/.cabal/bin $PATH
 set PATH $HOME/.local/bin $PATH
 for p in (find $HOME/.apps/**/bin | ag /bin\$)
