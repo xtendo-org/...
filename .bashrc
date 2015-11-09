@@ -13,7 +13,7 @@ export HALCYON_CABAL_VERSION=1.22.6.0
 # Always have only one instance of ssh-agent
 if [[ "$SSH_AGENT_PID" == "" ]]; then
     if ! pgrep ssh-agent > /dev/null; then
-        ssh-agent > ~/..ssh-agent
+        ssh-agent -c > ~/..ssh-agent
         eval `head -n 2 ~/..ssh-agent`
         echo "ssh-agent initialized"
     else
