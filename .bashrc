@@ -3,7 +3,7 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 # Default: PS1='[\u@\h \W]\$ '
-PS1='\[\e[0;37m\]\[\e[44m\]\w \[\e[0;34m\]\[\e[0m\] '
+PS1='\[\e[0;37m\]\[\e[43m\]\w \[\e[0;33m\]\[\e[0m\] '
 
 alias apt-get='apt-get --no-install-recommends'
 
