@@ -116,8 +116,8 @@ set wildmenu
 set swapfile
 set dir=~/tmp
 
-nnoremap  :w<CR>
-inoremap  <ESC>:w<CR>
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>
 
 :command! Saha
     \ execute ':w'
