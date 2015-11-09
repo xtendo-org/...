@@ -22,6 +22,19 @@ function hunt
     ps aux | grep $argv | grep -v grep | awk '{print $2}'
 end
 
+# set ssh-agent
+
+if [ -n "$SSH_AGENT_PID" ]
+else
+    if pgrep ssh-agent > /dev/null
+        echo "ssh-agent is already on, exporting pid"
+    else
+        ssh-agent > ~/..ssh-agent
+        echo "ssh-agent is starting"
+    end
+    eval (head -n 2 ~/..ssh-agent)
+end
+
 set PATH $HOME/.cabal/bin $PATH
 set PATH $HOME/.local/bin $PATH
 for p in (find $HOME/.apps/**/bin | ag /bin\$)
