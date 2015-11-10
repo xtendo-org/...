@@ -57,6 +57,9 @@ set softtabstop=4
 " set smarttab
 set expandtab
 
+" hide certain file types in netrw
+let g:netrw_list_hide= '.*\.swp$,.*\.pyc$'
+
 " :w!! to save with sudo
 cmap w!! %!sudo tee > /dev/null %
 
