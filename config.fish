@@ -11,7 +11,7 @@ function fish_prompt
     echo -n ''
     set_color -b 9CF
     set_color black
-    echo -n '' (prompt_long_pwd) ''
+    echo -n ' 📂' (prompt_long_pwd) ''
     set_color -b normal
     set_color 9CF
     echo -n ' '
