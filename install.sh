@@ -1,8 +1,10 @@
-sudo bash -c "apt-get -y install git vim tree curl silversearcher-ag fish wget openssh-server ca-certificates sudo tmux &&
-chsh -s /usr/bin/fish"
+echo $USER > /tmp/currentusername
+sudo bash -c "apt-get -y install git vim tree curl silversearcher-ag fish wget openssh-server ca-certificates sudo tmux && \
+    cat /tmp/currentusername | xargs chsh -s /usr/bin/fish"
 [ -f ~/.vim/autoload/plug.vim ] || \
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    (curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &&
+    vim -c "PlugUpdate | qa")
 ln -sf ~/.../.tmux.conf ~/
 ln -sf ~/.../.vimrc ~/
 grep -Fxq "source ~/.../.bashrc" ~/.bashrc || \
