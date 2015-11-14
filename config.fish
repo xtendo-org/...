@@ -26,7 +26,7 @@ end
 
 if [ -n "$SSH_AGENT_PID" ]
 else
-    if notpgrep ssh-agent > /dev/null
+    if not pgrep ssh-agent > /dev/null
         ssh-agent -c > ~/..ssh-agent
     end
     eval (head -n 2 ~/..ssh-agent)
