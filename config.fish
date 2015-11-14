@@ -26,11 +26,8 @@ end
 
 if [ -n "$SSH_AGENT_PID" ]
 else
-    if pgrep ssh-agent > /dev/null
-        echo "ssh-agent is already on, exporting pid"
-    else
-        ssh-agent > ~/..ssh-agent
-        echo "ssh-agent is starting"
+    if notpgrep ssh-agent > /dev/null
+        ssh-agent -c > ~/..ssh-agent
     end
     eval (head -n 2 ~/..ssh-agent)
 end

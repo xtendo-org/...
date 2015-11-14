@@ -14,12 +14,9 @@ export HALCYON_CABAL_VERSION=1.22.6.0
 if [[ "$SSH_AGENT_PID" == "" ]]; then
     if ! pgrep ssh-agent > /dev/null; then
         ssh-agent -c > ~/..ssh-agent
-        eval `head -n 2 ~/..ssh-agent`
-        echo "ssh-agent initialized"
-    else
-        eval `head -n 2 ~/..ssh-agent`
-        echo "ssh-agent exported"
     fi
+    eval `head -n 2 ~/..ssh-agent | sed -r "s/^setenv //g" | sed -r "s/ /=/g"`
+
 fi
 
 # Stop the pesky Ctrl-S behavior.
