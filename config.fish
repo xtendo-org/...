@@ -12,10 +12,22 @@ function fish_prompt
     set_color -b 9CF
     set_color black
     echo -n '' (prompt_long_pwd) ''
-    set_color -b normal
-    set_color 9CF
-    echo -n ' '
-    set_color normal
+    if [ (jobs | wc -l) = 0 ]
+        set_color -b normal
+        set_color 9CF
+        echo -n ' '
+        set_color normal
+    else
+        set_color -b red
+        set_color 9CF
+        echo -n ''
+        set_color white
+        echo -n '' (jobs | wc -l) ''
+        set_color -b normal
+        set_color red
+        echo -n ' '
+        set_color normal
+    end
 end
 
 function hunt
