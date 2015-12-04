@@ -132,6 +132,8 @@ autocmd FileType markdown nnoremap <F5> :Saha<CR>
 autocmd FileType markdown inoremap <F5> <ESC>:Saha<CR>
 autocmd FileType markdown setlocal spell spelllang=en_us
 
+autocmd FileType gitcommit set smarttab
+
 " turn off spell checking
 nnoremap <leader>` :set nospell<CR>
 
