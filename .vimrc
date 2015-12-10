@@ -18,7 +18,7 @@ Plug 'bling/vim-airline'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
-Plug 'raichoo/haskell-vim'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
 call plug#end()
