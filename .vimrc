@@ -32,9 +32,6 @@ set title
 set ruler
 set showcmd
 set number
-set cursorline
-set cursorcolumn
-hi CursorLine cterm=NONE ctermbg=lightgray
 hi clear SpellBad
 hi SpellBad cterm=bold ctermbg=lightmagenta
 
