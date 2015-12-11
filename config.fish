@@ -46,9 +46,9 @@ end
 
 set PATH $HOME/.cabal/bin $PATH
 set PATH $HOME/.local/bin $PATH
-for p in (find $HOME/.apps/**/bin | ag /bin\$)
-    set PATH $p $PATH
-end
+# for p in (find $HOME/.apps/**/bin | ag /bin\$)
+#     set PATH $p $PATH
+# end
 
 alias apt-get "apt-get --no-install-recommends"
 set TERM xterm-256color
