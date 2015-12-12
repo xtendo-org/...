@@ -9,7 +9,6 @@ if [ -f ~/.compiz-session ]; then
 else
     xscreensaver &
     nautilus &
-    gvim ~/memo.md &
     /home/user/Package/prospect &
     xset b 50
 fi
