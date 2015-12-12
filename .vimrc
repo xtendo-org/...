@@ -141,3 +141,10 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 " visual mode backspace is now "delete without copy"
 vnoremap <backspace> "_d
+
+" 79th and 80th column is colored. From
+" https://github.com/simnalamburt/.dotfiles/blob/master/.vimrc
+set textwidth=78
+set formatoptions-=t
+set colorcolumn=+1,+2
+hi ColorColumn ctermbg=lightgray
