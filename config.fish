@@ -3,6 +3,10 @@ function prompt_long_pwd --description 'Print the current working directory'
     echo $PWD | sed -e "s|^$HOME|~|"
 end
 function fish_prompt
+    # set tmux window name
+    if [ $TMUX ]
+        echo $PWD | sed -e "s|^$HOME|~|" | xargs basename | xargs tmux rename-window
+    end
     set_color -b blue
     set_color white
     echo -n '' (hostname) ''
