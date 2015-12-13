@@ -7,23 +7,28 @@ function fish_prompt
     if [ $TMUX ]
         echo $PWD | sed -e "s|^$HOME|~|" | xargs basename | xargs tmux rename-window
     end
-    set_color -b blue
-    set_color white
-    echo -n '' (hostname) ''
-    set_color -b 9CF
-    set_color blue
-    echo -n ''
-    set_color -b 9CF
-    set_color black
-    echo -n '' (prompt_long_pwd) ''
+    echo -n (set_color -b 9CF)(set_color black) (prompt_long_pwd) ''
+    set git_color 9CF
+    # git
+    set -l git_dir (git rev-parse --git-dir 2> /dev/null)
+    if test -n "$git_dir"
+        set -l branch (git branch 2> /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')
+        set -l git_status (git status -s)
+        if test -n "$git_status"
+            set git_color yellow
+        else
+            set git_color cyan
+        end
+        echo -n (set_color -b "$git_color")(set_color 9CF)''(set_color white) $branch (set_color normal)
+    end
     if [ (jobs | wc -l) = 0 ]
         set_color -b normal
-        set_color 9CF
+        set_color "$git_color"
         echo -n ' '
         set_color normal
     else
         set_color -b red
-        set_color 9CF
+        set_color "$git_color"
         echo -n ''
         set_color white
         echo -n '' (jobs | wc -l) ''
