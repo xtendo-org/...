@@ -9,7 +9,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-eunuch'
@@ -145,6 +144,6 @@ vnoremap <backspace> "_d
 " 79th and 80th column is colored. From
 " https://github.com/simnalamburt/.dotfiles/blob/master/.vimrc
 set textwidth=78
-set formatoptions-=t
 set colorcolumn=+1,+2
 hi ColorColumn ctermbg=lightgray
+autocmd BufNewFile,BufRead * setlocal formatoptions-=t
