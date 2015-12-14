@@ -13,29 +13,28 @@ function fish_prompt
     set -l git_dir (git rev-parse --git-dir 2> /dev/null)
     if test -n "$git_dir"
         set -l branch (git branch 2> /dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')
-        set -l git_status (git status -s)
+        if test "$branch" = 'master'
+            set branch ''
+        end
+        set -l git_status (git status -s 2> /dev/null)
         if test -n "$git_status"
             set git_color yellow
         else
             set git_color cyan
         end
-        echo -n (set_color -b "$git_color")(set_color 9CF)''(set_color white) $branch (set_color normal)
+        set -l git_ahead (git rev-list origin/master.. 2> /dev/null | wc -l)
+        if test "$git_ahead" != 0
+            set git_ahead " $git_ahead "
+        else
+            set git_ahead ""
+        end
+        echo -n (set_color -b "$git_color")(set_color 9CF)''(set_color white) $branch $git_ahead(set_color normal)
     end
-    if [ (jobs | wc -l) = 0 ]
-        set_color -b normal
-        set_color "$git_color"
-        echo -n ' '
-        set_color normal
+    set -l current_jobs (jobs | wc -l)
+    if [ "$current_jobs" = 0 ]
+        echo -n (set_color -b normal)(set_color "$git_color")' '
     else
-        set_color -b red
-        set_color "$git_color"
-        echo -n ''
-        set_color white
-        echo -n '' (jobs | wc -l) ''
-        set_color -b normal
-        set_color red
-        echo -n ' '
-        set_color normal
+        echo -n (set_color -b red)(set_color "$git_color")''(set_color white) "$current_jobs" (set_color -b normal)(set_color red)' '
     end
 end
 
