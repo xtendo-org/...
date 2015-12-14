@@ -42,7 +42,7 @@ au BufReadPost *
 
 set hlsearch
 set incsearch
-set ignorecase
+set nowrapscan
 set backspace=indent,eol,start
 set autoindent
 
@@ -124,13 +124,26 @@ inoremap <C-s> <ESC>:w<CR>
     \ | execute ':silent !saha compile'
     \ | execute ':redraw!'
 
-autocmd FileType markdown nnoremap <F5> :Saha<CR>
-autocmd FileType markdown inoremap <F5> <ESC>:Saha<CR>
-autocmd FileType markdown,gitcommit setlocal spell spelllang=en_us
-autocmd FileType gitcommit set smarttab
+" 79th and 80th column is colored. From
+" https://github.com/simnalamburt/.dotfiles/blob/master/.vimrc
+set textwidth=78
+set colorcolumn=+1,+2
+hi ColorColumn ctermbg=lightgray
+set formatoptions-=t
+set formatoptions+=c
+set formatoptions+=r
+
+autocmd FileType markdown
+    \ nnoremap <F5> :Saha<CR>
+    \ | inoremap <F5> <ESC>:Saha<CR>
+    \ | setlocal formatoptions=q
+autocmd FileType gitcommit
+    \ set smarttab
+    \ | setlocal formatoptions+=t
+autocmd FileType markdown,gitcommit setlocal spell
 
 " turn off spell checking
-nnoremap <leader>` :set nospell<CR>
+nnoremap <leader>` :set spell!<CR>
 
 " visually select the last inserted text
 nnoremap gV `[v`]
@@ -140,10 +153,3 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 " visual mode backspace is now "delete without copy"
 vnoremap <backspace> "_d
-
-" 79th and 80th column is colored. From
-" https://github.com/simnalamburt/.dotfiles/blob/master/.vimrc
-set textwidth=78
-set colorcolumn=+1,+2
-hi ColorColumn ctermbg=lightgray
-autocmd BufNewFile,BufRead * setlocal formatoptions-=t
