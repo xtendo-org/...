@@ -35,9 +35,9 @@ hi SpellBad cterm=bold ctermbg=lightmagenta
 
 " Restore the last editing position
 au BufReadPost *
-\ if line("'\"") > 0 && line("'\"") <= line("$") |
-\ exe "norm g`\"" |
-\ endif
+\ if line("'\"") > 0 && line("'\"") <= line("$")  && &filetype != "gitcommit"
+\ | exe "norm g`\""
+\ | endif
 
 set hlsearch
 set incsearch
