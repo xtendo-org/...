@@ -139,6 +139,7 @@ autocmd FileType markdown
 autocmd FileType gitcommit
     \ set smarttab
     \ | setlocal formatoptions+=t
+    \ | setlocal textwidth=72
 autocmd FileType markdown,gitcommit setlocal spell
 
 " turn off spell checking
