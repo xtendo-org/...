@@ -5,7 +5,7 @@ end
 function fish_prompt
     # set tmux window name
     if [ $TMUX ]
-        echo $PWD | sed -e "s|^$HOME|~|" | xargs -0 basename | sed -e "s| |\\\\ |" | xargs tmux rename-window
+        echo $PWD | sed -e "s|^$HOME|~|" | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window
     end
     echo -n (set_color -b 9CF)(set_color black) (prompt_long_pwd) ''
     set git_color 9CF
