@@ -10,5 +10,5 @@ ln -sf ~/.../.tmux.conf ~/
 ln -sf ~/.../.vimrc ~/
 grep -Fxq "source ~/.../.bashrc" ~/.bashrc || \
     echo "source ~/.../.bashrc" >> ~/.bashrc
-mkdir -p ~/.config/fish
+curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
 ln -sf ~/.../config.fish ~/.config/fish/config.fish
