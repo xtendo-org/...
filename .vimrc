@@ -132,10 +132,11 @@ set formatoptions-=t
 set formatoptions+=c
 set formatoptions+=r
 
-autocmd FileType markdown
+autocmd FileType markdown,text
     \ nnoremap <F5> :Saha<CR>
     \ | inoremap <F5> <ESC>:Saha<CR>
     \ | setlocal formatoptions=q
+    \ | setlocal colorcolumn=
 autocmd FileType gitcommit
     \ set smarttab
     \ | setlocal formatoptions+=t
