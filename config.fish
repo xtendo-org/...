@@ -70,4 +70,5 @@ set PATH $HOME/.local/bin $PATH
 # end
 
 alias apt-get "apt-get --no-install-recommends"
+alias u "unbreak open"
 set TERM xterm-256color
