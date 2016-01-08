@@ -154,3 +154,9 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 " visual mode backspace is now "delete without copy"
 vnoremap <backspace> "_d
+
+" minimal number of screen lines to keep above and below the cursor
+set scrolloff=5
+
+" color of matching parenthesis
+hi MatchParen cterm=none ctermbg=red ctermfg=black
