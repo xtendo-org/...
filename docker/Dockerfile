@@ -24,6 +24,11 @@ RUN \
 
 ENV LC_ALL en_US.UTF-8
 
+# Haskell
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 575159689BEFB442
+RUN echo 'deb http://download.fpcomplete.com/debian jessie main' | tee /etc/apt/sources.list.d/fpco.list
+RUN apt-get update && apt-get install stack -y
+
 # create user
 RUN \
     adduser --disabled-password --gecos '' ubuntu &&\
@@ -41,6 +46,12 @@ RUN \
     ln -sf ~/.../config.fish ~/.config/fish/config.fish &&\
     ln -sf ~/.../.tmux.conf ~/ &&\
     ln -sf ~/.../.vimrc ~/ &&\
-    (grep -Fxq "source ~/.../.bashrc" ~/.bashrc || echo "source ~/.../.bashrc" >> ~/.bashrc)
-RUN [ -f ~/.vim/autoload/plug.vim ] || (curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim -c "PlugUpdate | qa")
+    echo "source ~/.../.bashrc" >> ~/.bashrc
+RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim -c "PlugUpdate | qa"
 RUN mkdir -p ~/tmp
+
+# SSH
+USER root
+RUN service ssh start
+USER ubuntu
+
