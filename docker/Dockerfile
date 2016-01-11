@@ -31,13 +31,13 @@ RUN apt-get update && apt-get install stack -y
 
 # create user
 RUN \
-    adduser --disabled-password --gecos '' ubuntu &&\
-    adduser ubuntu sudo &&\
+    adduser --disabled-password --gecos '' user &&\
+    adduser user sudo &&\
     # username:password
-    echo ubuntu:1234 | chpasswd
-RUN chsh -s /usr/bin/fish ubuntu
-USER ubuntu
-WORKDIR /home/ubuntu
+    echo user:1234 | chpasswd
+RUN chsh -s /usr/bin/fish user
+USER user
+WORKDIR /home/user
 
 # configuration
 RUN git clone --depth=1 https://github.com/kinoru/....git
@@ -50,8 +50,20 @@ RUN \
 RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim -c "PlugUpdate | qa"
 RUN mkdir -p ~/tmp
 
-# SSH
+# SSH server
 USER root
-RUN service ssh start
-USER ubuntu
+RUN \
+    sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config &&\
+    sed -i 's/^#AuthorizedKeysFile /AuthorizedKeysFile /g' /etc/ssh/sshd_config
+USER user
+RUN \
+    mkdir -p ~/.ssh &&\
+    echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGg1a5lmF1iEIhYfsb+/4q1qmr7K4PXmObqA4GJ+ixJz user@dev" > ~/.ssh/authorized_keys
 
+# npm
+USER root
+RUN apt-get install -y nodejs-legacy npm
+
+RUN mkdir /var/run/sshd
+RUN echo "export VISIBLE=now" >> /etc/profile
+CMD ["/usr/sbin/sshd", "-D"]
