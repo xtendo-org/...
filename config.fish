@@ -72,3 +72,8 @@ set PATH $HOME/.local/bin $PATH
 alias apt-get "apt-get --no-install-recommends"
 alias u "unbreak open"
 set TERM xterm-256color
+
+# pyenv
+set -x PATH "/home/user/.pyenv/bin" $PATH
+status --is-interactive; and . (pyenv init -|psub)
+status --is-interactive; and . (pyenv virtualenv-init -|psub)

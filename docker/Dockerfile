@@ -64,6 +64,10 @@ RUN \
 USER root
 RUN apt-get install -y nodejs-legacy npm
 
+# pyenv
+RUN apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev
+RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+
 RUN mkdir /var/run/sshd
 RUN echo "export VISIBLE=now" >> /etc/profile
 CMD ["/usr/sbin/sshd", "-D"]
