@@ -45,6 +45,7 @@ set incsearch
 set nowrapscan
 set backspace=indent,eol,start
 set autoindent
+set ve=onemore " enable moving to the end of the line
 
 sy enable
 set tabstop=4
@@ -91,8 +92,10 @@ let g:airline_right_sep=''
 
 hi Search ctermbg=LightYellow ctermfg=Black
 hi Constant ctermfg=DarkBlue
-hi Comment ctermfg=Red term=italic
+hi Comment ctermfg=Red cterm=italic
 hi Visual ctermbg=LightMagenta
+" color of matching parenthesis
+hi MatchParen cterm=bold ctermbg=darkblue ctermfg=black
 
 hi clear SignColumn
 hi GitGutterAdd ctermfg=Green
@@ -158,6 +161,3 @@ vnoremap <backspace> "_d
 
 " minimal number of screen lines to keep above and below the cursor
 set scrolloff=5
-
-" color of matching parenthesis
-hi MatchParen cterm=none ctermbg=red ctermfg=black
