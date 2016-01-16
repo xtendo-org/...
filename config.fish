@@ -18,7 +18,7 @@ function fish_prompt
     if [ $TMUX ]
         echo $PWD | sed -e "s|^$HOME|~|" | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window
     end
-    echo -n (set_color -b 9CF)(set_color black) (prompt_long_pwd) ''
+    echo -n (set_color -b blue)(set_color white) (hostname) (if test "$PYENV_VIRTUAL_ENV"; echo -n ' '; basename $PYENV_VIRTUAL_ENV; end ) (set_color -b 9CF)(set_color blue)''(set_color black) (prompt_long_pwd) ''
     set git_color 9CF
     # git
     set -l git_dir (git rev-parse --git-dir 2> /dev/null)
@@ -71,6 +71,7 @@ set PATH $HOME/.local/bin $PATH
 
 alias apt-get "apt-get --no-install-recommends"
 alias u "unbreak open"
+tic ~/.../screen-256color-italic.terminfo
 set TERM screen-256color-italic
 
 # pyenv
