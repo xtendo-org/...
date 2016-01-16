@@ -1,0 +1,6 @@
+.stack-work/
+__pycache__/
+ignoreme_*
+node_modules/
+build/
+npm-debug.log

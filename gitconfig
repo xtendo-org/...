@@ -1,0 +1,12 @@
+[user]
+  name = kinoru
+  email = xkinoru@gmail.com
+[push]
+  default = simple
+[color]
+  ui = true
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit
+[core]
+  excludesfile = ~/.gitexclude
+  pager = less -+$LESS -r
