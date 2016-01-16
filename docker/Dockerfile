@@ -27,7 +27,7 @@ ENV LC_ALL en_US.UTF-8
 # Haskell
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 575159689BEFB442
 RUN echo 'deb http://download.fpcomplete.com/debian jessie main' | tee /etc/apt/sources.list.d/fpco.list
-RUN apt-get update && apt-get install stack -y
+RUN apt-get update && apt-get install -y --no-install-recommends stack
 
 # create user
 RUN \
@@ -39,17 +39,6 @@ RUN chsh -s /usr/bin/fish user
 USER user
 WORKDIR /home/user
 
-# configuration
-RUN git clone --depth=1 https://github.com/kinoru/....git
-RUN \
-    mkdir -p ~/.config/fish &&\
-    ln -sf ~/.../config.fish ~/.config/fish/config.fish &&\
-    ln -sf ~/.../.tmux.conf ~/ &&\
-    ln -sf ~/.../.vimrc ~/ &&\
-    echo "source ~/.../.bashrc" >> ~/.bashrc
-RUN curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim -c "PlugUpdate | qa"
-RUN mkdir -p ~/tmp
-
 # SSH server
 USER root
 RUN \
@@ -60,13 +49,28 @@ RUN \
     mkdir -p ~/.ssh &&\
     echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGg1a5lmF1iEIhYfsb+/4q1qmr7K4PXmObqA4GJ+ixJz user@dev" > ~/.ssh/authorized_keys
 
-# npm
+# development utlities
 USER root
-RUN apt-get install -y nodejs-legacy npm
+RUN apt-get install -y --no-install-recommends man less
+
+# npm
+RUN apt-get install -y --no-install-recommends nodejs-legacy npm
 
 # pyenv
-RUN apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev
+RUN apt-get install -y --no-install-recommends libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev patch python-virtualenv python-pip python3-pip python-virtualenv
+USER user
 RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+RUN /home/user/.pyenv/bin/pyenv install 3.5.1
+RUN /home/user/.pyenv/bin/pyenv install 2.7.11
+RUN /home/user/.pyenv/bin/pyenv install 3.4.3
+USER root
+
+# PostgreSQL
+RUN apt-get install -y --no-install-recommends postgresql libpq-dev
+RUN \
+    service postgresql start &&\
+    sudo -u postgres createuser -d -s -r user &&\
+    sudo -u user createdb user
 
 RUN mkdir /var/run/sshd
 RUN echo "export VISIBLE=now" >> /etc/profile

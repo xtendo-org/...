@@ -2,28 +2,27 @@ Welcome to Kinoru's configuration madness!
 
 Pesky copyright probably does not even apply to these files. Browse and cherry-pick whatever you want.
 
-Note for my future self:
+Notable ones:
 
-- `install.sh`: Minimum configuration. Sufficient for development (virtual) machines.
-- `desktop.sh`: Additional and crazy configuration for Debian/Ubuntu desktops.
+- `config.fish`
+- `.vimrc`
+- `.tmux.conf`
 
-I use the text triumvirate of fish, vim, and tmux. All three of them are configured to adapt the Powerline style. [The style for tmux written by Klutzy](https://github.com/klutzy/.../blob/master/.tmux.conf) is minimal yet awesome.
+All three of them are configured to the Powerline style.
 
 ## Docker
 
-The `Dockerfile` describes my development environment.
+The `Dockerfile` describes my development environment, along with `install.sh`.
 
 ```bash
 docker build -t kinoru/dev .
-docker run -t -i -p 9999:22 -p 8001:8000 kinoru/dev /bin/bash
+docker run -d --name test_sshd -v /home/user/code:/home/user/code -v /home/user/Package:/home/user/package -v /home/user/...:/home/user/... -v /home/user/.vim:/home/user/.vim -h dev kinoru/dev
 ```
 
-Restarting:
+Clean up:
 
 ```bash
-docker stop container_name
-docker commit container_name test01
-docker run -t -i -p 9999:22 test01 /usr/bin/zsh
+docker ps -a | sed 1d |  awk '{print $1}' | xargs docker r
 ```
 
 ## Fullscreen title bar
