@@ -95,7 +95,7 @@ hi Constant ctermfg=DarkBlue
 hi Comment ctermfg=Red cterm=italic
 hi Visual ctermbg=LightMagenta
 " color of matching parenthesis
-hi MatchParen cterm=bold ctermbg=darkblue ctermfg=black
+hi MatchParen cterm=bold ctermbg=lightblue ctermfg=black
 
 hi clear SignColumn
 hi GitGutterAdd ctermfg=Green
