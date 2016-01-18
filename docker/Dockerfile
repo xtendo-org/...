@@ -72,6 +72,9 @@ RUN \
     sudo -u postgres createuser -d -s -r user &&\
     sudo -u user createdb user
 
+# libelf
+RUN apt-get install -y --no-install-recommends libelf-dev
+
 RUN mkdir /var/run/sshd
 RUN echo "export VISIBLE=now" >> /etc/profile
 CMD ["/usr/sbin/sshd", "-D"]
