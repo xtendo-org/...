@@ -19,7 +19,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
-Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html' }
 call plug#end()
 
 filetype plugin indent on
@@ -161,3 +161,8 @@ vnoremap <backspace> "_d
 
 " minimal number of screen lines to keep above and below the cursor
 set scrolloff=5
+
+" Haskell spell checking for comments only
+syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
+syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
+autocmd FileType haskell setlocal spell
