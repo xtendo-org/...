@@ -75,6 +75,8 @@ tic ~/.../screen-256color-italic.terminfo
 set TERM screen-256color-italic
 
 # pyenv
-set -x PATH "/home/user/.pyenv/bin" $PATH
-status --is-interactive; and . (pyenv init -|psub)
-status --is-interactive; and . (pyenv virtualenv-init -|psub)
+if which pyenv
+    set -x PATH "/home/user/.pyenv/bin" $PATH
+    status --is-interactive; and . (pyenv init -|psub)
+    status --is-interactive; and . (pyenv virtualenv-init -|psub)
+end
