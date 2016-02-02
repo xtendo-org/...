@@ -14,6 +14,7 @@ grep -Fxq "source ~/.../.bashrc" ~/.bashrc || \
 [ -e ~/.local/share/omf/README.md ] || \
     curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install\
     | fish
+mkdir -p ~/.config/fish
 ln -sf ~/.../config.fish ~/.config/fish/config.fish
 ln -sf ~/.../gitconfig ~/.gitconfig
 ln -sf ~/.../gitexclude ~/.gitexclude

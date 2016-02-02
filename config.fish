@@ -33,7 +33,7 @@ function fish_prompt
         else
             set git_color cyan
         end
-        set -l git_ahead (git rev-list origin/master.. 2> /dev/null | wc -l)
+        set -l git_ahead (git rev-list origin/master.. 2> /dev/null | wc -l | tr -d '[:space:]')
         if test "$git_ahead" != 0
             set git_ahead " $git_ahead "
         else
@@ -41,7 +41,7 @@ function fish_prompt
         end
         echo -n (set_color -b "$git_color")(set_color 9CF)''(set_color white) $branch $git_ahead(set_color normal)
     end
-    set -l current_jobs (jobs | wc -l)
+    set -l current_jobs (jobs | wc -l | tr -d '[:space:]')
     if [ "$current_jobs" = 0 ]
         echo -n (set_color -b normal)(set_color "$git_color")' '
     else
