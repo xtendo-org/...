@@ -1,14 +1,3 @@
-# Path to Oh My Fish install.
-set -gx OMF_PATH $HOME/.local/share/omf
-
-# Customize Oh My Fish configuration path.
-#set -gx OMF_CONFIG $HOME/.config/omf
-
-# Load oh-my-fish configuration.
-if test -e $OMF_PATH/init.fish
-    source $OMF_PATH/init.fish
-end
-
 set fish_greeting
 function prompt_long_pwd --description 'Print the current working directory'
     echo $PWD | sed -e "s|^$HOME|~|"
@@ -88,5 +77,4 @@ end
 # OS X coreutils (installed with brew)
 if [ -d /usr/local/opt/coreutils/libexec/gnubin/ ]
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
-    setenv MANPATH /usr/local/opt/coreutils/libexec/gnuman $MANPATH
 end

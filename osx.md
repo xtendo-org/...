@@ -14,3 +14,9 @@ brew install vim tmux fish git
 ```sh
 brew install coreutils
 ```
+
+## Host name
+
+```sh
+sudo scutil --set HostName "newname"
+```
