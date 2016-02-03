@@ -10,3 +10,4 @@
 [core]
   excludesfile = ~/.gitexclude
   pager = less -+$LESS -r
+  editor = vim

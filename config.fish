@@ -69,8 +69,12 @@ set PATH $HOME/.local/bin $PATH
 #     set PATH $p $PATH
 # end
 
+# aliases
 alias apt-get "apt-get --no-install-recommends"
 alias u "unbreak open"
+alias vi vim
+
+# TERM
 tic ~/.../screen-256color-italic.terminfo
 set TERM screen-256color-italic
 
