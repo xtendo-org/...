@@ -80,3 +80,9 @@ if type -q pyenv
     status --is-interactive; and . (pyenv init -|psub)
     status --is-interactive; and . (pyenv virtualenv-init -|psub)
 end
+
+# OS X coreutils (installed with brew)
+if [ -d /usr/local/opt/coreutils/libexec/gnubin/ ]
+    set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
+    setenv MANPATH /usr/local/opt/coreutils/libexec/gnuman $MANPATH
+end
