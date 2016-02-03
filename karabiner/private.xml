@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<root>
+    <item>
+        <name>COMMATOBACKSPACE</name>
+        <identifier>private.comma_to_backspace</identifier>
+        <autogen>
+            --KeyToKey--
+            KeyCode::COMMA,
+            KeyCode::DELETE
+        </autogen>
+    </item>
+    <item>
+        <name>BACKSPACETOCOMMA</name>
+        <identifier>private.backspace_to_comma</identifier>
+        <autogen>
+            --KeyToKey--
+            KeyCode::DELETE,
+            KeyCode::COMMA
+        </autogen>
+    </item>
+</root>
