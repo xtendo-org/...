@@ -1,5 +1,9 @@
 Steps required to retire a system. Memo for my future self.
 
-## GitHub
+## Change password
 
-- Unregister the public key for the system.
+Change password for the services with locally stored passwords.
+
+- Instant messengers.
+- GitHub.
+    - Remove the public key as well.
