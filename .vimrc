@@ -85,6 +85,15 @@ if filereadable($HOME . "/.vim/local.vim")
     source ~/.vim/local.vim
 endif
 
+" local.vim example:
+" set fencs=ucs-bom,utf-8,cp949
+" autocmd BufReadPre *.aes set nobackup
+" autocmd BufReadPre *.aes set nowritebackup
+" autocmd BufReadPre *.aes set noswapfile
+" nnoremap <C-v> "+P
+" vnoremap <C-v> "+P
+" vnoremap <C-c> "+ygv
+
 " airline settings
 set laststatus=2
 let g:airline_left_sep=''
