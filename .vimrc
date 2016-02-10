@@ -175,3 +175,9 @@ set scrolloff=5
 syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
 syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
 autocmd FileType haskell setlocal spell
+
+" vim-tmux-navigator: navigate even in insert mode
+imap <C-h> <ESC><C-h>
+imap <C-j> <ESC><C-j>
+imap <C-k> <ESC><C-k>
+imap <C-l> <ESC><C-l>
