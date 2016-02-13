@@ -12,11 +12,9 @@ ln -sf ~/.../.tmux.conf ~/
 grep -Fxq "source ~/.../.bashrc" ~/.bashrc || \
     echo "source ~/.../.bashrc" >> ~/.bashrc
 
-# OMF
-[ -e ~/.local/share/omf/README.md ] || \
-    ln -sf ~/.../omf ~/.config/omf && \
-    curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install\
-    | fish
+# fish
+mkdir -p ~/.config/fish/config/fish
+ln -sf ~/.../config.fish ~/.config/fish/config.fish
 
 # git
 ln -sf ~/.../gitconfig ~/.gitconfig
