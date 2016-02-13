@@ -4,3 +4,4 @@ ignoreme_*
 node_modules/
 build/
 npm-debug.log
+Session.vim
