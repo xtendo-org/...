@@ -1,7 +1,16 @@
 <?xml version="1.0"?>
 <root>
     <item>
-        <name>COMMATOBACKSPACE</name>
+        <name>Leave GT</name>
+        <identifier>private.leave_gt</identifier>
+        <autogen>
+            --KeyToKey--
+            KeyCode::COMMA, ModifierFlag::SHIFT_L,
+            KeyCode::COMMA, ModifierFlag::SHIFT_L
+        </autogen>
+    </item>
+    <item>
+        <name>Comma to Backspace</name>
         <identifier>private.comma_to_backspace</identifier>
         <autogen>
             --KeyToKey--
@@ -10,7 +19,7 @@
         </autogen>
     </item>
     <item>
-        <name>BACKSPACETOCOMMA</name>
+        <name>Backspace to Comma</name>
         <identifier>private.backspace_to_comma</identifier>
         <autogen>
             --KeyToKey--
