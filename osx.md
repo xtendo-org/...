@@ -20,3 +20,10 @@ brew install coreutils
 ```sh
 sudo scutil --set HostName "newname"
 ```
+
+## Keys
+
+- Force Quit: <kbd>Command</kbd> + <kbd>Option</kbd> + <kbd>Esc</kbd>
+- Lock screen: <kbd>Control</kbd> + <kbd>Shift</kbd> + <kbd>Delete</kbd>
+- Screenshot: <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd>
+- Screenshot of a window: <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> then <kbd>Space</kbd>
