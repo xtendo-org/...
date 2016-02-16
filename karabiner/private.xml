@@ -27,4 +27,22 @@
             KeyCode::COMMA
         </autogen>
     </item>
+    <item>
+        <name>Switch to Desktop 1</name>
+        <identifier>private.desktop_1</identifier>
+        <autogen>
+            --KeyToKey--
+            KeyCode::F1,
+            KeyCode::1, ModifierFlag::CONTROL_L
+        </autogen>
+    </item>
+    <item>
+        <name>Switch to Desktop 2</name>
+        <identifier>private.desktop_2</identifier>
+        <autogen>
+            --KeyToKey--
+            KeyCode::F2,
+            KeyCode::2, ModifierFlag::CONTROL_L
+        </autogen>
+    </item>
 </root>
