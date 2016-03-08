@@ -1,4 +1,4 @@
-set shell=/bin/bash
+set shell=/bin/sh
 set nocompatible
 
 scripte utf-8
@@ -20,7 +20,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
-Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html' }
+Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,nix' }
 call plug#end()
 
 filetype plugin indent on
@@ -182,3 +182,6 @@ imap <C-h> <ESC><C-h>
 imap <C-j> <ESC><C-j>
 imap <C-k> <ESC><C-k>
 imap <C-l> <ESC><C-l>
+
+" add nix filetype
+au BufNewFile,BufRead *.nix set filetype=nix
