@@ -1,3 +1,5 @@
+! Use the command below for some hint:
+! xmodmap -pke > current_xmodmap
 clear Lock
 keycode 66 = Escape Escape Escape
 keycode 59 = BackSpace less BackSpace
