@@ -64,8 +64,8 @@ alias u "unbreak open"
 alias vi vim
 
 # TERM
-tic ~/.../screen-256color-italic.terminfo
-set TERM screen-256color-italic
+tic ~/.../screen-256color.terminfo
+set TERM screen-256color
 
 # pyenv
 set -x PATH $HOME"/.pyenv/bin" $PATH
@@ -78,3 +78,5 @@ end
 if [ -d /usr/local/opt/coreutils/libexec/gnubin/ ]
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 end
+
+setenv SHELL (which fish)
