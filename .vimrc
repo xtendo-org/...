@@ -20,7 +20,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
-Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,nix' }
+Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,go,nix' }
 call plug#end()
 
 filetype plugin indent on
