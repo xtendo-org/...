@@ -4,3 +4,4 @@ clear Lock
 keycode 66 = Escape Escape Escape
 keycode 59 = BackSpace less BackSpace
 keycode 22 = comma less comma
+keycode 108 = Hangul Hangul Hangul
