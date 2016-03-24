@@ -8,7 +8,7 @@ end
 function fish_prompt
     # set tmux window name
     if [ $TMUX ]
-        echo $PWD | sed -e "s|^$HOME|~|" | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window
+        prompt_long_pwd | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window
     end
     echo -n (set_color -b blue)(set_color white) (hostname) (if test "$PYENV_VIRTUAL_ENV"; echo -n ' '; basename $PYENV_VIRTUAL_ENV; end ) (set_color -b 9CF)(set_color blue)''(set_color black) (prompt_long_pwd) ''
     set git_color 9CF
