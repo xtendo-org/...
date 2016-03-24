@@ -1,6 +1,9 @@
 set fish_greeting
 function prompt_long_pwd --description 'Print the current working directory'
-    echo $PWD | sed -e "s|^$HOME|~|"
+    set -l maybe_pwd (echo $PWD | sed -e "s|^$HOME|~|")
+    echo $maybe_pwd | grep -q "^~/work/go/src/"
+    and echo $maybe_pwd | sed -e "s|.*/\([-_A-Za-z]*\)\(\.git\)\?\$|\1|"
+    or echo $maybe_pwd
 end
 function fish_prompt
     # set tmux window name
@@ -79,4 +82,8 @@ if [ -d /usr/local/opt/coreutils/libexec/gnubin/ ]
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
 end
 
-setenv SHELL (which fish)
+# Set $GOPATH if there's a Go workspace
+if [ -d ~/work/go/ ]
+    setenv GOPATH ~/work/go
+    set PATH $GOPATH"/bin" $PATH
+end
