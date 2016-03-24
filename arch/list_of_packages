@@ -1,0 +1,58 @@
+# fundamental elements of life
+sudo
+fish
+gvim  # for Vim's X11 support
+tmux
+git
+openssh
+
+# power management
+upower
+powertop
+acpi
+pm-utils
+
+# device
+xf86-video-intel
+xf86-input-synaptics
+bluez
+bluez-utils
+wpa_supplicant
+
+# xorg
+xorg-server
+xorg-xinit
+xorg-utils
+xorg-xmodmap
+xorg-xrandr
+xorg-xrdb
+xorg-xinput
+
+# fonts
+noto-fonts
+adobe-source-han-sans-cn-fonts
+adobe-source-han-sans-jp-fonts
+adobe-source-han-sans-kr-fonts
+adobe-source-han-sans-tw-fonts
+
+# graphical configuration and management
+gnome-screensaver
+uim
+
+# graphical user applications
+terminator
+gmrun
+firefox
+gvim
+chromium
+gsimplecal
+
+# terminal tools
+wget
+unzip
+net-tools  # netstat
+
+# development
+go
+stack  # install libtinfo from AUR
+postgresql
