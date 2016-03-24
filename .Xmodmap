@@ -4,4 +4,7 @@ clear Lock
 keycode 66 = Escape Escape Escape
 keycode 59 = BackSpace less BackSpace
 keycode 22 = comma less comma
-keycode 108 = Hangul Hangul Hangul
+
+! Hangul
+keycode 65 = space Hangul space
+keycode 108 = Mode_switch Meta_R Alt_R Meta_R
