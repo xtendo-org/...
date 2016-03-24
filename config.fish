@@ -71,6 +71,9 @@ tic ~/.../screen-256color.terminfo
 set TERM screen-256color
 
 # pyenv
+# Install:
+# git clone --depth=1 https://github.com/yyuu/pyenv ~/.pyenv
+# git clone --depth=1 https://github.com/yyuu/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
 set -x PATH $HOME"/.pyenv/bin" $PATH
 if type -q pyenv
     status --is-interactive; and . (pyenv init -|psub)
