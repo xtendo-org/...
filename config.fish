@@ -70,16 +70,6 @@ alias vi vim
 tic ~/.../screen-256color.terminfo
 set TERM screen-256color
 
-# pyenv
-# Install:
-# git clone --depth=1 https://github.com/yyuu/pyenv ~/.pyenv
-# git clone --depth=1 https://github.com/yyuu/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
-set -x PATH $HOME"/.pyenv/bin" $PATH
-if type -q pyenv
-    status --is-interactive; and . (pyenv init -|psub)
-    status --is-interactive; and . (pyenv virtualenv-init -|psub)
-end
-
 # OS X coreutils (installed with brew)
 if [ -d /usr/local/opt/coreutils/libexec/gnubin/ ]
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
@@ -90,3 +80,13 @@ if [ -d ~/work/go/ ]
     setenv GOPATH ~/work/go
     set PATH $GOPATH"/bin" $PATH
 end
+
+# pyenv
+if not [ -d ~/.pyenv ]
+    echo "Installing pyenv..."
+    git clone --depth=1 https://github.com/yyuu/pyenv ~/.pyenv
+    git clone --depth=1 https://github.com/yyuu/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
+end
+set -x PATH $HOME"/.pyenv/bin" $PATH
+. (pyenv init -|psub)
+. (pyenv virtualenv-init -|psub)
