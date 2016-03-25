@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="zoom_out" mtime="1430896094" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+	<entry name="zoom_in" mtime="1430896092" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+</gconf>
