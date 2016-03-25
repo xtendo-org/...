@@ -66,10 +66,6 @@ alias apt-get "apt-get --no-install-recommends"
 alias u "unbreak open"
 alias vi vim
 
-# TERM
-tic ~/.../screen-256color.terminfo
-set TERM screen-256color
-
 # OS X coreutils (installed with brew)
 if [ -d /usr/local/opt/coreutils/libexec/gnubin/ ]
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
