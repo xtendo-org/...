@@ -41,6 +41,7 @@ uim
 
 # graphical user applications
 terminator
+gnome-terminal
 gmrun
 firefox
 gvim
