@@ -9,7 +9,7 @@ xrdb -merge ~/.Xresources
 xmodmap ~/.Xmodmap
 
 # keyboard repetition
-xset r rate 200 45
+xset r rate 300 40
 # idle screen off
 xset s 300 300
 
