@@ -19,7 +19,7 @@
     background_color = "#fdf6e3"
     background_image = None
     custom_command = fish
-    font = Envy Code R for Powerline 11
+    font = Envy Code R for Powerline 10
     foreground_color = "#657b83"
     scrollbar_position = hidden
     show_titlebar = False
