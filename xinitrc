@@ -10,8 +10,6 @@ xmodmap ~/.Xmodmap
 
 # keyboard repetition
 xset r rate 300 40
-# idle screen off
-xset s 300 300
 
 # touchpad
 source ~/.../lpx/configure_touchpad.sh
