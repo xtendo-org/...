@@ -21,6 +21,7 @@ Plug 'raichoo/purescript-vim'
 Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
 Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,go,nix' }
+Plug 'chrisbra/Recover.vim'
 call plug#end()
 
 filetype plugin indent on
