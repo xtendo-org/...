@@ -10,7 +10,6 @@ openssh
 upower
 powertop
 acpi
-pm-utils
 
 # device
 xf86-video-intel
