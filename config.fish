@@ -46,13 +46,12 @@ function hunt
 end
 
 # set ssh-agent
-
-if [ -n "$SSH_AGENT_PID" ]
-else
+if [ -z $SSH_AUTH_SOCK ]
     if not pgrep ssh-agent > /dev/null
-        ssh-agent -c > ~/..ssh-agent
+        ssh-agent -c | head -n 2 | source
+    else
+        set SSH_AUTH_SOCK (ls /tmp/ssh-*/agent.*)
     end
-    eval (head -n 2 ~/..ssh-agent)
 end
 
 set PATH $HOME/.cabal/bin $PATH
