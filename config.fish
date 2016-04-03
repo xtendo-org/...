@@ -86,4 +86,5 @@ set -x PATH $HOME"/.pyenv/bin" $PATH
 . (pyenv init -|psub)
 . (pyenv virtualenv-init -|psub)
 
+# chips: the fish plugin manager. https://github.com/kinoru/chips
 if [ -e ~/.config/chips/build.fish ] ; source ~/.config/chips/build.fish ; end
