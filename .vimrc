@@ -22,6 +22,10 @@ Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
 Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,go,nix' }
 Plug 'chrisbra/Recover.vim'
+" local plugins
+if filereadable($HOME . "/.vim/plugin.vim")
+    source ~/.vim/plugin.vim
+endif
 call plug#end()
 
 filetype plugin indent on
