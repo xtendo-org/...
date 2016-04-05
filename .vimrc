@@ -174,9 +174,10 @@ vnoremap <backspace> "_d
 set scrolloff=5
 
 " Haskell spell checking for comments only
-syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
-syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
-autocmd FileType haskell setlocal spell
+autocmd FileType haskell
+    \ syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
+    \ | syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
+    \ | setlocal spell
 
 " vim-tmux-navigator: navigate even in insert mode
 imap <C-h> <ESC><C-h>
