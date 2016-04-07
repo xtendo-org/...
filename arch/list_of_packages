@@ -43,6 +43,7 @@ terminator
 gnome-terminal
 gmrun
 firefox
+flashplugin
 gvim
 chromium
 gsimplecal
@@ -54,5 +55,5 @@ net-tools  # netstat
 
 # development
 go
-stack  # install libtinfo from AUR
+# stack: install libtinfo from AUR
 postgresql
