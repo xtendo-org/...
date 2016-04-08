@@ -76,15 +76,5 @@ if [ -d ~/work/go/ ]
     set PATH $GOPATH"/bin" $PATH
 end
 
-# pyenv
-if not [ -d ~/.pyenv ]
-    echo "Installing pyenv..."
-    git clone --depth=1 https://github.com/yyuu/pyenv ~/.pyenv
-    git clone --depth=1 https://github.com/yyuu/pyenv-virtualenv ~/.pyenv/plugins/pyenv-virtualenv
-end
-set -x PATH $HOME"/.pyenv/bin" $PATH
-. (pyenv init -|psub)
-. (pyenv virtualenv-init -|psub)
-
 # chips: the fish plugin manager. https://github.com/kinoru/chips
 if [ -e ~/.config/chips/build.fish ] ; source ~/.config/chips/build.fish ; end
