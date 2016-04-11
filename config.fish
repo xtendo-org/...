@@ -78,3 +78,9 @@ end
 
 # chips: the fish plugin manager. https://github.com/kinoru/chips
 if [ -e ~/.config/chips/build.fish ] ; source ~/.config/chips/build.fish ; end
+
+# rbenv
+if [ -d ~/.rbenv ]
+    set -x PATH $HOME"/.rbenv/bin" $PATH
+    . (rbenv init -|psub)
+end
