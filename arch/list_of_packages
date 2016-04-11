@@ -46,6 +46,9 @@ firefox
 flashplugin
 gvim
 chromium
+# chromium stopped working after an upgrade on Apr 11, 2016.
+# /usr/lib/chromium/chromium: error while loading shared libraries: libicui18n.so.57: cannot open shared object file: No such file or directory
+# Manually installing the "icu" packaged solved it.
 gsimplecal
 
 # terminal tools
@@ -57,3 +60,5 @@ net-tools  # netstat
 go
 # stack: install libtinfo from AUR
 postgresql
+mariadb
+vagrant
