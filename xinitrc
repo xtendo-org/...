@@ -20,7 +20,7 @@ xset r rate 300 40
 
 # touchpad
 source ~/.../lpx/configure_touchpad.sh
-syndaemon -i 3 -t -k &
+syndaemon -i 2 -t -k &
 
 gnome-screensaver &
 source ~/.../lpx/monitor.sh
