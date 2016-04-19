@@ -24,4 +24,5 @@ syndaemon -i 2 -t -k &
 
 gnome-screensaver &
 source ~/.../lpx/monitor.sh
+gsimplecal &
 compiz --replace
