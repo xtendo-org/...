@@ -11,3 +11,5 @@
   excludesfile = ~/.gitexclude
   pager = less -+$LESS -r
   editor = vim
+[log]
+  date = iso8601
