@@ -174,9 +174,6 @@ nnoremap <leader><space> :nohlsearch<CR>
 " visual mode backspace is now "delete without copy"
 vnoremap <backspace> "_d
 
-" minimal number of screen lines to keep above and below the cursor
-set scrolloff=5
-
 " Haskell spell checking for comments only
 autocmd FileType haskell
     \ syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
