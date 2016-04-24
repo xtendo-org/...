@@ -17,6 +17,7 @@ xf86-input-synaptics
 bluez
 bluez-utils
 wpa_supplicant
+alsa-utils
 
 # xorg
 xorg-server
