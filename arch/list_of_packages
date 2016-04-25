@@ -64,3 +64,4 @@ go
 postgresql
 mariadb
 vagrant
+docker  # sudo usermod -aG docker username
