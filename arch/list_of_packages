@@ -27,6 +27,7 @@ xorg-xmodmap
 xorg-xrandr
 xorg-xrdb
 xorg-xinput
+xclip
 
 # fonts
 noto-fonts
