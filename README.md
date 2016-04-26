@@ -15,7 +15,8 @@ All three of them are configured to the Powerline style.
 Hopefully someday I can manage these with dotfiles…
 
 - [Advanced Tab Navigation](https://addons.mozilla.org/en-US/firefox/addon/advanced-tab-navigation/): Switch to left, right, previously active tab and more with customizable hotkeys
-    - <kbd>Alt</kbd>+<kbd>j</kbd>, <kbd>k</kbd> for switching tabs
+    - Disable "After closing tab switch to previously active one"
+    - <kbd>Alt</kbd>+<kbd>j</kbd>, <kbd>k</kbd> for switching tabs (and do not ignore in editable content)
 - [Clean Links](https://addons.mozilla.org/en-US/firefox/addon/clean-links/): Converts obfuscated/nested links to genuine clean links
 - [Copy Link Text](https://addons.mozilla.org/en-US/firefox/addon/copy-link-text-4750/): Copy text without the trouble of using the mouse to highlight the text exactly or the annoyance of unintentionally visiting the link.
 - [Disable Ctrl-Q Shortcut](https://addons.mozilla.org/en-US/firefox/addon/disable-ctrl-q-shortcut/): Seriously, did _browser close_ and _tab close_ have to be next to each other? I'm fine with <kbd>Alt</kbd>+<kbd>F4</kbd>.
@@ -27,7 +28,7 @@ Hopefully someday I can manage these with dotfiles…
 - [uBlock Origin](https://github.com/gorhill/uBlock): Finally, an efficient blocker.
 - [Privacy Badger](https://www.eff.org/privacybadger)
 - [VimFx](https://github.com/akhodakivskiy/VimFx): Vim keyboard shortcuts for Firefox
-    - Disable the "Reload all tabs" key (Who in the right mind would want this?)
+    - Disable the "Reload all tabs" key
 
 ## Windows
 
