@@ -7,7 +7,6 @@ git
 openssh
 
 # power management
-upower
 powertop
 acpi
 
