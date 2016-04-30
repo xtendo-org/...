@@ -59,6 +59,7 @@ gsimplecal
 wget
 unzip
 net-tools  # netstat
+tree
 
 # development
 go
