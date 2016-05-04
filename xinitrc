@@ -22,7 +22,8 @@ xset r rate 300 40
 source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 2 -t -k &
 
+prospect &
 gnome-screensaver &
-source ~/.../lpx/monitor.sh
-gsimplecal &
-compiz --replace
+gnome-terminal &
+compiz --replace &
+wait
