@@ -6,6 +6,15 @@ function prompt_long_pwd --description 'Print the current working directory'
     or echo $maybe_pwd
 end
 function fish_prompt
+    # Directory-based pyenv-virtualenv
+    if [ -e .pyenv-virtualenv ]
+        [ (cat .pyenv-virtualenv) = (basename "$PYENV_VIRTUAL_ENV") ]
+        or pyenv activate (cat .pyenv-virtualenv) ^ /dev/null > /dev/null
+    else
+        [ "$PYENV_VIRTUAL_ENV" = '' ]
+        or pyenv deactivate
+    end
+
     # set tmux window name
     if [ $TMUX ]
         prompt_long_pwd | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window

@@ -6,3 +6,4 @@ build/
 npm-debug.log
 Session.vim
 dist/
+.pyenv-virtualenv
