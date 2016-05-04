@@ -60,11 +60,6 @@ set PATH $HOME/.local/bin $PATH
 #     set PATH $p $PATH
 # end
 
-# aliases
-alias apt-get "apt-get --no-install-recommends"
-alias u "unbreak open"
-alias vi vim
-
 # OS X coreutils (installed with brew)
 if [ -d /usr/local/opt/coreutils/libexec/gnubin/ ]
     set PATH /usr/local/opt/coreutils/libexec/gnubin $PATH
@@ -76,11 +71,18 @@ if [ -d ~/work/go/ ]
     set PATH $GOPATH"/bin" $PATH
 end
 
-# chips: the fish plugin manager. https://github.com/kinoru/chips
-if [ -e ~/.config/chips/build.fish ] ; source ~/.config/chips/build.fish ; end
-
 # rbenv
 if [ -d ~/.rbenv ]
     set -x PATH $HOME"/.rbenv/bin" $PATH
     . (rbenv init -|psub)
 end
+
+# chips: the fish plugin manager. https://github.com/kinoru/chips
+if [ -e ~/.config/chips/build.fish ] ; source ~/.config/chips/build.fish ; end
+alias chipsedit "vim ~/.config/chips/plugin.yaml"
+
+# aliases
+alias u "unbreak open"
+alias vim "echo NO"
+alias v "/usr/bin/vim"
+alias package "v ~/.../arch/list_of_packages"
