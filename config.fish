@@ -88,7 +88,7 @@ end
 
 # chips: the fish plugin manager. https://github.com/kinoru/chips
 if [ -e ~/.config/chips/build.fish ] ; source ~/.config/chips/build.fish ; end
-alias chipsedit "vim ~/.config/chips/plugin.yaml"
+alias chipsedit "v ~/.config/chips/plugin.yaml"
 
 # aliases
 alias u "unbreak open"
