@@ -1,16 +1,18 @@
 set fish_greeting
 function prompt_long_pwd --description 'Print the current working directory'
-    set -l maybe_pwd (echo $PWD | sed -e "s|^$HOME|~|")
-    echo $maybe_pwd | grep -q "^~/work/go/src/"
-    and echo $maybe_pwd | sed -e "s|.*/\([-_A-Za-z]*\)\(\.git\)\?\$|\1|"
-    or echo $maybe_pwd
+    echo $PWD | sed -e "s|^$HOME|~|"
 end
 function fish_prompt
     # set tmux window name
     if [ $TMUX ]
         prompt_long_pwd | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window
     end
-    echo -n (set_color -b blue)(set_color white) (hostname) (if test "$PYENV_VIRTUAL_ENV"; echo -n ' '; basename $PYENV_VIRTUAL_ENV; end ) (set_color -b 9CF)(set_color blue)''(set_color black) (prompt_long_pwd) ''
+    if test "$PYENV_VIRTUAL_ENV";
+        set_color -b black; set_color white;
+        echo -n ' '(basename $PYENV_VIRTUAL_ENV)' ';
+        set_color -b blue; set_color black; echo -n '';
+    end
+    echo -n (set_color -b blue)(set_color white) (hostname) (set_color -b 9CF)(set_color blue)''(set_color black) (prompt_long_pwd) ''
     set git_color 9CF
     # git
     set -l git_dir (git rev-parse --git-dir 2> /dev/null)
