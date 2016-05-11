@@ -1,6 +1,15 @@
 set fish_greeting
 function prompt_long_pwd --description 'Print the current working directory'
-    echo $PWD | sed -e "s|^$HOME|~|"
+    set -l maybe_pwd (echo $PWD | sed -e "s|^$HOME|~|")
+    if echo $maybe_pwd | grep -q "^~/code/"
+        echo $maybe_pwd | sed -e "s|^~/code/||"
+    else
+        if echo $maybe_pwd | grep -q "^~/work/"
+            echo $maybe_pwd | sed -e "s|^~/work/||"
+        else
+            echo $maybe_pwd
+        end
+    end
 end
 function fish_prompt
     # set tmux window name
