@@ -6,15 +6,6 @@ function prompt_long_pwd --description 'Print the current working directory'
     or echo $maybe_pwd
 end
 function fish_prompt
-    # Directory-based pyenv-virtualenv
-    if [ -e .pyenv-virtualenv ]
-        [ (cat .pyenv-virtualenv) = (basename "$PYENV_VIRTUAL_ENV") ]
-        or pyenv activate (cat .pyenv-virtualenv) ^ /dev/null > /dev/null
-    else
-        [ "$PYENV_VIRTUAL_ENV" = '' ]
-        or pyenv deactivate
-    end
-
     # set tmux window name
     if [ $TMUX ]
         prompt_long_pwd | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window
@@ -95,3 +86,15 @@ alias u "unbreak open"
 alias vim "echo NO"
 alias v "/usr/bin/vim"
 alias package "v ~/.../arch/list_of_packages"
+
+function cd
+    builtin cd $argv
+    # Directory-based pyenv-virtualenv
+    if [ -e .pyenv-virtualenv ]
+        [ (cat .pyenv-virtualenv) = (basename "$PYENV_VIRTUAL_ENV") ]
+        or pyenv activate (cat .pyenv-virtualenv) ^ /dev/null > /dev/null
+    else
+        [ "$PYENV_VIRTUAL_ENV" = '' ]
+        or pyenv deactivate
+    end
+end
