@@ -87,9 +87,8 @@ alias vim "echo NO"
 alias v "/usr/bin/vim"
 alias package "v ~/.../arch/list_of_packages"
 
-function cd
-    builtin cd $argv
-    # Directory-based pyenv-virtualenv
+# Directory-based pyenv-virtualenv
+function _pyenv-virtualenv
     if [ -e .pyenv-virtualenv ]
         [ (cat .pyenv-virtualenv) = (basename "$PYENV_VIRTUAL_ENV") ]
         or pyenv activate (cat .pyenv-virtualenv) ^ /dev/null > /dev/null
@@ -98,3 +97,10 @@ function cd
         or pyenv deactivate
     end
 end
+
+function cd
+    builtin cd $argv
+    _pyenv-virtualenv
+end
+
+_pyenv-virtualenv
