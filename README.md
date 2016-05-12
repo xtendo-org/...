@@ -25,6 +25,7 @@ Hopefully someday I can manage these with dotfiles…
     - [나무위키 펼침](https://github.com/kinoru/namuwiki-unfold)
 - [HTTPS Everywhere](https://www.eff.org/https-everywhere)
 - [Restart](https://addons.mozilla.org/en-US/firefox/addon/re-start/): It's really stupid that this is not a built-in function
+- [tabs closebutton restored](https://addons.mozilla.org/en-US/firefox/addon/tabs-closebutton-restored/)
 - [uBlock Origin](https://github.com/gorhill/uBlock): Finally, an efficient blocker.
 - [Privacy Badger](https://www.eff.org/privacybadger)
 - [VimFx](https://github.com/akhodakivskiy/VimFx): Vim keyboard shortcuts for Firefox
