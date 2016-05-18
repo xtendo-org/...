@@ -54,6 +54,7 @@ chromium
 # /usr/lib/chromium/chromium: error while loading shared libraries: libicui18n.so.57: cannot open shared object file: No such file or directory
 # Manually installing the "icu" packaged solved it.
 gsimplecal
+fontforge
 
 # terminal tools
 wget
