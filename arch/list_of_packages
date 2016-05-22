@@ -17,6 +17,8 @@ bluez
 bluez-utils
 wpa_supplicant
 alsa-utils
+cups
+hplip
 
 # xorg
 xorg-server
