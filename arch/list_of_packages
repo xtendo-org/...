@@ -39,7 +39,7 @@ adobe-source-han-sans-tw-fonts
 noto-fonts-emoji
 
 # graphical configuration and management
-gnome-screensaver
+# install xscreensaver-argh-logo from AUR
 uim
 dzen2
 libxft
