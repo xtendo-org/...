@@ -57,6 +57,7 @@ chromium
 # Manually installing the "icu" packaged solved it.
 gsimplecal
 fontforge
+graphviz
 
 # terminal tools
 wget
