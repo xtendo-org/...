@@ -13,15 +13,23 @@ export GTK_IM_MODULE="uim"
 export QT_IM_MODULE="uim"
 
 xrdb -merge ~/.Xresources
+
+# launch basic apps
+xscreensaver &
+gnome-terminal &
+
 xmodmap ~/.Xmodmap
 
 # keyboard repetition
 xset r rate 300 40
 
+# screen off will be managed by xscreensaver
+xset s off
+
+# stop xscreensaver for when a full screen app is running
+bash ~/.../arch/xscreensaverstopper.sh &
+
 # touchpad
 source ~/.../lpx/configure_touchpad.sh
-syndaemon -i 2 -t -k &
-
-xscreensaver &
-gnome-terminal &
+syndaemon -i 1 -t -k -R -d
 compiz --replace
