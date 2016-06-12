@@ -16,7 +16,10 @@ xf86-input-synaptics
 bluez
 bluez-utils
 wpa_supplicant
+## sound
 alsa-utils
+pulseaudio-alsa
+## printing
 cups
 hplip
 
@@ -36,7 +39,7 @@ adobe-source-han-sans-cn-fonts
 adobe-source-han-sans-jp-fonts
 adobe-source-han-sans-kr-fonts
 adobe-source-han-sans-tw-fonts
-noto-fonts-emoji
+# noto-fonts-emoji
 
 # graphical configuration and management
 # install xscreensaver-argh-logo from AUR
