@@ -12,6 +12,9 @@ export XMODIFIERS=@im=uim
 export GTK_IM_MODULE="uim"
 export QT_IM_MODULE="uim"
 
+# set DPI depending on resolution
+bash ~/.../lpx/init_monitor.sh
+
 xrdb -merge ~/.Xresources
 
 # launch basic apps
