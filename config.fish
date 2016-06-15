@@ -101,7 +101,7 @@ alias package "v ~/.../arch/list_of_packages"
 function _pyenv-virtualenv
     if [ -e .pyenv-virtualenv ]
         [ (cat .pyenv-virtualenv) = (basename "$PYENV_VIRTUAL_ENV") ]
-        or pyenv activate (cat .pyenv-virtualenv) ^ /dev/null > /dev/null
+        or pyenv activate --quiet (cat .pyenv-virtualenv)
     else
         [ "$PYENV_VIRTUAL_ENV" = '' ]
         or pyenv deactivate
