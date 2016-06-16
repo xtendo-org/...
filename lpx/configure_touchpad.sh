@@ -5,8 +5,8 @@ synclient PalmDetect=1
 synclient PalmMinWidth=8
 synclient PalmMinZ=1
 
-synclient PressureMotionMinZ=30
-synclient EmulateTwoFingerMinZ=100
+synclient PressureMotionMinZ=15
+synclient EmulateTwoFingerMinZ=80
 synclient EmulateTwoFingerMinW=1
 
 synclient FingerLow=5
@@ -17,9 +17,11 @@ synclient MinSpeed=0.5
 synclient MaxSpeed=6
 
 synclient MaxTapTime=100
-synclient MaxTapMove=50
-synclient SingleTapTimeout=200
+synclient MaxTapMove=1
+synclient SingleTapTimeout=150
+synclient MaxDoubleTapTime=50
 
+synclient TapButton1=1
 synclient TapButton2=3
 synclient TapButton3=2
 
