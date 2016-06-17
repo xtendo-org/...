@@ -27,7 +27,9 @@ xmodmap ~/.Xmodmap
 xset r rate 300 40
 
 # screen off will be managed by xscreensaver
+xset -dpms
 xset s off
+xset s off -dpms
 
 # stop xscreensaver for when a full screen app is running
 bash ~/.../arch/xscreensaverstopper.sh &
