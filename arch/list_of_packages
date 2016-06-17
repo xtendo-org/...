@@ -15,6 +15,7 @@ xf86-video-intel
 xf86-input-synaptics
 bluez
 bluez-utils
+rfkill
 wpa_supplicant
 ## sound
 alsa-utils
