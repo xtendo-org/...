@@ -20,6 +20,7 @@ wpa_supplicant
 ## sound
 alsa-utils
 pulseaudio-alsa
+pavucontrol
 ## printing
 cups
 hplip
