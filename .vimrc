@@ -20,8 +20,9 @@ Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
-Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,go,nix' }
+Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,htmldjango,css,go,nix' }
 Plug 'chrisbra/Recover.vim'
+Plug 'pangloss/vim-javascript'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
