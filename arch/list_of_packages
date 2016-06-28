@@ -24,6 +24,8 @@ pavucontrol
 ## printing
 cups
 hplip
+## disk
+exfat-utils
 
 # xorg
 xorg-server
