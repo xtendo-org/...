@@ -179,6 +179,7 @@ vnoremap <backspace> "_d
 autocmd FileType haskell
     \ syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
     \ | syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
+    \ | syn region  hsPragma	       start="{-#" end="#-}"
     \ | setlocal spell
 
 " vim-tmux-navigator: navigate even in insert mode
