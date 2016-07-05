@@ -31,6 +31,7 @@ Hopefully someday I can manage these with dotfiles…
 - [Privacy Badger](https://www.eff.org/privacybadger)
 - [VimFx](https://github.com/akhodakivskiy/VimFx): Vim keyboard shortcuts for Firefox
     - Disable the "Reload all tabs" key
+    - Disable the "Paste and go" key
 
 ## Windows
 
