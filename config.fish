@@ -94,7 +94,7 @@ alias chipsedit "v ~/.config/chips/plugin.yaml"
 
 # aliases
 alias u "unbreak open"
-alias v "vim"
+alias v "vim --servername (random)"
 alias package "v ~/.../arch/list_of_packages"
 
 # Directory-based pyenv-virtualenv
