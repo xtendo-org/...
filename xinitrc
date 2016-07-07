@@ -18,7 +18,7 @@ bash ~/.../lpx/init_monitor.sh
 xrdb -merge ~/.Xresources
 
 # launch basic apps
-xscreensaver &
+xscreensaver -no-splash &
 gnome-terminal &
 
 xmodmap ~/.Xmodmap
