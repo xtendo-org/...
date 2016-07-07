@@ -26,10 +26,8 @@ xmodmap ~/.Xmodmap
 # keyboard repetition
 xset r rate 300 40
 
-# screen off will be managed by xscreensaver
-xset -dpms
-xset s off
-xset s off -dpms
+# keep DPMS off
+python ~/.../lpx/dpms_killer.py &
 
 # stop xscreensaver for when a full screen app is running
 bash ~/.../arch/xscreensaverstopper.sh &
