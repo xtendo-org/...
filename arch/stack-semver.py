@@ -20,7 +20,10 @@ def parse_cabal(cabal_str):
         matched = one_package.match(cabal_str)
         if matched is None:
             break
-        yield matched.groups()[0]
+        pkg = matched.groups()[0]
+        if pkg == 'base':
+            continue
+        yield pkg
         cabal_str = cabal_str[matched.end() + 1:]
 
 try:
