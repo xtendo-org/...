@@ -71,6 +71,7 @@ wget
 unzip
 net-tools  # netstat
 tree
+expect
 
 # development
 go
