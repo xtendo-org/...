@@ -114,3 +114,7 @@ function cd
 end
 
 _pyenv-virtualenv
+
+# Change Ctrl+w to delete up to the last whitespace;
+# use Alt+Backspace for deleting path components.
+bind \cw backward-kill-bigword
