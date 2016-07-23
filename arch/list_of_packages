@@ -80,3 +80,7 @@ postgresql
 mariadb
 vagrant
 docker  # sudo usermod -aG docker username
+
+# graphics
+wine
+inkscape
