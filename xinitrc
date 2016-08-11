@@ -27,7 +27,8 @@ xmodmap ~/.Xmodmap
 xset r rate 300 40
 
 # keep DPMS off
-python ~/.../lpx/dpms_killer.py &
+# python ~/.../lpx/dpms_killer.py &
+bash ~/.../lpx/dpms_diediedie.sh &
 
 # stop xscreensaver for when a full screen app is running
 bash ~/.../arch/xscreensaverstopper.sh &
