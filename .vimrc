@@ -20,7 +20,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'raichoo/purescript-vim'
 Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
-Plug 'tpope/vim-sleuth', { 'for' : 'javascript,html,htmldjango,css,go,nix' }
 Plug 'chrisbra/Recover.vim'
 Plug 'pangloss/vim-javascript'
 " local plugins
@@ -178,8 +177,10 @@ vnoremap <backspace> "_d
 " Haskell spell checking for comments only
 autocmd FileType haskell
     \ syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
+    " \ | syn region  hsPragma	       start="{-#" end="#-}" contains=hsBlockComment
     \ | syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
-    \ | syn region  hsPragma	       start="{-#" end="#-}"
+    \ | syn region  hsPragma	       start="{-#" end="#-}" contains=hsBlockComment
+    " \ | syn match  hsBlockComment     "{-.*-}" contains=@Spell
     \ | setlocal spell
 
 " vim-tmux-navigator: navigate even in insert mode
@@ -190,3 +191,11 @@ imap <C-l> <ESC><C-l>
 
 " add nix filetype
 au BufNewFile,BufRead *.nix set filetype=nix
+
+" JavaScript indentation
+autocmd FileType javascript,css
+    \ filetype plugin indent off
+    \ | filetype indent off
+    \ | setlocal tabstop=2
+    \ | setlocal shiftwidth=2
+    \ | setlocal softtabstop=2
