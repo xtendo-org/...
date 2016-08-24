@@ -77,10 +77,10 @@ expect
 # development
 go
 # stack: install libtinfo from AUR
-postgresql
 mariadb
 vagrant
 docker  # sudo usermod -aG docker username
+rsync
 
 # graphics
 wine
