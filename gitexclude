@@ -1,6 +1,7 @@
 .stack-work/
 __pycache__/
 ignoreme_*
+IgnoreMe*
 node_modules/
 build/
 npm-debug.log
