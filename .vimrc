@@ -7,7 +7,6 @@ scripte utf-8
 call plug#begin('~/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -22,6 +21,8 @@ Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
 Plug 'chrisbra/Recover.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'justinmk/vim-dirvish'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
@@ -194,8 +195,16 @@ au BufNewFile,BufRead *.nix set filetype=nix
 
 " JavaScript indentation
 autocmd FileType javascript,css
-    \ filetype plugin indent off
-    \ | filetype indent off
-    \ | setlocal tabstop=2
+    \ setlocal tabstop=2
     \ | setlocal shiftwidth=2
     \ | setlocal softtabstop=2
+    \ | setlocal nocin nosi inde=
+    \ | setlocal ai
+
+" stylus
+autocmd FileType stylus
+    \ setlocal nocin nosi inde=
+    \ | setlocal ai
+
+" Disable H in visual mode (I make this mistake too often)
+vnoremap H h
