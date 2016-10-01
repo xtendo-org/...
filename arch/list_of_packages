@@ -6,6 +6,9 @@ tmux
 git
 openssh
 
+# system management
+pkgfile
+
 # power management
 powertop
 acpi
@@ -65,7 +68,6 @@ chromium
 gsimplecal
 fontforge
 graphviz
-gnome-mplayer
 
 # terminal tools
 wget
