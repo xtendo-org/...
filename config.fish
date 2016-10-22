@@ -95,7 +95,6 @@ alias chipsedit "v ~/.config/chips/plugin.yaml"
 # aliases
 alias u "unbreak open"
 alias v "vim --servername (random)"
-alias package "v ~/.../arch/list_of_packages"
 
 # Directory-based pyenv-virtualenv
 function _pyenv-virtualenv
@@ -108,9 +107,9 @@ function _pyenv-virtualenv
     end
 end
 
-function cd
-    builtin cd $argv
-    _pyenv-virtualenv
+function __check_pyenv --on-variable PWD --description 'Check for .pyenv-activate'
+  status --is-command-substitution; and return
+  _pyenv-virtualenv
 end
 
 _pyenv-virtualenv
