@@ -23,6 +23,7 @@ Plug 'chrisbra/Recover.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
+Plug 'elmcast/elm-vim'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
@@ -87,10 +88,6 @@ command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
 
 set fillchars+=vert:│
 hi VertSplit ctermfg=White ctermbg=Black term=NONE
-
-if filereadable($HOME . "/.vim/local.vim")
-    source ~/.vim/local.vim
-endif
 
 " local.vim example:
 " set fencs=ucs-bom,utf-8,cp949
@@ -208,3 +205,16 @@ autocmd FileType stylus
 
 " Disable H in visual mode (I make this mistake too often)
 vnoremap H h
+
+" Elm indentation
+autocmd FileType elm
+    \ setlocal tabstop=2
+    \ | setlocal shiftwidth=2
+    \ | setlocal softtabstop=2
+
+" Prevent q: which is typo of :q
+nnoremap q: :q
+
+if filereadable($HOME . "/.vim/local.vim")
+    source ~/.vim/local.vim
+endif
