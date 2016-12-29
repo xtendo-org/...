@@ -24,6 +24,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'elmcast/elm-vim'
+Plug 'junegunn/vim-slash'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
