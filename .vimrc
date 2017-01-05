@@ -219,3 +219,7 @@ nnoremap q: :q
 if filereadable($HOME . "/.vim/local.vim")
     source ~/.vim/local.vim
 endif
+
+" hsc is Haskell
+
+au BufRead,BufNewFile *.hsc set filetype=haskell
