@@ -14,7 +14,12 @@ end
 function fish_prompt
     # set tmux window name
     if [ $TMUX ]
-        prompt_long_pwd | xargs -0 basename | sed -e "s| |\\\\ |g" | xargs tmux rename-window
+        set -l current_path (prompt_long_pwd)
+        if [ $current_path != "/" ]
+            # set -l current_path (basename $current_path | sed -e "s| |\\\\ |g")
+            set current_path (basename $current_path)
+        end
+        tmux rename-window $current_path
     end
     if test "$PYENV_VIRTUAL_ENV";
         set_color -b black; set_color white;
