@@ -1,4 +1,4 @@
-Welcome to Kinoru's configuration madness.
+Welcome to XT's configuration madness.
 
 Browse and cherry-pick whatever you want.
 
