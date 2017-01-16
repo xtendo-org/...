@@ -55,7 +55,7 @@ function fish_prompt
         if test "$branch" = 'master'
             set branch ''
         end
-        set -l git_status (git status -s 2> /dev/null)
+        set -l git_status (git status -s 2> /dev/null | grep -v "^??")
         if test -n "$git_status"
             set git_color yellow
         else
