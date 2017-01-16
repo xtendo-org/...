@@ -1,4 +1,5 @@
 set fish_greeting
+
 function prompt_long_pwd --description 'Print the current working directory'
     set -l maybe_pwd (echo $PWD | sed -e "s|^$HOME|~|")
     if echo $maybe_pwd | grep -q "^~/code/"
@@ -11,23 +12,42 @@ function prompt_long_pwd --description 'Print the current working directory'
         end
     end
 end
+
+# tartar begins
+
+set -g tartar_bg NONE
+
+function prompt_open
+    echo -n (set_color -b $argv[1])(set_color $argv[2]) ''
+    set tartar_bg $argv[1]
+end
+
+function prompt_transition
+    # argv 1: new background color
+    # argv 2: new foreground color
+    echo -n '' (set_color -b $argv[1])(set_color $tartar_bg)\uE0B0(set_color $argv[2]) ''
+    set tartar_bg $argv[1]
+end
+
+function prompt_close
+    echo -n '' (set_color -b normal)(set_color $tartar_bg)\uE0B0(set_color normal) ''
+end
+
 function fish_prompt
-    # set tmux window name
-    if [ $TMUX ]
-        set -l current_path (prompt_long_pwd)
-        if [ $current_path != "/" ]
-            # set -l current_path (basename $current_path | sed -e "s| |\\\\ |g")
-            set current_path (basename $current_path)
-        end
-        tmux rename-window $current_path
+    # hostname
+    prompt_open blue white
+    echo -n (hostname)
+
+    # path
+    prompt_transition black white
+    echo -n (prompt_long_pwd)
+
+    # pyenv
+    if [ $PYENV_VIRTUAL_ENV ];
+        prompt_transition magenta white
+        echo -n (basename $PYENV_VIRTUAL_ENV);
     end
-    if test "$PYENV_VIRTUAL_ENV";
-        set_color -b black; set_color white;
-        echo -n ' '(basename $PYENV_VIRTUAL_ENV)' ';
-        set_color -b blue; set_color black; echo -n '';
-    end
-    echo -n (set_color -b blue)(set_color white) (hostname) (set_color -b 9CF)(set_color blue)''(set_color black) (prompt_long_pwd) ''
-    set git_color 9CF
+
     # git
     set -l git_dir (git rev-parse --git-dir 2> /dev/null)
     if test -n "$git_dir"
@@ -39,22 +59,27 @@ function fish_prompt
         if test -n "$git_status"
             set git_color yellow
         else
-            set git_color cyan
+            set git_color green
         end
         set -l git_ahead (git rev-list origin/master.. 2> /dev/null | wc -l | tr -d '[:space:]')
-        if test "$git_ahead" != 0
-            set git_ahead " $git_ahead "
-        else
-            set git_ahead ""
+        if git status -s 2> /dev/null | grep -q "^??"
+            set git_untracked "*"
         end
-        echo -n (set_color -b "$git_color")(set_color 9CF)''(set_color white) $branch $git_ahead(set_color normal)
+        if test "$git_ahead" != 0
+            set git_str " $git_ahead"
+        end
+        prompt_transition $git_color white
+        echo -n $branch $git_untracked $git_str
     end
+
+    # current jobs
     set -l current_jobs (jobs | grep -v /usr/bin/fish | wc -l | tr -d '[:space:]')
-    if [ "$current_jobs" = 0 ]
-        echo -n (set_color -b normal)(set_color "$git_color")' '
-    else
-        echo -n (set_color -b red)(set_color "$git_color")''(set_color white) "$current_jobs" (set_color -b normal)(set_color red)' '
+    if [ "$current_jobs" != 0 ]
+        prompt_transition red white
+        echo -n $current_jobs
     end
+
+    prompt_close
 end
 
 function hunt
@@ -112,9 +137,18 @@ function _pyenv-virtualenv
     end
 end
 
-function __check_pyenv --on-variable PWD --description 'Check for .pyenv-activate'
-  status --is-command-substitution; and return
-  _pyenv-virtualenv
+function __check_pwd --on-variable PWD --description 'PWD change hook'
+    status --is-command-substitution; and return
+    # set tmux window name
+    if [ $TMUX ]
+        set -l current_path (prompt_long_pwd)
+        if [ $current_path != "/" ]
+            # set -l current_path (basename $current_path | sed -e "s| |\\\\ |g")
+            set current_path (basename $current_path)
+        end
+        tmux rename-window $current_path
+    end
+    _pyenv-virtualenv
 end
 
 _pyenv-virtualenv
