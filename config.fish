@@ -63,13 +63,17 @@ function fish_prompt
         end
         set -l git_ahead (git rev-list origin/master.. 2> /dev/null | wc -l | tr -d '[:space:]')
         if git status -s 2> /dev/null | grep -q "^??"
-            set git_untracked "*"
+            set git_untracked "+"
         end
-        if test "$git_ahead" != 0
+        if [ "$git_ahead" != 0 ]
             set git_str " $git_ahead"
         end
+        set git_stash (git stash list | wc -l)
+        if [ $git_stash = 0 ]
+            set git_stash
+        end
         prompt_transition $git_color white
-        echo -n $branch $git_untracked $git_str
+        echo -n $git_stash $branch $git_untracked $git_str
     end
 
     # current jobs
