@@ -33,6 +33,9 @@ bash ~/.../lpx/dpms_diediedie.sh &
 # stop xscreensaver for when a full screen app is running
 bash ~/.../arch/xscreensaverstopper.sh &
 
+# fullscreen clock
+~/.../lpx/wall.sh &
+
 # touchpad
 source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
