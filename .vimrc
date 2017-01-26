@@ -21,10 +21,11 @@ Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
 Plug 'chrisbra/Recover.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'justinmk/vim-dirvish'
 Plug 'elmcast/elm-vim'
 Plug 'junegunn/vim-slash'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
@@ -223,3 +224,5 @@ endif
 " hsc is Haskell
 
 au BufRead,BufNewFile *.hsc set filetype=haskell
+
+nnoremap <C-p> :FZF<CR>
