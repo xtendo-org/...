@@ -217,12 +217,13 @@ autocmd FileType elm
 " Prevent q: which is typo of :q
 nnoremap q: :q
 
-if filereadable($HOME . "/.vim/local.vim")
-    source ~/.vim/local.vim
-endif
-
 " hsc is Haskell
 
 au BufRead,BufNewFile *.hsc set filetype=haskell
 
 nnoremap <C-p> :FZF<CR>
+
+" Reading the local conf should always be at the bottom
+if filereadable($HOME . "/.vim/local.vim")
+    source ~/.vim/local.vim
+endif
