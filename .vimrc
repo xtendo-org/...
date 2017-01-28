@@ -218,7 +218,6 @@ autocmd FileType elm
 nnoremap q: :q
 
 " hsc is Haskell
-
 au BufRead,BufNewFile *.hsc set filetype=haskell
 
 nnoremap <C-p> :FZF<CR>
