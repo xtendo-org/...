@@ -214,8 +214,8 @@ autocmd FileType elm
     \ | setlocal shiftwidth=2
     \ | setlocal softtabstop=2
 
-" Prevent q: which is typo of :q
-nnoremap q: :q
+" Disable q
+nnoremap q <Nop>
 
 " hsc is Haskell
 au BufRead,BufNewFile *.hsc set filetype=haskell
