@@ -220,7 +220,9 @@ nnoremap q <Nop>
 " hsc is Haskell
 au BufRead,BufNewFile *.hsc set filetype=haskell
 
+" fzf
 nnoremap <C-p> :FZF<CR>
+let g:fzf_layout = { 'down': '~25%' }
 
 " Reading the local conf should always be at the bottom
 if filereadable($HOME . "/.vim/local.vim")
