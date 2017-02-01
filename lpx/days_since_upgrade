@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+echo "("$(date +%s)"-"$(date +%s -d "$(tac /var/log/pacman.log | grep -m 1 "^\[.*\] \[PACMAN\] starting full system upgrade\$" | sed -e "s/^\[\(.*\) .*\] \[.*/\1/")")")/86400" | bc | tr '\n' ' '
