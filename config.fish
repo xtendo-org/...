@@ -57,7 +57,13 @@ end
 # aliases
 alias u "unbreak open"
 alias v "vim --servername (random)"
-alias vs "vim --servername (random) -S"
+function vs
+    if [ -e Session.vim ]
+        vim --servername (random) -S
+    else
+        vim --servername (random) -c ':Obsession'
+    end
+end
 
 # Directory-based pyenv-virtualenv
 function _pyenv-virtualenv
@@ -89,6 +95,24 @@ _pyenv-virtualenv
 # Change Ctrl+w to delete up to the last whitespace;
 # use Alt+Backspace for deleting path components.
 bind \cw backward-kill-bigword
+
+# z
+function fasd_cd
+  # if no $argv, identical with `fasd`
+  if test (count $argv) -le 1
+    command somethingelse "$argv"
+  else
+    set -l ret (command somethingelse -e 'printf %s' $argv)
+    test -z "$ret";
+      and return
+    test -d "$ret";
+      and cd "$ret";
+      or printf "%s\n" $ret
+  end
+end
+function z
+  fasd_cd -d $argv
+end
 
 # chips
 if [ -e ~/.config/chips/build.fish ] ; . ~/.config/chips/build.fish ; end
