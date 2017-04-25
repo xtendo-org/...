@@ -154,6 +154,7 @@ set formatoptions+=r
 autocmd FileType markdown,text
     \ nnoremap <F5> :Saha<CR>
     \ | inoremap <F5> <ESC>:Saha<CR>
+    \ | setlocal formatoptions-=c
     \ | setlocal formatoptions=q
     \ | setlocal colorcolumn=
 autocmd FileType gitcommit
@@ -193,7 +194,7 @@ imap <C-l> <ESC><C-l>
 au BufNewFile,BufRead *.nix set filetype=nix
 
 " JavaScript indentation
-autocmd FileType javascript,css
+autocmd FileType javascript,css,html
     \ setlocal tabstop=2
     \ | setlocal shiftwidth=2
     \ | setlocal softtabstop=2
