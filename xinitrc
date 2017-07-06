@@ -13,7 +13,8 @@ export GTK_IM_MODULE="uim"
 export QT_IM_MODULE="uim"
 
 # set DPI depending on resolution
-bash ~/.../lpx/init_monitor.sh
+source ~/.../lpx/init_monitor.sh
+source ~/.../lpx/monitor.sh
 
 xrdb -merge ~/.Xresources
 
@@ -35,4 +36,5 @@ bash ~/.../arch/xscreensaverstopper.sh &
 # touchpad
 source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
+
 compiz --replace
