@@ -172,8 +172,9 @@ nnoremap gV `[v`]
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 
-" visual mode backspace is now "delete without copy"
-vnoremap <backspace> "_d
+" backspace is down
+nnoremap <backspace> j
+vnoremap <backspace> j
 
 " Haskell spell checking for comments only
 autocmd FileType haskell
@@ -194,7 +195,7 @@ imap <C-l> <ESC><C-l>
 au BufNewFile,BufRead *.nix set filetype=nix
 
 " JavaScript indentation
-autocmd FileType javascript,css,html
+autocmd FileType javascript,css,html,htmldjango
     \ setlocal tabstop=2
     \ | setlocal shiftwidth=2
     \ | setlocal softtabstop=2
@@ -229,3 +230,11 @@ let g:fzf_layout = { 'down': '~25%' }
 if filereadable($HOME . "/.vim/local.vim")
     source ~/.vim/local.vim
 endif
+
+" C-a and C-e instead of ^ and $
+nnoremap <C-a> ^
+vnoremap <C-a> ^
+nnoremap <C-e> $
+vnoremap <C-e> $
+
+command! PasteClipboard normal! "+p
