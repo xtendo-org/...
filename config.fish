@@ -31,7 +31,6 @@ if [ -z $SSH_AUTH_SOCK ]
     end
 end
 
-set PATH $HOME/.cabal/bin $PATH
 set PATH $HOME/.local/bin $PATH
 # for p in (find $HOME/.apps/**/bin | ag /bin\$)
 #     set PATH $p $PATH
