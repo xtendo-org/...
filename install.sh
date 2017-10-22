@@ -7,7 +7,7 @@ set -e # stop immediately if anything fails
 
 echo "Configuring Vim..."
 mkdir -p ~/tmp
-ln -sf ~/.../.vimrc ~/
+ln -sf ~/.../vimrc ~/
 [ -f ~/.vim/autoload/plug.vim ] || \
     (curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &&
