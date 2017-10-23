@@ -9,8 +9,8 @@ synclient PressureMotionMinZ=4
 synclient EmulateTwoFingerMinZ=80
 synclient EmulateTwoFingerMinW=1
 
-synclient FingerLow=1
-synclient FingerHigh=1
+synclient FingerLow=9
+synclient FingerHigh=10
 
 synclient AccelFactor=0.1
 synclient MinSpeed=0.1
