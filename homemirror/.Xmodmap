@@ -1,10 +1,49 @@
 ! Use the command below for some hint:
 ! xmodmap -pke > current_xmodmap
-clear Lock
-keycode 66 = Escape Escape Escape
-keycode 59 = BackSpace less BackSpace
-keycode 22 = comma less comma
 
-! Hangul
-keycode 65 = space Hangul space
-keycode 108 = Mode_switch Meta_R Alt_R Meta_R
+! Caps_Lock
+clear Lock
+clear control
+clear mod1
+clear mod5
+add mod1    = Alt_L
+keycode  66 = Control_L Control_L Control_L Control_L
+add control = Control_L
+keycode 108 = Mode_switch
+add mod5    = Mode_switch
+
+keycode  65 = space space Hangul
+
+keycode  16 = 7 ampersand KP_7
+keycode  17 = 8 asterisk KP_8
+keycode  18 = 9 parenleft KP_9
+keycode  20 = minus underscore
+keycode  22 = comma less
+
+keycode  24 = q Q underscore
+keycode  26 = e E End End
+keycode  28 = t T equal
+
+keycode  33 = p P minus
+
+keycode  38 = a A Home Home
+keycode  39 = s S Prior
+keycode  40 = d D Next
+keycode  41 = f F Escape Escape
+keycode  42 = g G plus
+
+
+keycode  43 = h H Left Left
+keycode  44 = j J Down Down
+keycode  45 = k K Up Up
+keycode  46 = l L Right Right
+keycode  47 = semicolon colon Hangul_Hanja
+
+keycode  52 = z Z less
+keycode  53 = x X greater
+keycode  54 = c C parenleft
+keycode  55 = v V parenright
+
+keycode  59 = BackSpace BackSpace Hangul
+
+keycode 105 = Hangul
