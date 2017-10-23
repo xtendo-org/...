@@ -17,6 +17,7 @@ source ~/.../lpx/init_monitor.sh
 source ~/.../lpx/monitor.sh
 
 xrdb -merge ~/.Xresources
+xset -b
 
 # launch basic apps
 xscreensaver -no-splash &
