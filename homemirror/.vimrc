@@ -194,8 +194,8 @@ imap <C-l> <ESC><C-l>
 " add nix filetype
 au BufNewFile,BufRead *.nix set filetype=nix
 
-" JavaScript indentation
-autocmd FileType javascript,css,html,htmldjango
+" 2-space indentation
+autocmd FileType yaml,haskell,javascript,css,html,htmldjango
     \ setlocal tabstop=2
     \ | setlocal shiftwidth=2
     \ | setlocal softtabstop=2
@@ -237,4 +237,12 @@ vnoremap <C-a> ^
 nnoremap <C-e> $
 vnoremap <C-e> $
 
+nnoremap ^ <Nop>
+nnoremap $ <Nop>
+
 command! PasteClipboard normal! "+p
+
+" gvim: turn off all useless stuff
+set guioptions=f
+set guifont=Envy\ Code\ R\ For\ Powerline\ 12
+set mouse=
