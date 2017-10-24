@@ -246,3 +246,11 @@ command! PasteClipboard normal! "+p
 set guioptions=f
 set guifont=Envy\ Code\ R\ For\ Powerline\ 12
 set mouse=
+
+" nnoremap <C-v> "+P
+" vnoremap <C-v> "+P
+vnoremap <C-c> "+ygv
+
+" Haskell spell checking for comments only
+syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
+syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
