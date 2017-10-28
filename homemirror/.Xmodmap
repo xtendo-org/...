@@ -9,6 +9,7 @@ clear mod5
 add mod1    = Alt_L
 keycode  66 = Control_L Control_L Control_L Control_L
 add control = Control_L
+add control = Control_R
 keycode 108 = Mode_switch
 add mod5    = Mode_switch
 
