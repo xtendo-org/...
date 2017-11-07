@@ -95,24 +95,6 @@ _pyenv-virtualenv
 # use Alt+Backspace for deleting path components.
 bind \cw backward-kill-bigword
 
-# z
-function fasd_cd
-  # if no $argv, identical with `fasd`
-  if test (count $argv) -le 1
-    command somethingelse "$argv"
-  else
-    set -l ret (command somethingelse -e 'printf %s' $argv)
-    test -z "$ret";
-      and return
-    test -d "$ret";
-      and cd "$ret";
-      or printf "%s\n" $ret
-  end
-end
-function z
-  fasd_cd -d $argv
-end
-
 # chips
 if [ -e ~/.config/chips/build.fish ] ; . ~/.config/chips/build.fish ; end
 alias chipsedit "v ~/.config/chips/plugin.yaml"
