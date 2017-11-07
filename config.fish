@@ -32,6 +32,7 @@ if [ -z $SSH_AUTH_SOCK ]
 end
 
 set PATH $HOME/.local/bin $PATH
+set PATH $HOME/.../bin $PATH
 # for p in (find $HOME/.apps/**/bin | ag /bin\$)
 #     set PATH $p $PATH
 # end
