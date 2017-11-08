@@ -10,4 +10,7 @@ if not targets[-1]:
     targets.pop()
 
 for target in targets[1:]:
-    subprocess.run(['ln', '-sf', target, HOME + target[len(mirror_dir):]])
+    if os.path.isfile(target):
+        subprocess.run(['ln', '-sf', target, HOME + target[len(mirror_dir):]])
+    else:
+        print(target, 'is directory')
