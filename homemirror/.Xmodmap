@@ -47,4 +47,4 @@ keycode  55 = v V parenright
 
 keycode  59 = BackSpace BackSpace Hangul
 
-keycode 105 = Hangul
+keycode 105 = Control_R
