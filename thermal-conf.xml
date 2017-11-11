@@ -17,7 +17,7 @@
       <TripPoints>
         <TripPoint>
           <SensorType>pkg-temp-0</SensorType>
-          <Temperature>80000</Temperature>
+          <Temperature>70000</Temperature>
           <type>passive</type>
           <ControlType>PARALLEL</ControlType>
           <CoolingDevice>
