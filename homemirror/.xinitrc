@@ -20,7 +20,6 @@ source ~/.../lpx/init_monitor.sh
 source ~/.../lpx/monitor.sh
 
 xrdb -merge ~/.Xresources
-xset -b
 
 # launch basic apps
 xscreensaver -no-splash &
@@ -41,4 +40,5 @@ bash ~/.../arch/xscreensaverstopper.sh &
 source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 
+xset -b
 compiz --replace
