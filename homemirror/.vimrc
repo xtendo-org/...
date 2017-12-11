@@ -26,6 +26,7 @@ Plug 'elmcast/elm-vim'
 Plug 'junegunn/vim-slash'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'tikhomirov/vim-glsl'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
