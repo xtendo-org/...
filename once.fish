@@ -1,18 +1,5 @@
 set fish_greeting
 
-function prompt_long_pwd --description 'Print the current working directory'
-    set -l maybe_pwd (echo $PWD | sed -e "s|^$HOME|~|")
-    if echo $maybe_pwd | grep -q "^~/code/"
-        echo $maybe_pwd | sed -e "s|^~/code/||"
-    else
-        if echo $maybe_pwd | grep -q "^~/work/"
-            echo $maybe_pwd | sed -e "s|^~/work/||"
-        else
-            echo $maybe_pwd
-        end
-    end
-end
-
 # tartar configuration
 
 set TARTAR_PATH_BG 9cf
@@ -46,6 +33,12 @@ end
 if [ -d ~/work/go/ ]
     setenv GOPATH ~/work/go
     set PATH $GOPATH"/bin" $PATH
+end
+
+# pyenv
+if [ -d ~/.pyenv ]
+    set -x PATH $HOME"/.pyenv/bin" $PATH
+    . (pyenv init -|psub)
 end
 
 # rbenv
