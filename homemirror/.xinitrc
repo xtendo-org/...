@@ -34,7 +34,7 @@ xset r rate 300 40
 bash ~/.../arch/xscreensaverstopper.sh &
 
 # fullscreen clock
-~/.../lpx/wall.sh &
+# ~/.../lpx/wall.sh &
 
 # touchpad
 source ~/.../lpx/configure_touchpad.sh
