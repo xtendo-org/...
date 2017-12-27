@@ -238,9 +238,6 @@ vnoremap <C-a> ^
 nnoremap <C-e> $
 vnoremap <C-e> $
 
-nnoremap ^ <Nop>
-nnoremap $ <Nop>
-
 command! PasteClipboard normal! "+p
 
 " gvim: turn off all useless stuff
