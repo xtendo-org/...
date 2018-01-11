@@ -18,10 +18,10 @@ echo "Configuring bash..."
 grep -Fxq "source ~/.../.bashrc" ~/.bashrc || \
     echo "source ~/.../.bashrc" >> ~/.bashrc
 
-echo "Configuring fish..."
-mkdir -p ~/.config/fish/config/fish
-ln -sf ~/.../config.fish ~/.config/fish/config.fish
-
-echo "Configuring Git..."
-ln -sf ~/.../gitconfig ~/.gitconfig
-ln -sf ~/.../gitexclude ~/.gitexclude
+# echo "Configuring fish..."
+# mkdir -p ~/.config/fish/config/fish
+# ln -sf ~/.../config.fish ~/.config/fish/config.fish
+# 
+# echo "Configuring Git..."
+# ln -sf ~/.../gitconfig ~/.gitconfig
+# ln -sf ~/.../gitexclude ~/.gitexclude
