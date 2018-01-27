@@ -253,3 +253,6 @@ vnoremap <C-c> "+ygv
 " Haskell spell checking for comments only
 syn match   hsLineComment      "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$" contains=@Spell
 syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spell
+
+" sort the current paragraph
+nnoremap <leader>s vip:sort<CR>
