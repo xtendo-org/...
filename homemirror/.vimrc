@@ -24,9 +24,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'justinmk/vim-dirvish'
 Plug 'elmcast/elm-vim'
 Plug 'junegunn/vim-slash'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" Plug 'kien/ctrlp.vim'
 Plug 'tikhomirov/vim-glsl'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
@@ -224,9 +224,9 @@ nnoremap q <Nop>
 " hsc is Haskell
 au BufRead,BufNewFile *.hsc set filetype=haskell
 
-" " fzf
-" nnoremap <C-p> :FZF<CR>
-" let g:fzf_layout = { 'down': '~25%' }
+" fzf
+nnoremap <C-p> :FZF<CR>
+let g:fzf_layout = { 'down': '~25%' }
 
 " Reading the local conf should always be at the bottom
 if filereadable($HOME . "/.vim/local.vim")
@@ -257,4 +257,5 @@ syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spe
 " sort the current paragraph
 nnoremap <leader>s vip:sort<CR>
 
+" ctrlp
 let g:ctrlp_cmd = 'CtrlPMRU'
