@@ -224,9 +224,9 @@ nnoremap q <Nop>
 " hsc is Haskell
 au BufRead,BufNewFile *.hsc set filetype=haskell
 
-" fzf
-nnoremap <C-p> :FZF<CR>
-let g:fzf_layout = { 'down': '~25%' }
+" " fzf
+" nnoremap <C-p> :FZF<CR>
+" let g:fzf_layout = { 'down': '~25%' }
 
 " Reading the local conf should always be at the bottom
 if filereadable($HOME . "/.vim/local.vim")
@@ -256,3 +256,5 @@ syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spe
 
 " sort the current paragraph
 nnoremap <leader>s vip:sort<CR>
+
+let g:ctrlp_cmd = 'CtrlPMRU'
