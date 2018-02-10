@@ -1,0 +1,2 @@
+#!/bin/bash
+git diff $(git status --porcelain | awk '{print $2}' | sed -n "$1"p)
