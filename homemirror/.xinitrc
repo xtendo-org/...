@@ -40,5 +40,8 @@ bash ~/.../arch/xscreensaverstopper.sh &
 source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 
+# dunst
+dunst &
+
 xset -b
 compiz --replace
