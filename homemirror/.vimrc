@@ -174,7 +174,7 @@ nnoremap gV `[v`]
 nnoremap <leader><space> :nohlsearch<CR>
 
 " backspace is down
-nnoremap <backspace> dd
+nnoremap <backspace> i<backspace>
 vnoremap <backspace> "_d
 
 " Haskell spell checking for comments only
