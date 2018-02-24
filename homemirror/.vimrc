@@ -105,6 +105,7 @@ hi VertSplit ctermfg=White ctermbg=Black term=NONE
 set laststatus=2
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline_section_b=''
 
 hi Search ctermbg=LightYellow ctermfg=Black
 hi Constant ctermfg=DarkBlue
@@ -162,7 +163,7 @@ autocmd FileType gitcommit
     \ set smarttab
     \ | setlocal formatoptions+=t
     \ | setlocal textwidth=72
-autocmd FileType markdown,gitcommit setlocal spell
+autocmd FileType markdown,gitcommit,haskell setlocal spell
 
 " turn off spell checking
 nnoremap <leader>` :set spell!<CR>
@@ -196,7 +197,7 @@ imap <C-l> <ESC><C-l>
 au BufNewFile,BufRead *.nix set filetype=nix
 
 " 2-space indentation
-autocmd FileType yaml,haskell,javascript,css,html,htmldjango
+autocmd FileType yaml,haskell,javascript,css,html,htmldjango,python
     \ setlocal tabstop=2
     \ | setlocal shiftwidth=2
     \ | setlocal softtabstop=2
