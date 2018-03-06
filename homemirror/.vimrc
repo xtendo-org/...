@@ -139,6 +139,8 @@ set dir=~/tmp
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
 
+" Curlier (mostly for OpenSCAD)
+
 :command! Curlier
     \ execute ':w'
     \ | execute ':silent !curlier'
@@ -147,6 +149,7 @@ inoremap <C-s> <ESC>:w<CR>
 autocmd FileType openscad
     \ nnoremap <C-s> :Curlier<CR>
     \ | inoremap <C-s> <ESC>:Curlier<CR>
+    \ | setlocal commentstring=//\ %s
 
 :command! Saha
     \ execute ':w'
