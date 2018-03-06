@@ -40,8 +40,8 @@ bash ~/.../arch/xscreensaverstopper.sh &
 source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 
-# dunst
-dunst &
+# notification
+/usr/lib/notification-daemon-1.0/notification-daemon &
 
 xset -b
 compiz --replace
