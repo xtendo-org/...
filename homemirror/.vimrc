@@ -59,9 +59,9 @@ set autoindent
 set ve=onemore " enable moving to the end of the line
 
 sy enable
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+setlocal tabstop=2
+setlocal shiftwidth=2
+setlocal softtabstop=2
 " set smarttab
 set expandtab
 
@@ -196,14 +196,6 @@ imap <C-l> <ESC><C-l>
 " add nix filetype
 au BufNewFile,BufRead *.nix set filetype=nix
 
-" 2-space indentation
-autocmd FileType yaml,haskell,javascript,css,html,htmldjango,python
-    \ setlocal tabstop=2
-    \ | setlocal shiftwidth=2
-    \ | setlocal softtabstop=2
-    \ | setlocal nocin nosi inde=
-    \ | setlocal ai
-
 " stylus
 autocmd FileType stylus
     \ setlocal nocin nosi inde=
@@ -211,12 +203,6 @@ autocmd FileType stylus
 
 " Disable H in visual mode (I make this mistake too often)
 vnoremap H h
-
-" Elm indentation
-autocmd FileType elm
-    \ setlocal tabstop=2
-    \ | setlocal shiftwidth=2
-    \ | setlocal softtabstop=2
 
 " Disable q
 nnoremap q <Nop>
