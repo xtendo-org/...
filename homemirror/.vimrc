@@ -25,8 +25,8 @@ Plug 'justinmk/vim-dirvish'
 Plug 'elmcast/elm-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'kien/ctrlp.vim'
 Plug 'tikhomirov/vim-glsl'
+Plug 'sirtaj/vim-openscad'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
