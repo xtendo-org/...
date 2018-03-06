@@ -139,6 +139,15 @@ set dir=~/tmp
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
 
+:command! Curlier
+    \ execute ':w'
+    \ | execute ':silent !curlier'
+    \ | execute ':redraw!'
+
+autocmd FileType openscad
+    \ nnoremap <C-s> :Curlier<CR>
+    \ | inoremap <C-s> <ESC>:Curlier<CR>
+
 :command! Saha
     \ execute ':w'
     \ | execute ':silent !saha compile'

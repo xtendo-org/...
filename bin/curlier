@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+import itertools
+import os
+import subprocess
+
+
+def translate(path):
+  dst = path[:-len(b'.p.scad')] + b'.scad'
+  with open(path, 'r') as srcf:
+    with open(dst, 'w') as dstf:
+      depth = 0
+      while True:
+        line = srcf.readline()
+        if line == '':
+          dstf.write('}' * (depth // 2))
+          break
+        if not line.strip():
+          continue
+
+        this_depth = len(list(itertools.takewhile(lambda c: c == ' ', line)))
+        if this_depth > depth:
+          dstf.write('%s{\n' % ('  ' * (depth // 2)))
+          depth = this_depth
+        elif this_depth < depth:
+          dstf.write('}' * ((depth - this_depth) // 2) + '\n')
+          depth = this_depth
+        dstf.write(line)
+
+
+if __name__ == '__main__':
+  proc = subprocess.run(['find'], stdout=subprocess.PIPE)
+  srcs = proc.stdout.split(b'\n')
+  if not srcs[-1]:
+    srcs.pop()
+
+  for src in srcs[1:]:
+    s_src = src.decode('utf-8')
+    if os.path.isfile(src) and src.endswith(b'.p.scad'):
+      print('Translating {}'.format(s_src))
+      translate(src)
