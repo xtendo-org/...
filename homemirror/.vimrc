@@ -243,6 +243,7 @@ command! PasteClipboard normal! "+p
 set guioptions=f
 set guifont=Envy\ Code\ R\ For\ Powerline\ 12
 set mouse=
+set guicursor+=n-v-c:blinkon0  " disable cursor blinking
 
 " nnoremap <C-v> "+P
 " vnoremap <C-v> "+P
