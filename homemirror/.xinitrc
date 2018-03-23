@@ -41,7 +41,7 @@ source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 
 # notification
-/usr/lib/notification-daemon-1.0/notification-daemon &
+/usr/lib/notification-daemon-1.0/notification-daemon --debug -r > ~/notification-daemon.txt &
 
 xset -b
 compiz --replace
