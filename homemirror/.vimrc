@@ -263,3 +263,6 @@ let g:ctrlp_cmd = 'CtrlPMRU'
 " insert ISO 8601 timestamp
 nnoremap <leader>d i<C-r>=strftime("%FT%T%z")<CR><Esc>
 nnoremap <leader>t i<C-r>=strftime("%s")<CR><Esc>
+
+" Don't add stupid extra space when joining lines that end with a period
+set nojoinspaces
