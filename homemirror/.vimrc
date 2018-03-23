@@ -27,6 +27,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tikhomirov/vim-glsl'
 Plug 'sirtaj/vim-openscad'
+Plug 'leafgarland/typescript-vim'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
@@ -59,9 +60,9 @@ set autoindent
 set ve=onemore " enable moving to the end of the line
 
 sy enable
-setlocal tabstop=2
-setlocal shiftwidth=2
-setlocal softtabstop=2
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 " set smarttab
 set expandtab
 
