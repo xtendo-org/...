@@ -19,11 +19,11 @@ export QT_IM_MODULE="uim"
 source ~/.../lpx/init_monitor.sh
 source ~/.../lpx/monitor.sh
 
-xrdb -merge ~/.Xresources
+# xrdb -merge ~/.Xresources
 
 # launch basic apps
 xscreensaver -no-splash &
-gnome-terminal &
+# gnome-terminal &
 
 xmodmap ~/.Xmodmap
 
