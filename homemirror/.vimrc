@@ -34,6 +34,9 @@ if filereadable($HOME . "/.vim/plugin.vim")
 endif
 call plug#end()
 
+" use space for leader
+let mapleader=" "
+
 filetype plugin indent on
 filetype indent on
 filetype on
@@ -266,3 +269,9 @@ nnoremap <leader>t i<C-r>=strftime("%s")<CR><Esc>
 
 " Don't add stupid extra space when joining lines that end with a period
 set nojoinspaces
+
+" jump to definition in the right split
+nnoremap <leader>] :only<CR><C-w>v<C-w>L<C-]>
+
+" paste clipboard
+nnoremap <leader>p :PasteClipboard<CR>
