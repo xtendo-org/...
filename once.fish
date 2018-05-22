@@ -40,3 +40,6 @@ end
 
 # autojump
 source /usr/share/autojump/autojump.fish
+
+# cargo
+set -x PATH $HOME/.cargo/bin $PATH
