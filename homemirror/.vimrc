@@ -147,12 +147,12 @@ inoremap <C-s> <ESC>:w<CR>
 
 :command! Curlier
     \ execute ':w'
-    \ | execute ':silent !curlier'
+    \ | execute ':silent !curlier %'
     \ | execute ':redraw!'
 
 autocmd FileType openscad
-    \ nnoremap <C-s> :Curlier<CR>
-    \ | inoremap <C-s> <ESC>:Curlier<CR>
+    \ nnoremap <buffer> <C-s> :Curlier<CR>
+    \ | inoremap <buffer> <C-s> <ESC>:Curlier<CR>
     \ | setlocal commentstring=//\ %s
 
 :command! Saha
