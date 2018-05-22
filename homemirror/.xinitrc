@@ -43,5 +43,7 @@ syndaemon -i 1 -t -k -R -d
 # notification
 /usr/lib/notification-daemon-1.0/notification-daemon --debug -r > ~/notification-daemon.txt &
 
+gnome-terminal &
+
 xset -b
 compiz --replace
