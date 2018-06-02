@@ -1,0 +1,3 @@
+#!/bin/bash
+fsign=$(echo $1 | sed -e 's/^\(.*\)media\/\(.*\)\.jpg/\2/')
+wget -q https://pbs.twimg.com/media/$fsign.jpg:large -O ~/twlarge/$fsign.jpg
