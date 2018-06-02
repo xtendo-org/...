@@ -28,6 +28,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'tikhomirov/vim-glsl'
 Plug 'sirtaj/vim-openscad'
 Plug 'leafgarland/typescript-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
+Plug 'vim-scripts/synic.vim'
+Plug 'endel/vim-github-colorscheme'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
@@ -245,7 +249,7 @@ command! PasteClipboard normal! "+p
 
 " gvim: turn off all useless stuff
 set guioptions=f
-set guifont=Envy\ Code\ R\ For\ Powerline\ 12
+set guifont=Roboto\ Mono\ 12
 set mouse=
 set guicursor+=n-v-c-i:blinkon0  " disable cursor blinking
 

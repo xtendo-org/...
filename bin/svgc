@@ -1,0 +1,2 @@
+#!/bin/sh
+~/.local/bin/svgcleaner $1 min_$1
