@@ -279,3 +279,6 @@ nnoremap <leader>] :only<CR><C-w>v<C-w>L<C-]>
 
 " paste clipboard
 nnoremap <leader>p :PasteClipboard<CR>
+
+" I don't use K
+nnoremap K k
