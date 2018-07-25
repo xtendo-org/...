@@ -1,0 +1,7 @@
+#!/bin/sh
+filename=$(basename -- "$1")
+extension="${filename##*.}"
+filename="${filename%.*}"
+sum=$(b2sum $1 | head -c 32)
+echo $sum
+mv $1 $sum.$extension
