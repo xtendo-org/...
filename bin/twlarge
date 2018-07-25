@@ -1,3 +1,6 @@
 #!/bin/bash
-fsign=$(echo $1 | sed -e 's/^\(.*\)media\/\(.*\)\.jpg/\2/')
-wget -q https://pbs.twimg.com/media/$fsign.jpg:large -O ~/twlarge/$fsign.jpg
+filename=$(basename -- "$1")
+extension="${filename##*.}"
+filename="${filename%.*}"
+echo $filename.$extension
+wget -q https://pbs.twimg.com/media/$filename.$extension:large -O ~/twlarge/$filename.$extension
