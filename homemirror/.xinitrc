@@ -19,6 +19,9 @@ export QT_IM_MODULE="uim"
 source ~/.../lpx/init_monitor.sh
 source ~/.../lpx/monitor.sh
 
+# if HDMI2 is connected, turn off the laptop monitor
+xrandr | grep '^HDMI2 connected' && xrandr --output eDP1 --off
+
 # xrdb -merge ~/.Xresources
 
 # launch basic apps
@@ -44,6 +47,9 @@ syndaemon -i 1 -t -k -R -d
 /usr/lib/notification-daemon-1.0/notification-daemon --debug -r > ~/notification-daemon.txt &
 
 gnome-terminal &
+
+# suppress blue light that is bad for sleeping and long-term vision
+redshift -O 4500K
 
 xset -b
 compiz --replace
