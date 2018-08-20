@@ -43,3 +43,8 @@ source /usr/share/autojump/autojump.fish
 
 # cargo
 set -x PATH $HOME/.cargo/bin $PATH
+
+# fzf to use ripgrep
+set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
+
+alias pyctags "ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags . (python -c \"import os, sys; print('\n'.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))\")"
