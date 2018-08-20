@@ -282,3 +282,13 @@ nnoremap <leader>p :PasteClipboard<CR>
 
 " I don't use K
 nnoremap K k
+
+" Use 4 spaces for indentation in Python
+autocmd FileType python
+  \ setlocal tabstop=4
+  \ | setlocal shiftwidth=4
+  \ | setlocal softtabstop=4
+
+" Prevent Vim from clearing the terminal
+set t_ti=
+set t_te=
