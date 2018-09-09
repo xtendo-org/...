@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+import datetime
+import sys
+
+h, _, m = sys.argv[1].partition(':')
+now = datetime.datetime.now()
+target = now.replace(hour=int(h), minute=int(m), second=0)
+print((target - now).seconds)
