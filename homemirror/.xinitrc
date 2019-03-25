@@ -29,6 +29,7 @@ xscreensaver -no-splash &
 # gnome-terminal &
 
 xmodmap ~/.Xmodmap
+xmodmap -e "pointer = 3 2 1"
 
 # keyboard repetition
 xset r rate 300 40

@@ -1,3 +1,2 @@
 #!/bin/bash
-pactl set-sink-volume 0 +5%
-pactl list | grep Volume | head -n 1 | grep -o '[0-9]*%' | head -n 1 | dzen2 -p 1 -x -150 -y 100 -w 50 -h 50 -title-name volume -fn 'Roboto-12'
+volset +5

@@ -1,2 +1,2 @@
 #!/bin/bash
-firefox $(stack path --snapshot-doc-root)/$(stack list-dependencies | grep "^$1 " | sed -e 's/ /-/')/index.html
+firefox $(stack path --snapshot-doc-root)/$(stack ls dependencies | grep "^$1 " | sed -e 's/ /-/')/index.html

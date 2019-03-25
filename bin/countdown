@@ -10,4 +10,4 @@ begin = time.time()
 for i in range(seconds):
   sys.stdout.write('{}/{} ({} seconds left)\r'.format(i, seconds, seconds - i))
   now = time.time()
-  time.sleep(i + 1 - (now - begin))
+  time.sleep(i + 1 - (now - begin) or 1)

@@ -32,6 +32,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/synic.vim'
 Plug 'endel/vim-github-colorscheme'
+Plug 'simnalamburt/vim-mundo'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
@@ -176,8 +177,8 @@ set formatoptions+=r
 autocmd FileType markdown,text
     \ nnoremap <F5> :Saha<CR>
     \ | inoremap <F5> <ESC>:Saha<CR>
-    \ | setlocal formatoptions-=c
     \ | setlocal formatoptions=q
+    \ | setlocal formatoptions-=c
     \ | setlocal colorcolumn=
 autocmd FileType gitcommit
     \ set smarttab
@@ -290,5 +291,14 @@ autocmd FileType python
   \ | setlocal softtabstop=4
 
 " Prevent Vim from clearing the terminal
-set t_ti=
-set t_te=
+" set t_ti=
+" set t_te=
+
+" cursorline
+set cursorline
+hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE guibg=LightYellow guifg=NONE
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END

@@ -4,6 +4,7 @@
   ui = true
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit
+	recent = branch -l --sort=-committerdate
 [core]
   excludesfile = /home/user/.gitignore
   pager = less -+$LESS -r

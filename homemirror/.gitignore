@@ -8,4 +8,4 @@ npm-debug.log
 Session.vim
 dist/
 .pyenv-virtualenv
-/tags
+tags

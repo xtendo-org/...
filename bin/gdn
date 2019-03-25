@@ -1,2 +1,2 @@
 #!/bin/bash
-git status --porcelain | awk '{print $2}' | sed -n "$1"p
+git status --porcelain | grep '^ M' | awk '{print $2}' | sed -n "$1"p
