@@ -1,0 +1,7 @@
+#!/bin/sh
+filename=$(basename -- "$1")
+dirpath=$(dirname "$1")
+#extension="${filename##*.}"
+filename="${filename%.*}"
+mkdir $dirpath/$filename
+unzip $1 -d $dirpath/$filename
