@@ -47,12 +47,17 @@ function __check_pwd --on-variable PWD --description 'PWD change hook'
     status --is-command-substitution; and return
     # set tmux window name
     if [ $TMUX ]
-        set -l current_path (prompt_long_pwd)
-        if [ $current_path != "/" ]
-            # set -l current_path (basename $current_path | sed -e "s| |\\\\ |g")
-            set current_path (basename $current_path)
+        set -l maybe_pwd (echo $PWD | sed -e "s|^$HOME|~|")
+        if echo $maybe_pwd | grep -q "^~/work/"
+            set maybe_pwd (echo $maybe_pwd | sed "s|~/work/\([^/]*\).*|\1|")
+        else
+          if echo $maybe_pwd | grep -q "^~/code/"
+              set maybe_pwd (echo $maybe_pwd | sed "s|~/code/\([^/]*\).*|\1|")
+          else
+            set maybe_pwd (basename $maybe_pwd)
+          end
         end
-        tmux rename-window $current_path
+        tmux rename-window $maybe_pwd
     end
     _pyenv-virtualenv
     autojump --add (pwd) >/dev/null 2>>$AUTOJUMP_ERROR_PATH &
