@@ -21,7 +21,7 @@ Plug 'wavded/vim-stylus'
 Plug 'dag/vim-fish'
 Plug 'chrisbra/Recover.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'justinmk/vim-dirvish'
+Plug 'tpope/vim-vinegar'
 Plug 'elmcast/elm-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -33,6 +33,7 @@ Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/synic.vim'
 Plug 'endel/vim-github-colorscheme'
 Plug 'simnalamburt/vim-mundo'
+" Plug 'jiangmiao/auto-pairs'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
@@ -265,8 +266,8 @@ syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spe
 " sort the current paragraph
 nnoremap <leader>s vip:sort<CR>
 
-" ctrlp
-let g:ctrlp_cmd = 'CtrlPMRU'
+" " ctrlp
+" let g:ctrlp_cmd = 'CtrlPMRU'
 
 " insert ISO 8601 timestamp
 nnoremap <leader>d i<C-r>=strftime("%FT%T%z")<CR><Esc>
