@@ -4,33 +4,43 @@ import itertools
 import sys
 
 
-def translate(path):
-  dst = path[:-len('.p.scad')] + '.scad'
-  with open(path, 'r') as srcf:
-    with open(dst, 'w') as dstf:
-      depth = 0
-      while True:
-        line = srcf.readline()
-        if line == '':
-          dstf.write('}' * (depth // 2))
-          break
-        if not line.strip():
-          continue
-        if line.lstrip().startswith('//'):
-          continue
+def closings(diff, base):
+    return '\n'.join('  ' * c + '}' for c in list(range(diff - 1 + base, -1 + base, -1)))
 
-        this_depth = len(list(itertools.takewhile(lambda c: c == ' ', line)))
-        if this_depth > depth:
-          dstf.write('%s{\n' % ('  ' * (depth // 2)))
-          depth = this_depth
-        elif this_depth < depth:
-          dstf.write('}' * ((depth - this_depth) // 2) + '\n')
-          depth = this_depth
-        dstf.write(line)
+
+def translate(path):
+    dst = path[:-len('.p.scad')] + '.scad'
+    empty_lines = 0
+    comments = []
+    with open(path, 'r') as srcf:
+        with open(dst, 'w') as dstf:
+            depth = 0
+            while True:
+                line = srcf.readline()
+                if line == '':
+                    dstf.write('\n' + closings((depth) // 2, 0))
+                    break
+                if not line.strip():
+                    empty_lines += 1
+                    continue
+                if line.lstrip().startswith('//'):
+                    comments.append('\n' + line.rstrip())
+                    continue
+
+                this_depth = len(list(itertools.takewhile(lambda c: c == ' ', line)))
+                if this_depth > depth:
+                    dstf.write(' {')
+                    depth = this_depth
+                elif this_depth < depth:
+                    dstf.write('\n' + closings((depth - this_depth) // 2, this_depth // 2))
+                    depth = this_depth
+                dstf.write('{}{}{}'.format(''.join(comments), '\n' * (empty_lines + 1), line.rstrip()))
+                empty_lines = 0
+                comments = []
 
 
 if __name__ == '__main__':
-  path = sys.argv[1]
-  if path.endswith('.p.scad'):
-    print('Translating {}'.format(path))
-    translate(path)
+    path = sys.argv[1]
+    if path.endswith('.p.scad'):
+        print('Translating {}'.format(path))
+        translate(path)
