@@ -9,3 +9,5 @@ Session.vim
 dist/
 .pyenv-virtualenv
 tags
+.mypy_cache
+*.egg-info
