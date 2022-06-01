@@ -1,2 +1,2 @@
 #!/bin/bash
-volset -5
+volset -10
