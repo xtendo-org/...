@@ -1,4 +1,5 @@
 #!/bin/bash
+espeak-ng $1
 mplayer /usr/share/sounds/freedesktop/stereo/complete.oga </dev/null >/dev/null 2>&1 &
-echo 'Complete: '$1 | dzen2 -x -400 -y 100 -w 300 -h 100 -p
+echo 'Complete: '$1 | dzen2 -x -400 -y 100 -w 300 -h 100 -p -bg '#ff0000' -fg '#ffffff' -fn 'Noto Sans CJK KR'
 wait

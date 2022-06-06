@@ -1,0 +1,2 @@
+#!/bin/sh
+free -h | sed '2q;d' | sed 's/\s\+/ /g'

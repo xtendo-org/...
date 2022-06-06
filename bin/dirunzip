@@ -1,7 +1,20 @@
 #!/bin/sh
-filename=$(basename -- "$1")
-dirpath=$(dirname "$1")
+set -e
+path=$(pwd)
+str="$*"
+filename=$(basename -- "$str")
+dirpath=$(dirname "$str")
 #extension="${filename##*.}"
-filename="${filename%.*}"
-mkdir $dirpath/$filename
-unzip $1 -d $dirpath/$filename
+filenameonly="${filename%.*}"
+newdirpath="$PWD/$filenameonly"
+# echo "$str"
+# echo "$dirpath"
+# echo "$filename"
+# echo "$filenameonly"
+# echo "$PWD"
+# echo "$newdirpath"
+# echo "mkdir $newdirpath"
+# echo "unzip $str -d $newdirpath"
+mkdir "$newdirpath"
+echo "$str" -d "$newdirpath"
+unzip "$PWD/$str" -d "$newdirpath"
