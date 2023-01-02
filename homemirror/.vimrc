@@ -5,34 +5,38 @@ scripte utf-8
 " set fencs=ucs-bom,cp949,utf-8
 
 call plug#begin('~/.vim/plugged')
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-obsession'
+Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'kshenoy/vim-signature'
-Plug 'raichoo/purescript-vim'
-Plug 'wavded/vim-stylus'
-Plug 'dag/vim-fish'
 Plug 'chrisbra/Recover.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-vinegar'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dag/vim-fish'
 Plug 'elmcast/elm-vim'
+Plug 'endel/vim-github-colorscheme'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'tikhomirov/vim-glsl'
-Plug 'sirtaj/vim-openscad'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'kshenoy/vim-signature'
 Plug 'leafgarland/typescript-vim'
-Plug 'altercation/vim-colors-solarized'
 Plug 'morhetz/gruvbox'
-Plug 'vim-scripts/synic.vim'
-Plug 'endel/vim-github-colorscheme'
+Plug 'pangloss/vim-javascript'
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'raichoo/purescript-vim'
 Plug 'simnalamburt/vim-mundo'
+Plug 'sirtaj/vim-openscad'
+Plug 'tikhomirov/vim-glsl'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-python/python-syntax'
+Plug 'vim-scripts/synic.vim'
+Plug 'wavded/vim-stylus'
+" Plug 'wellle/context.vim'
 " Plug 'jiangmiao/auto-pairs'
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
@@ -157,9 +161,9 @@ inoremap <C-s> <ESC>:w<CR>
     \ | execute ':redraw!'
 
 autocmd FileType openscad
-    \ nnoremap <buffer> <C-s> :Curlier<CR>
-    \ | inoremap <buffer> <C-s> <ESC>:Curlier<CR>
-    \ | setlocal commentstring=//\ %s
+    \ setlocal commentstring=//\ %s
+    " \ nnoremap <buffer> <C-s> :Curlier<CR>
+    " \ | inoremap <buffer> <C-s> <ESC>:Curlier<CR>
 
 :command! Saha
     \ execute ':w'
@@ -170,7 +174,7 @@ autocmd FileType openscad
 " https://github.com/simnalamburt/.dotfiles/blob/master/.vimrc
 set textwidth=78
 set colorcolumn=+1,+2
-hi ColorColumn ctermbg=lightgray
+hi ColorColumn ctermbg=gray
 set formatoptions-=t
 set formatoptions+=c
 set formatoptions+=r
@@ -189,6 +193,10 @@ autocmd FileType markdown,gitcommit,haskell setlocal spell
 
 " turn off spell checking
 nnoremap <leader>` :set spell!<CR>
+
+nnoremap <leader>tm a™<ESC>
+nnoremap <leader>em a—<ESC>
+nnoremap <leader>en a–<ESC>
 
 " visually select the last inserted text
 nnoremap gV `[v`]
@@ -224,7 +232,7 @@ autocmd FileType stylus
     \ | setlocal ai
 
 " Disable H in visual mode (I make this mistake too often)
-vnoremap H h
+" vnoremap H h
 
 " Disable q
 nnoremap q <Nop>
@@ -265,6 +273,8 @@ syn region  hsBlockComment     start="{-"  end="-}" contains=hsBlockComment,@Spe
 
 " sort the current paragraph
 nnoremap <leader>s vip:sort<CR>
+" sort inside the parentheses
+nnoremap <leader>i vi):sort<CR>
 
 " " ctrlp
 " let g:ctrlp_cmd = 'CtrlPMRU'
@@ -291,6 +301,11 @@ autocmd FileType python
   \ | setlocal shiftwidth=4
   \ | setlocal softtabstop=4
 
+autocmd FileType python setlocal indentkeys-=<:>
+autocmd FileType python setlocal indentkeys-=:
+autocmd FileType html setlocal indentkeys=
+autocmd FileType htmldjango setlocal indentkeys=
+
 " Prevent Vim from clearing the terminal
 " set t_ti=
 " set t_te=
@@ -303,3 +318,32 @@ augroup CursorLine
     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     au WinLeave * setlocal nocursorline
 augroup END
+
+autocmd BufEnter *
+    \ if !get(g:, 'obsession_no_bufenter') |
+    \   try |
+    \     exe s:persist() |
+    \   catch |
+    \   endtry |
+    \ endif
+
+autocmd FileType htmldjango setlocal indentexpr=
+
+vnoremap <leader>y :w! /tmp/vimbuffer.txt<CR>
+nnoremap <leader>v :r /tmp/vimbuffer.txt<CR>
+
+set guifont=Envy\ Code\ R\ for\ Powerline\ 10
+
+" turn off bells
+set noerrorbells
+set vb t_vb=
+set belloff=all
+
+
+command! InsertLineNumbers
+    \ execute ':%s/^/\=printf("%d ", line("."))'
+
+
+let g:python_highlight_all = 1
+
+nnoremap Q <Nop>
