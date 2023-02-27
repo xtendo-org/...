@@ -24,6 +24,11 @@ stamp = subprocess.check_output(['date', '--iso-8601=seconds']).decode('ascii').
 pw = ''.join(random.choice(choices) for _ in range(int(sys.argv[2])))
 output = '[{}] {}\n'.format(stamp, pw)
 
+p = subprocess.Popen(['xclip', '-sel', 'clip'], stdin=subprocess.PIPE)
+p.stdin.write(pw.encode('utf-8'))
+p.stdin.close()
+p.wait()
+
 with open(HOME + '/.pw-gen.log', 'a') as f:
     f.write(output)
 print(output, end='')
