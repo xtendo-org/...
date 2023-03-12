@@ -13,3 +13,5 @@
   date = iso8601
 [init]
 	defaultBranch = main
+[safe]
+	directory = /opt/flutter

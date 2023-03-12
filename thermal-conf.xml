@@ -6,7 +6,7 @@
   <Preference>QUIET</Preference>
   <ThermalSensors>
     <ThermalSensor>
-      <Type>pkg-temp-0</Type>
+      <Type>x86_pkg_temp</Type>
       <Path>/sys/class/thermal/thermal_zone1/</Path>
       <AsyncCapable>1</AsyncCapable>
     </ThermalSensor>
@@ -16,7 +16,7 @@
       <Type>cpu package</Type>
       <TripPoints>
         <TripPoint>
-          <SensorType>pkg-temp-0</SensorType>
+          <SensorType>x86_pkg_temp</SensorType>
           <Temperature>70000</Temperature>
           <type>passive</type>
           <ControlType>PARALLEL</ControlType>

@@ -19,17 +19,17 @@ export QT_IM_MODULE="uim"
 source ~/.../lpx/init_monitor.sh
 source ~/.../lpx/monitor.sh
 
-# if HDMI2 is connected, turn off the laptop monitor
-xrandr | grep '^HDMI2 connected' && xrandr --output eDP1 --off
+# # if HDMI2 is connected, turn off the laptop monitor
+# xrandr | grep '^HDMI2 connected' && xrandr --output eDP1 --off
+# xrandr | grep '^HDMI2 connected' && xrandr --output HDMI2 --primary && xrandr --output eDP1 --below HDMI2
 
-# xrdb -merge ~/.Xresources
+xrdb -merge ~/.Xresources
 
 # launch basic apps
+gnome-terminal &
 xscreensaver -no-splash &
-# gnome-terminal &
 
 xmodmap ~/.Xmodmap
-xmodmap -e "pointer = 3 2 1"
 
 # keyboard repetition
 xset r rate 300 40
@@ -44,13 +44,22 @@ bash ~/.../arch/xscreensaverstopper.sh &
 source ~/.../lpx/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 
-# notification
-/usr/lib/notification-daemon-1.0/notification-daemon --debug -r > ~/notification-daemon.txt &
-
-gnome-terminal &
+# # notification
+# /usr/lib/notification-daemon-1.0/notification-daemon --debug -r > ~/notification-daemon.txt &
 
 # suppress blue light that is bad for sleeping and long-term vision
-redshift -O 4500K
+# redshift -O 4500K
 
+# xset b 10 30 500
 xset -b
+# xkbevd -bg &
+
+# feh --bg-fill ~/Desktop/bg.jpg &
+
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+~/.../lpx/wall.sh &
+
 compiz --replace
+# xmonad
+# awesome

@@ -29,6 +29,7 @@ p.stdin.write(pw.encode('utf-8'))
 p.stdin.close()
 p.wait()
 
-with open(HOME + '/.pw-gen.log', 'a') as f:
-    f.write(output)
+if '--dry' not in sys.argv:
+    with open(HOME + '/.pw-gen.log', 'a') as f:
+        f.write(output)
 print(output, end='')

@@ -136,9 +136,6 @@ hi GitGutterChangeDelete ctermfg=Red
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-"" ctrl+c to copy
-"vmap <C-c> "*y
-
 augroup rainbow
     autocmd!
     autocmd FileType haskell,python,javascript RainbowParentheses
@@ -233,9 +230,6 @@ autocmd FileType stylus
 
 " Disable H in visual mode (I make this mistake too often)
 " vnoremap H h
-
-" Disable q
-nnoremap q <Nop>
 
 " hsc is Haskell
 au BufRead,BufNewFile *.hsc set filetype=haskell
@@ -346,4 +340,7 @@ command! InsertLineNumbers
 
 let g:python_highlight_all = 1
 
-nnoremap Q <Nop>
+" q adds a new line after the current line AND keep the cursor position.
+nnoremap q :call append('.', '')<CR>
+" Q adds a new line before the current line AND keep the cursor position.
+nnoremap Q :call append(line('.')-1, '')<CR>

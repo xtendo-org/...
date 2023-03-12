@@ -1,2 +1,3 @@
 #!/bin/sh
-free -h | sed '2q;d' | sed 's/\s\+/ /g'
+# free -h | sed '2q;d' | sed 's/\s\+/ /g'
+ip addr | rg 'inet [0-9]+\.' | rg -v ' (172|127)\.' | rg -o '[0-9.]+' -m 1 | head -n 1

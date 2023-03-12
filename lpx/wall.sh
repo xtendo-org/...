@@ -8,6 +8,8 @@ else
     height=1078
 fi
 
-while sleep $(echo 120 - `date +%s` % 120 | bc); do
-    date +'%H:%M:%S' | dzen2 -title-name "job finished" -x 1 -y 1 -w $width -h $height -p 1 -bg black -fg white -fn 'Lato-300'
+while sleep $(echo 3600 - `date +%s` % 3600 | bc); do
+    date +'%H:%M:%S' | dzen2 -title-name "job finished" -x 1 -y 1 -w $width -h $height -p 1 -bg black -fg white -fn 'Lato-300' &
+    espeak-ng -v en+f4 -a 20 "It's "$(date +%H:%M) &
+    wait
 done
