@@ -55,8 +55,14 @@
  ("$" (jongseong-rieulpieup  . 4))
  ("%" (jongseong-rieultieut  . 4))
  ("^" . "^")
- ("&" . #x201c)		    ; U+201C, LEFT DOUBLE QUOTATION MARK
- ("*" . #x201d)		    ; U+201D, RIGHT DOUBLE QUOTATION MARK
+; ("&" . #x201c)		    ; U+201C, LEFT DOUBLE QUOTATION MARK
+; ("*" . #x201d)		    ; U+201D, RIGHT DOUBLE QUOTATION MARK
+; ("&" . #x3008)
+; ("*" . #x3009)
+ ("&" . #x300c)
+ ("*" . #x300d)
+;  ("(" . "'")
+;  (")" . "~")
  ("(" . "(")
  (")" . ")")
  ("_" . "_")
@@ -64,7 +70,8 @@
  ("W" (jongseong-tieut	     . (1 4)))
  ("E" (jongseong-nieunjieuj  . 4))
  ("R" (jongseong-rieulhieuh  . 4))
- ("T" (jongseong-rieulsios   . 4))
+ ; ("T" (jongseong-rieulsios   . 4))
+ ("T" . "'")
  ("Y" . "5")
  ("U" . "6")
  ("I" . "7")

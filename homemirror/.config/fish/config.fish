@@ -5,13 +5,13 @@ if not set -q FISH_INITIALIZED
 end
 
 # aliases
-alias u "unbreak open"
-alias v "vim --servername (random)"
+alias v "vim"
 function vs
     if [ -e Session.vim ]
-        vim --servername (random) -S
+      # vim --servername (head --bytes 32 /dev/urandom | b2sum | head -c 32) -S
+        vim --servername (pwd) -S
     else
-        vim --servername (random) -c ':Obsession'
+        vim --servername (pwd) -c ':Obsession'
     end
 end
 alias pyctags "ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags . (python -c \"import os, sys; print('\n'.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))\")"
@@ -31,7 +31,7 @@ end
 
 # Directory-based pyenv-virtualenv
 function _pyenv-virtualenv
-  command pyenv rehash 2>/dev/null
+  # command pyenv rehash 2>/dev/null
   if [ -e .pyenv-virtualenv ]
     [ (cat .pyenv-virtualenv) = (basename "$PYENV_VIRTUAL_ENV") ]
     or pyenv activate --quiet (cat .pyenv-virtualenv)
@@ -47,19 +47,14 @@ function __check_pwd --on-variable PWD --description 'PWD change hook'
     status --is-command-substitution; and return
     # set tmux window name
     if [ $TMUX ]
-        set -l maybe_pwd (echo $PWD | sed -e "s|^$HOME|~|")
-        if echo $maybe_pwd | grep -q "^~/work/"
-            set maybe_pwd (echo $maybe_pwd | sed "s|~/work/\([^/]*\).*|\1|")
-        else
-          if echo $maybe_pwd | grep -q "^~/code/"
-              set maybe_pwd (echo $maybe_pwd | sed "s|~/code/\([^/]*\).*|\1|")
-          else
-            set maybe_pwd (basename $maybe_pwd)
-          end
-        end
+        set -l maybe_pwd "$PWD"
+        set maybe_pwd (basename (echo $maybe_pwd | sed -E -e "s|^$HOME/(work\|code)/([^/]*)/.*|\2|") | sed -e "s|^mindism-frontend-||" -e "s|^mindism-||")
+        # set maybe_pwd (basename $maybe_pwd)
         tmux rename-window $maybe_pwd
     end
+
     _pyenv-virtualenv
+
     autojump --add (pwd) >/dev/null 2>>$AUTOJUMP_ERROR_PATH &
 end
 

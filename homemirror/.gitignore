@@ -1,4 +1,5 @@
 .stack-work/
+stack.yaml.lock
 __pycache__/
 ignoreme_*
 IgnoreMe*
@@ -11,3 +12,4 @@ dist/
 tags
 .mypy_cache
 *.egg-info
+*.hie
