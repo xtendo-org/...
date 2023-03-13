@@ -35,7 +35,7 @@ function fish_prompt
     else
       set -f git_color green
     end
-    set -f git_ahead (git rev-list origin/master.. 2> /dev/null | wc -l | tr -d '[:space:]')
+    set -f git_ahead (git rev-list origin/main.. 2> /dev/null | wc -l | tr -d '[:space:]')
     if git status -s 2> /dev/null | grep -q "^??"
       set -f git_untracked " +"
     end
