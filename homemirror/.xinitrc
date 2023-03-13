@@ -38,11 +38,7 @@ xset r rate 300 40
 bash ~/.../arch/xscreensaverstopper.sh &
 
 # fullscreen clock
-# ~/.../lpx/wall.sh &
-
-# touchpad
-source ~/.../lpx/configure_touchpad.sh
-syndaemon -i 1 -t -k -R -d
+~/.../lpx/wall.sh &
 
 # # notification
 # /usr/lib/notification-daemon-1.0/notification-daemon --debug -r > ~/notification-daemon.txt &
@@ -58,7 +54,7 @@ xset -b
 
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
-~/.../lpx/wall.sh &
+[ -f ~/.local/xinitrc ] && source ~/.local/xinitrc
 
 compiz --replace
 # xmonad
