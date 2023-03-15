@@ -36,5 +36,5 @@ synclient HorizTwoFingerScroll=1
 # TopEdge                 = 113
 # BottomEdge              = 1989
 
-synclient AreaLeftEdge=868
-synclient AreaRightEdge=2605
+synclient AreaLeftEdge=694
+synclient AreaRightEdge=2778

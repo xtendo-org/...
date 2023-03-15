@@ -1,4 +1,5 @@
 #!/bin/sh
+sudo powertop --auto-tune
 source ~/.../z13/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 sudo rmmod uvcvideo

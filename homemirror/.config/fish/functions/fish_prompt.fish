@@ -14,7 +14,7 @@ function fish_prompt
   end
 
   set -g tartar_bg "black"
-  set -g tartar_construct (set_color -b black)(set_color white) (echo $PWD | sed -e "s|^$HOME|~|" -e "s|^~/code/||" -e "s|^~/work/||" -e "s|^~/corp/mindism/dev/||" -e "s|^mindism-frontend-||" -e "s|^mindism-||")
+  set -g tartar_construct (set_color -b black)(set_color white) (echo $PWD | sed -e "s|^$HOME|~|" -e "s|^~/code/||" -e "s|^~/work/||" -e "s|^~/corp/mindism/dev/||" -e "s|^pace-frontend-||" -e "s|^pace-||")
 
   # pyenv-virtualenv
   if [ $PYENV_VIRTUAL_ENV ];

@@ -48,7 +48,7 @@ function __check_pwd --on-variable PWD --description 'PWD change hook'
     # set tmux window name
     if [ $TMUX ]
         set -l maybe_pwd "$PWD"
-        set maybe_pwd (basename (echo $maybe_pwd | sed -E -e "s|^$HOME/(work\|code)/([^/]*)/.*|\2|") | sed -e "s|^mindism-frontend-||" -e "s|^mindism-||")
+        set maybe_pwd (basename (echo $maybe_pwd | sed -E -e "s|^$HOME/(work\|code)/([^/]*)/.*|\2|") | sed -e "s|^pace-frontend-||" -e "s|^pace-||")
         # set maybe_pwd (basename $maybe_pwd)
         tmux rename-window $maybe_pwd
     end

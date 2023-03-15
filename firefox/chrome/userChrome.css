@@ -1,12 +1,12 @@
 /* symlink me under ~/.mozilla/firefox/<profile_name>/ */
 
+#sidebar-header {
+  display: none;
+}
+
 #tabbrowser-tabs
 {
     font-size: 10pt !important;
 }
 
-#TabsToolBar { visibility: collapse !important }
-
-#sidebar-header {
-  display: none;
-}
+#TabsToolbar { visibility: collapse !important; }
