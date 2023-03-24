@@ -16,8 +16,8 @@ export GTK_IM_MODULE="uim"
 export QT_IM_MODULE="uim"
 
 # set DPI depending on resolution
-source ~/.../lpx/init_monitor.sh
-source ~/.../lpx/monitor.sh
+# source ~/.../lpx/init_monitor.sh
+# source ~/.../lpx/monitor.sh
 
 # # if HDMI2 is connected, turn off the laptop monitor
 # xrandr | grep '^HDMI2 connected' && xrandr --output eDP1 --off
