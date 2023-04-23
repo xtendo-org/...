@@ -1,0 +1,4 @@
+soundDirectory="/usr/share/sounds/"
+soundCmd="play -q"
+
+Bell() "freedesktop/stereo/bell.oga"
