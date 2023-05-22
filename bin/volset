@@ -1,4 +1,4 @@
 #!/bin/bash
-sinkname=$(pactl list sinks | grep -m 1 -Pzo '(IDLE|RUNNING)(.|\n)+?.*' | grep -ao 'alsa.*')
+sinkname=$(pactl get-default-sink)
 pactl set-sink-volume $sinkname $1%
-pactl get-sink-volume $sinkname | grep -ao '[0-9]*%' | dzen2 -p 1 -x -200 -y 100 -w 100 -h 50 -title-name up -fn 'Roboto-16' -bg '#ffcc00' -fg 'black'
+pactl get-sink-volume $sinkname | grep -ao '[0-9]*%' | dzen2 -p 1 -x -200 -y 100 -w 100 -h 50 -title-name top -fn 'Roboto-16' -bg '#ffcc00' -fg 'black'
