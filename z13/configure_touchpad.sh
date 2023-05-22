@@ -13,9 +13,9 @@ synclient EmulateTwoFingerMinW=1
 synclient FingerLow=1
 synclient FingerHigh=10
 
-synclient AccelFactor=25
-synclient MinSpeed=5
-synclient MaxSpeed=50
+synclient AccelFactor=0.05
+synclient MinSpeed=0.1
+synclient MaxSpeed=2
 
 synclient MaxTapTime=100
 synclient MaxTapMove=60

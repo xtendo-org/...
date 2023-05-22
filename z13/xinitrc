@@ -1,5 +1,6 @@
 #!/bin/sh
-sudo powertop --auto-tune
+# sudo powertop --auto-tune &
 source ~/.../z13/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 sudo rmmod uvcvideo
+pactl set-sink-volume alsa_output.pci-0000_63_00.6.3.HiFi__hw_Generic_1__sink 0%

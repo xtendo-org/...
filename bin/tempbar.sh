@@ -7,4 +7,4 @@ while true; do
       $(iwctl station wlan0 show | grep -m 1 RSSI | grep -o '\-\?[0-9]\+') · \
       $(acpi | sed -e 's/Battery 0: //');
     sleep 3
-done | dzen2 -title-name up -y -1 -bg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo black || echo white ) -fg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo white || echo black ) -h 48
+done | dzen2 -title-name up -y -1 -bg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo black || echo white ) -fg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo white || echo black ) -h 32
