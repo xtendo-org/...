@@ -1,0 +1,5 @@
+#!/bin/bash
+sinkname=$(pactl get-default-sink)
+pactl set-sink-mute $sinkname toggle
+muted=$(pactl get-sink-mute $sinkname)
+echo $(if [[ $muted =~ "Mute: yes" ]]; then echo MUTE; fi) $(pactl get-sink-volume $sinkname | rg -m 1 -ao '[0-9]*%' | head -n 1) | dzen2 -p 1 -x -400 -y 100 -w 300 -h 50 -title-name top -fn 'Roboto-16' -bg '#ffcc00' -fg 'black'
