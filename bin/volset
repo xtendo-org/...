@@ -1,4 +1,4 @@
 #!/bin/bash
 sinkname=$(pactl get-default-sink)
-pactl set-sink-volume $sinkname $1%
-pactl get-sink-volume $sinkname | rg -m 1 -ao '[0-9]*%' | dzen2 -p 1 -x -200 -y 100 -w 100 -h 50 -title-name top -fn 'Roboto-16' -bg '#ffcc00' -fg 'black'
+pactl set-sink-volume @DEFAULT_SINK@ $1%
+pactl get-sink-volume @DEFAULT_SINK@ | rg -m 1 -ao '[0-9]*%' | dzen2 -p 1 -x -200 -y 100 -w 100 -h 50 -title-name top -fn 'Roboto-16' -bg '#ffcc00' -fg 'black'
