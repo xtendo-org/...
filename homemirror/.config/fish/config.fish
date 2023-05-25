@@ -4,6 +4,8 @@ if not set -q FISH_INITIALIZED
     set -x FISH_INITIALIZED 1
 end
 
+set AUTOJUMP_ERROR_PATH ~/autojump.log
+
 # aliases
 alias v "vim"
 function vs
@@ -14,7 +16,6 @@ function vs
         vim --servername (pwd) -c ':Obsession'
     end
 end
-alias pyctags "ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags . (python -c \"import os, sys; print('\n'.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))\")"
 
 # pyenv
 function pyenv
