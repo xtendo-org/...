@@ -20,15 +20,20 @@ checkFullscreen()
     # loop through every display looking for a fullscreen window
     for display in $displays
     do
-        #get id of active window and clean output
-        activ_win_id=`DISPLAY=:0.${display} xprop -root _NET_ACTIVE_WINDOW`
-        echo "active_win_id: ${active_win_id}"
-        activ_win_id=${activ_win_id:40:9}
-        # Check if Active Window (the foremost window) is in fullscreen state
-        isActivWinFullscreen=`DISPLAY=:0.${display} xprop -id $activ_win_id | grep _NET_WM_STATE_FULLSCREEN`
-        if [[ "$isActivWinFullscreen" == *NET_WM_STATE_FULLSCREEN* ]];then
-        	xscreensaver-command -deactivate
-            xset s off
+      #get id of active window and clean output
+      activ_win_id=`DISPLAY=:0.${display} xprop -root _NET_ACTIVE_WINDOW`
+      echo "active_win_id: ${active_win_id}"
+      activ_win_id=${activ_win_id:40:9}
+      # Check if Active Window (the foremost window) is in fullscreen state
+      isActivWinFullscreen=`DISPLAY=:0.${display} xprop -id $activ_win_id | grep _NET_WM_STATE_FULLSCREEN`
+      if [[ "$isActivWinFullscreen" == *NET_WM_STATE_FULLSCREEN* ]];then
+        xscreensaver-command -deactivate
+        xset s off
+      else
+        if [ $(pgrep barrierc) ]; then
+          xscreensaver-command -deactivate
+          xset s off
+        fi
 	    fi
     done
 }
