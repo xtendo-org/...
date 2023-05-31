@@ -10,4 +10,4 @@ while true; do
       $(if [[ $muted =~ "Mute: yes" ]]; then echo MUTE; else pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1; fi) · \
       $(acpi | sed -e 's/Battery 0: //');
     sleep 3
-done | dzen2 -title-name top -y -1 -bg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo black || echo white ) -fg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo white || echo black ) -h 23
+done | dzen2 -title-name top -y -1 -bg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo black || echo white ) -fg $( [ $(( $(date +%_j) % 2 )) -eq 0 ] && echo white || echo black ) -h 34

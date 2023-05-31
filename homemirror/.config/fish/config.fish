@@ -96,3 +96,6 @@ alias chipsedit "v ~/.config/chips/plugin.yaml"
 
 # chips
 if [ -e ~/.config/chips/build.fish ] ; . ~/.config/chips/build.fish ; end
+
+bind \e\[25~ ' '
+bind \e\[29~ ' '
