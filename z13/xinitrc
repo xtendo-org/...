@@ -5,4 +5,6 @@ source ~/.../z13/monitor.sh
 source ~/.../z13/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 sudo rmmod uvcvideo
-pactl set-sink-volume alsa_output.pci-0000_63_00.6.3.HiFi__hw_Generic_1__sink 0%
+sudo ~/.../bin/chattering_fix.py /dev/input/by-id/usb-*Keyboard*-kbd 30 > /tmp/antichatter.log 2>&1
+xmodmap ~/.Xmodmap
+pactl set-sink-mute @DEFAULT_SINK@ 1
