@@ -24,7 +24,7 @@ export QT_IM_MODULE="uim"
 # xrandr | grep '^HDMI2 connected' && xrandr --output HDMI2 --primary && xrandr --output eDP1 --below HDMI2
 
 # launch basic apps
-gnome-terminal &
+gnome-terminal --maximize -e tmux &
 xscreensaver -no-splash &
 
 xmodmap ~/.Xmodmap
