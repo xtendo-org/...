@@ -49,12 +49,12 @@ function __check_pwd --on-variable PWD --description 'PWD change hook'
     # set tmux window name
     if [ $TMUX ]
         set -l maybe_pwd "$PWD"
-        set maybe_pwd (basename (echo $maybe_pwd | sed -E -e "s|^$HOME/(work\|code)/([^/]*)/.*|\2|") | sed -e "s|^pace-frontend-||" -e "s|^pace-||")
+        set maybe_pwd (basename (echo $maybe_pwd | sed -E -e "s|^$HOME/(work\|code)/([^/]*)/.*|\2|") | sed -e "s|^prex-||")
         # set maybe_pwd (basename $maybe_pwd)
         tmux rename-window $maybe_pwd
     end
 
-    _pyenv-virtualenv
+    # _pyenv-virtualenv
 
     autojump --add (pwd) >/dev/null 2>>$AUTOJUMP_ERROR_PATH &
 end
@@ -90,6 +90,15 @@ function j
                 end
             end
     end
+end
+
+function python
+  if [ $PYENV_VERSION ]
+    eval (which python) $argv
+  else
+    echo (set_color -b red -o brwhite)"WARNING: no virtualenv is activated."(set_color normal)
+    eval (which python) $argv
+  end
 end
 
 alias chipsedit "v ~/.config/chips/plugin.yaml"

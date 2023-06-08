@@ -23,7 +23,7 @@ from contextlib import contextmanager
 import time
 import logging
 
-logging.basicConfig(stream=sys.stderr, level=logging.INFO,
+logging.basicConfig(stream=sys.stderr, level=logging.DEBUG,
                     format='[%(levelname)s] %(message)s')
 
 

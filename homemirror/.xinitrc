@@ -23,8 +23,6 @@ export QT_IM_MODULE="uim"
 # xrandr | grep '^HDMI2 connected' && xrandr --output eDP1 --off
 # xrandr | grep '^HDMI2 connected' && xrandr --output HDMI2 --primary && xrandr --output eDP1 --below HDMI2
 
-xrdb -merge ~/.Xresources
-
 # launch basic apps
 gnome-terminal &
 xscreensaver -no-splash &

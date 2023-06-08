@@ -1,10 +1,12 @@
 #!/bin/sh
 # sudo powertop --auto-tune &
 BROWSER=firefox
+source ~/.../z13/init_monitor.sh
+xrdb -merge ~/.Xresources
 source ~/.../z13/monitor.sh
+
 source ~/.../z13/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
 sudo rmmod uvcvideo
-sudo ~/.../bin/chattering_fix.py /dev/input/by-id/usb-*Keyboard*-kbd 30 > /tmp/antichatter.log 2>&1
 xmodmap ~/.Xmodmap
 pactl set-sink-mute @DEFAULT_SINK@ 1
