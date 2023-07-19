@@ -1,4 +1,4 @@
 #!/bin/bash
 $(ffplay -autoexit -nodisp /usr/share/sounds/freedesktop/stereo/complete.oga >/dev/null 2>&1; espeak-ng "$1") &
-echo "Complete: $1" | dzen2 -x -400 -y 100 -w 300 -h 100 -p -bg '#ff0000' -fg '#ffffff' -fn 'Noto Sans CJK KR'
+echo -e "Complete: $1" | dzen2 -x -400 -y 100 -w 300 -h 100 -p $2 -bg '#ff0000' -fg '#ffffff' -fn 'Noto Sans CJK KR'
 wait
