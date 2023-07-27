@@ -1,6 +1,4 @@
-barthickness=${1:-34}
 resolution=$(xrandr | rg '\*' | awk '{print $1}')
-echo $resolution
 
 case $resolution in
   1920x1080)
@@ -15,6 +13,8 @@ case $resolution in
   *)
     thickness=24
 esac
+
+echo "Resolution is $resolution. Bar thickness is $thickness."
 
 while true; do
     sinkname=$(pactl get-default-sink)
