@@ -1,0 +1,14 @@
+user ALL =NOPASSWD: \
+  /usr/bin/fdisk, \
+  /usr/bin/journalctl, \
+  /usr/bin/modprobe, \
+  /usr/bin/mount, \
+  /usr/bin/paccache, \
+  /usr/bin/pacman, \
+  /usr/bin/powertop, \
+  /usr/bin/rfkill, \
+  /usr/bin/rmmod, \
+  /usr/bin/systemctl, \
+  /usr/bin/umount, \
+  /usr/bin/yay, \
+  /home/user/.../bin/chattering_fix.py
