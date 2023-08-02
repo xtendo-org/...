@@ -101,6 +101,10 @@ function python
   end
 end
 
+function snipe
+  ps aux | rg $argv[1] | fzf | awk '{print $2}' | xargs kill
+end
+
 alias chipsedit "v ~/.config/chips/plugin.yaml"
 
 # chips
