@@ -5,7 +5,7 @@ case $resolution in
     thickness=24
     ;;
   1920x1200)
-    thickness=20
+    thickness=25
     ;;
   3840x2160)
     thickness=46
