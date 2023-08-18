@@ -102,7 +102,8 @@ function python
 end
 
 function snipe
-  ps aux | rg $argv[1] | fzf | awk '{print $2}' | xargs kill
+  set -l _ps (ps aux | string split0)
+  echo $_ps | rg $argv[1] | fzf | awk '{print $2}' | xargs kill
 end
 
 alias chipsedit "v ~/.config/chips/plugin.yaml"

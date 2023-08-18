@@ -24,7 +24,7 @@ export QT_IM_MODULE="uim"
 # xrandr | grep '^HDMI2 connected' && xrandr --output HDMI2 --primary && xrandr --output eDP1 --below HDMI2
 
 # launch basic apps
-gnome-terminal --maximize -e tmux &
+gnome-terminal --maximize -e ~/.../bin/attachtmux.sh &
 xscreensaver -no-splash &
 
 xmodmap ~/.Xmodmap
@@ -50,6 +50,7 @@ xkbevd -bg &
 
 # feh --bg-fill ~/Desktop/bg.jpg &
 
+pkill xfce4-notifyd
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 [ -f ~/.local/xinitrc ] && source ~/.local/xinitrc
