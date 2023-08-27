@@ -25,7 +25,9 @@ export QT_IM_MODULE="uim"
 
 # launch basic apps
 gnome-terminal --maximize -e ~/.../bin/attachtmux.sh &
-xscreensaver -no-splash &
+
+export XSECURELOCK_BLANK_TIMEOUT=5
+xss-lock xsecurelock &
 
 xmodmap ~/.Xmodmap
 
