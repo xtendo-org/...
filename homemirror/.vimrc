@@ -345,3 +345,5 @@ let g:python_highlight_all = 1
 nnoremap q :call append('.', '')<CR>
 " Q adds a new line before the current line AND keep the cursor position.
 nnoremap Q :call append(line('.')-1, '')<CR>
+nnoremap o<ESC> :echoerr "Use q!"<CR>
+nnoremap O<ESC> :echoerr "Use Q!"<CR>

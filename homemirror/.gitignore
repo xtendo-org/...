@@ -4,6 +4,8 @@
 .pyenv-virtualenv
 .stack-work/
 /*.cabal
+/Cargo.lock
+/target/
 IgnoreMe*
 Session.vim
 __pycache__/
@@ -12,5 +14,5 @@ dist/
 ignoreme_*
 node_modules/
 npm-debug.log
-stack.yaml.lock
+stack.*.lock
 tags
