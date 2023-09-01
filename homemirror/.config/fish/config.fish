@@ -4,8 +4,6 @@ if not set -q FISH_INITIALIZED
     set -x FISH_INITIALIZED 1
 end
 
-set AUTOJUMP_ERROR_PATH ~/autojump.log
-
 # aliases
 alias v "vim"
 function vs
@@ -56,7 +54,7 @@ function __check_pwd --on-variable PWD --description 'PWD change hook'
 
     # _pyenv-virtualenv
 
-    autojump --add (pwd) >/dev/null 2>>$AUTOJUMP_ERROR_PATH &
+    autojump --add (pwd) >/dev/null 2>>~/autojump.log &
 end
 
 # Change Ctrl+w to delete up to the last whitespace;

@@ -1,8 +1,25 @@
 function fish_prompt
-  set previous $status
-  set timestamp (string split @ (date +%Y-%m-%d"@"%H:%M:%S"@".%N))
+  set -l previous $status
   if [ $previous != 0 ]
     echo -n (set_color -b red -o white)" $previous "(set_color normal)" "
   end
-  echo (set_color -b blue white)$CMD_DURATION(set_color normal) (set_color -o green)$timestamp[1](set_color white)T(set_color blue)$timestamp[2](set_color white)$timestamp[3](if [ $PYENV_VERSION ]; echo " "(set_color -b magenta brwhite)$PYENV_VERSION(set_color normal); else; echo ""; end) (set_color -o blue)(pwd | sed -e "s|^$HOME/work/prex-||" -e "s|^$HOME/code/||" -e "s|^$HOME/work/||" -e "s|^$HOME/||" -e "s|^$HOME|~|")(set_color normal)'$ '
+  echo \
+    (set_color -b blue white)$CMD_DURATION(set_color normal)\
+    (set_color -o cyan)(hostname)':'(set_color normal)\
+    (if [ $PYENV_VERSION ]; echo (set_color -b magenta brwhite)$PYENV_VERSION(set_color normal); end)\
+    (set_color -o blue)(pwd | sed -e "s|^$HOME/work/prex-||" -e "s|^$HOME/code/||" -e "s|^$HOME/work/||" -e "s|^$HOME/||" -e "s|^$HOME|~|")(set_color normal)\
+    (if set -l tartar_gitrev (git rev-parse --is-inside-work-tree --abbrev-ref HEAD 2>/dev/null)
+      set -l tartar_untracked_count (git ls-files --others --exclude-standard | wc -l)
+      git diff-index --quiet HEAD; and set -l tartar_gitbg green; or set -l tartar_gitbg yellow
+      echo -n (set_color -b $tartar_gitbg white)$tartar_gitrev[2]
+      set -l tartar_stash_count (git stash list | wc -l)
+      if [ $tartar_untracked_count != 0 ]
+        echo -n '+'$tartar_untracked_count
+      end
+      if [ $tartar_stash_count != 0 ]
+        echo -n '#'$tartar_stash_count
+      end
+      set_color normal
+    end)\
+    '$ '
 end
