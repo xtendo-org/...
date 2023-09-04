@@ -10,3 +10,7 @@ syndaemon -i 1 -t -k -R -d
 sudo rmmod uvcvideo
 xmodmap ~/.Xmodmap
 pactl set-sink-mute @DEFAULT_SINK@ 1
+pactl set-source-mute @DEFAULT_SOURCE@ 1
+
+pkill xfce4-notifyd
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
