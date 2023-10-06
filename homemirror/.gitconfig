@@ -4,7 +4,7 @@
   ui = true
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit
-	recent = branch -l --sort=-committerdate
+  recent = branch -l --sort=-committerdate
 [core]
   excludesfile = /home/user/.gitignore
   pager = less -+$LESS -r
@@ -12,6 +12,17 @@
 [log]
   date = iso8601
 [init]
-	defaultBranch = main
-[safe]
-	directory = /opt/flutter
+  defaultBranch = main
+[core]
+  ; pager = delta
+  pager = delta_or_less.sh
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  light = true
+  line-numbers = true
+  navigate = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default

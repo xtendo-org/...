@@ -3,7 +3,6 @@
 .mypy_cache
 .pyenv-virtualenv
 .stack-work/
-/*.cabal
 /.vscode/
 /Cargo.lock
 /target/

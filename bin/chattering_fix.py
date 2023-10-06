@@ -50,6 +50,7 @@ def start_filtering(evdev: Device, filter: Callable[[InputEvent], Union[InputEve
     # create a copy of the device that we can write to - this will emit the filtered events to anyone who listens
     uidev = evdev.create_uinput_device()
 
+    print('Loop...')
     while True:
         # since the descriptor is blocking, this blocks until there are events available
         for e in evdev.events():
