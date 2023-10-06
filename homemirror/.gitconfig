@@ -14,8 +14,7 @@
 [init]
   defaultBranch = main
 [core]
-  ; pager = delta
-  pager = delta_or_less.sh
+  pager = delta
 [interactive]
   diffFilter = delta --color-only
 [delta]
