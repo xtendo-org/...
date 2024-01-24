@@ -6,7 +6,8 @@ function fish_prompt
   echo \
     (set_color -b blue white)$CMD_DURATION(set_color normal)\
     (set_color -o cyan)(hostname)':'(set_color normal)\
-    (if [ $PYENV_VERSION ]; echo (set_color -b magenta brwhite)$PYENV_VERSION(set_color normal); end)\
+    (if [ $PYENV_VERSION ]; echo (set_color -b blue brwhite)$PYENV_VERSION(set_color normal); end)\
+    (if [ $CONDA_DEFAULT_ENV ]; echo (set_color -b green brwhite)$CONDA_DEFAULT_ENV(set_color normal); end)\
     (set_color -o blue)(pwd | sed -e "s|^$HOME/work/prex-||" -e "s|^$HOME/code/||" -e "s|^$HOME/work/||" -e "s|^$HOME/||" -e "s|^$HOME|~|")(set_color normal)\
     (if set -l tartar_gitrev (git rev-parse --is-inside-work-tree --abbrev-ref HEAD 2>/dev/null)
       set -l tartar_untracked_count (git ls-files --others --exclude-standard | wc -l)

@@ -189,6 +189,9 @@ autocmd FileType gitcommit
     \ | setlocal textwidth=72
 autocmd FileType markdown,gitcommit,haskell setlocal spell
 
+autocmd BufRead,BufNewFile * if &filetype == '' | setlocal textwidth=0 | endif
+autocmd VimEnter * if &filetype == '' | setlocal textwidth=0 | endif
+
 " turn off spell checking
 nnoremap <leader>` :set spell!<CR>
 
@@ -345,5 +348,3 @@ let g:python_highlight_all = 1
 nnoremap q :call append('.', '')<CR>
 " Q adds a new line before the current line AND keep the cursor position.
 nnoremap Q :call append(line('.')-1, '')<CR>
-nnoremap o<ESC> :echoerr "Use q!"<CR>
-nnoremap O<ESC> :echoerr "Use Q!"<CR>

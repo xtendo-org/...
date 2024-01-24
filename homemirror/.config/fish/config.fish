@@ -90,15 +90,6 @@ function j
     end
 end
 
-function python
-  if [ $PYENV_VERSION ]
-    eval (which python) $argv
-  else
-    echo (set_color -b red -o brwhite)"WARNING: no virtualenv is activated."(set_color normal)
-    eval (which python) $argv
-  end
-end
-
 function snipe
   set -l _ps (ps aux | string split0)
   echo $_ps | rg $argv[1] | fzf | awk '{print $2}' | xargs kill
@@ -111,3 +102,21 @@ if [ -e ~/.config/chips/build.fish ] ; . ~/.config/chips/build.fish ; end
 
 bind \e\[25~ ' '
 bind \e\[29~ ' '
+
+function conda --inherit-variable CONDA_EXE
+    if [ (count $argv) -lt 1 ]
+        $CONDA_EXE
+    else
+        set -l cmd $argv[1]
+        set -e argv[1]
+        switch $cmd
+            case activate deactivate
+                eval ($CONDA_EXE shell.fish $cmd $argv)
+            case install update upgrade remove uninstall
+                $CONDA_EXE $cmd $argv
+                and eval ($CONDA_EXE shell.fish reactivate)
+            case '*'
+                $CONDA_EXE $cmd $argv
+        end
+    end
+end

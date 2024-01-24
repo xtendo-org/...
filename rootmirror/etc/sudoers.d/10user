@@ -8,6 +8,7 @@ user ALL =NOPASSWD: \
   /usr/bin/powertop, \
   /usr/bin/rfkill, \
   /usr/bin/rmmod, \
+  /usr/bin/swapon, \
   /usr/bin/systemctl, \
   /usr/bin/umount, \
   /usr/bin/yay, \

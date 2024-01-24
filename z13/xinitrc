@@ -1,5 +1,7 @@
 #!/bin/sh
 # sudo powertop --auto-tune &
+swapon --show=SIZE | rg -q '[A-Z]' || sudo swapon /swapfile
+
 BROWSER=firefox
 source ~/.../z13/init_monitor.sh
 xrdb -merge ~/.Xresources

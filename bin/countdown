@@ -61,4 +61,4 @@ if __name__ == '__main__':
         left_repr = ':'.join('{:02d}'.format(i) for i in left)
         sys.stdout.write('{}/{} ({} left)\r'.format(i, seconds, left_repr))
         now = time.time()
-        time.sleep(i + 1 - (now - begin) or 1)
+        time.sleep(max(i + 1 - (now - begin) or 1, 0.1))

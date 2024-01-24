@@ -48,7 +48,8 @@ bash ~/.../arch/xscreensaverstopper.sh &
 
 # xset b 10 30 500
 xset -b
-xkbevd -bg &
+# NOTE: configure xkbevd with xkbevd.cf
+xkbevd -bg
 
 # feh --bg-fill ~/Desktop/bg.jpg &
 

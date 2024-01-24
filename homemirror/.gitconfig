@@ -7,20 +7,19 @@
   recent = branch -l --sort=-committerdate
 [core]
   excludesfile = /home/user/.gitignore
-  pager = less -+$LESS -r
   editor = vim
+  pager = delta
 [log]
   date = iso8601
 [init]
   defaultBranch = main
-[core]
-  pager = delta
 [interactive]
   diffFilter = delta --color-only
 [delta]
   light = true
   line-numbers = true
   navigate = true
+  pager = less
 [merge]
   conflictstyle = diff3
 [diff]
