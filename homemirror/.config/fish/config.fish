@@ -1,8 +1,14 @@
+if not status is-interactive
+    exit
+end
+
 if not set -q FISH_INITIALIZED
     echo "sourcing once.fish..."
     source ~/.../once.fish
     set -x FISH_INITIALIZED 1
 end
+
+set -q FISH_HOSTNAME || set FISH_HOSTNAME (string shorten -m12 (hostname))
 
 # aliases
 alias v "vim"

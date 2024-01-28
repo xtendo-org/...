@@ -20,6 +20,8 @@ set PATH $PATH $PNPM_PACKAGES/bin
 set -gx PNPM_HOME "/home/user/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 
+set -gx FISH_HOSTNAME (string shorten -m12 (hostname))
+
 # pyenv
 if [ -d ~/.pyenv ]
     set -gx PATH $HOME"/.pyenv/bin" $PATH
