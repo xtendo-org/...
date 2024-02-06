@@ -23,6 +23,8 @@ checkFullscreen()
   done
 }
 
+command -v iwctl && iwctl_exists=true
+
 resolution=$(xrandr | rg '\*' | awk '{print $1}')
 
 case $resolution in
@@ -53,13 +55,18 @@ while true; do
     sinkname=$(pactl get-default-sink)
     muted=$(pactl get-sink-mute $sinkname)
     short_sinkname=$(echo $sinkname | sed -e 's/.*\.//')
-    wireless_info=$(iwctl station wlan0 show)
+
+    if [ "$iwctl_exists" = true ]; then
+      wireless_info=$(iwctl station wlan0 show)
+    fi
     echo '^fn(Lato-10)' \
       $(date +'%Y-%m-%d (%a) %H:%M') \
       '^fn(Noto Emoji-10)⏳^fn(Lato-10)' $(uptime -p) \
       $(ip --brief addr show | grep '\s\+UP\s\+' | grep -v '\(docker\|veth\)' | sed -e 's|\([0-9a-z]\{4,\}\)\s\+\([A-Z]\+\)\s\+\([.0-9]\+\)\?\+.*|\1 ^fn(Noto Emoji-10)📪^fn(Lato-10) \3|' | head -c -1 | tr '\n' '/' | sed -e 's|/| / |g' -e 's|^|\^fn(Noto Emoji-10)🌏^fn(Lato-10) |') \
-      $(echo "$wireless_info" | grep -m 1 'Connected' | sed -e 's/Connected network/^fn(Noto Emoji-10)🛜^fn(Lato-10) /') \
-      $(echo "$wireless_info" | grep -m 1 RSSI | grep -o '\-\?[0-9]\+' | sed -e 's|^-|^fn(Noto Emoji-10)📶^fn(Lato-10) -|') \
+      $(if [ "$iwctl_exists" = true ]; then
+        echo "$wireless_info" | grep -m 1 'Connected' | sed -e 's/Connected network/^fn(Noto Emoji-10)🛜^fn(Lato-10) /'
+        echo "$wireless_info" | grep -m 1 RSSI | grep -o '\-\?[0-9]\+' | sed -e 's|^-|^fn(Noto Emoji-10)📶^fn(Lato-10) -|'
+      fi) \
       $(if [[ $muted =~ "Mute: yes" ]]; then echo '^fn(Noto Emoji-10)🔇^fn(Lato-10) MUTE'; else echo '^fn(Noto Emoji-10)🔊^fn(Lato-10)'; pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1; fi) \
       $short_sinkname \
       $(acpi | sed -e 's/Battery 0: /^fn(Noto Emoji-10)🔋^fn(Lato-10)/' -e 's/Discharging/\^bg(red) Discharging/');
