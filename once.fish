@@ -58,6 +58,10 @@ set -x PATH "/opt/flutter/bin" $PATH
 # status is-login; and pyenv init --path | source
 # pyenv init - | source
 
+if [ -d ~/.ghcup ]
+    set -x PATH $HOME"/.ghcup/bin" $PATH
+end
+
 # >>> conda initialize >>>
 
 set -gx CONDA_EXE "/opt/miniconda3/bin/conda"
