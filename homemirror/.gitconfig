@@ -1,26 +1,28 @@
 [push]
-  default = simple
+	default = simple
 [color]
-  ui = true
+	ui = true
 [alias]
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit
-  recent = branch -l --sort=-committerdate
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset %C(blue)%an%Creset %s %Cgreen(%cr)' --abbrev-commit
+	recent = branch -l --sort=-committerdate
 [core]
-  excludesfile = /home/user/.gitignore
-  editor = vim
-  pager = delta
+	excludesfile = /home/user/.gitignore
+	editor = vim
+	pager = delta
 [log]
-  date = iso8601
+	date = iso8601
 [init]
-  defaultBranch = main
+	defaultBranch = main
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
 [delta]
-  light = true
-  line-numbers = true
-  navigate = true
-  pager = less -R
+	light = true
+	line-numbers = true
+	navigate = true
+	pager = less -R
 [merge]
-  conflictstyle = diff3
+	conflictstyle = diff3
 [diff]
-  colorMoved = default
+	colorMoved = default
+[branch]
+	sort = committerdate
