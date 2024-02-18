@@ -38,12 +38,13 @@ let g:dirvish_git_indicators = {
 \ }
 
 
-let g:coc_global_extensions = [
-      \'@yaegassy/coc-ruff',
-      \'coc-highlight',
-      \'coc-json',
-      \'coc-pyright',
-      \'coc-rust-analyzer'
+let g:coc_global_extensions =
+      \[ '@yaegassy/coc-ruff'
+      \, 'coc-git'
+      \, 'coc-highlight'
+      \, 'coc-json'
+      \, 'coc-pyright'
+      \, 'coc-rust-analyzer'
       \]
 
 command! Fourmolu
