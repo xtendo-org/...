@@ -37,6 +37,15 @@ let g:dirvish_git_indicators = {
 \ 'Unknown'   : '?'
 \ }
 
+
+let g:coc_global_extensions = [
+      \'@yaegassy/coc-ruff',
+      \'coc-highlight',
+      \'coc-json',
+      \'coc-pyright',
+      \'coc-rust-analyzer'
+      \]
+
 command! Fourmolu
     \ execute ':w'
     \ | execute ':silent !fourmolu --mode inplace' shellescape(expand('%'))
