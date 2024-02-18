@@ -1,3 +1,5 @@
+font="source han sans kr"
+
 checkFullscreen()
 {
   # enumerate all the attached screens
@@ -59,18 +61,20 @@ while true; do
     if [ "$iwctl_exists" = true ]; then
       wireless_info=$(iwctl station wlan0 show)
     fi
-    echo '^fn(Lato-10)' \
+    echo "^fn($font-10)" \
       $(date +'%Y-%m-%d (%a) %H:%M') \
-      '^fn(Noto Emoji-10)⏳^fn(Lato-10)' $(uptime -p) \
-      '^fn(Noto Emoji-10)💾^fn(Lato-10)' $(free -h | awk '/^Mem:/ {mem=$4} /^Swap:/ {swap=$4} END {print mem " / " swap}') \
-      $(ip --brief addr show | grep '\s\+UP\s\+' | grep -v '\(docker\|veth\)' | sed -e 's|\([0-9a-z]\{4,\}\)\s\+\([A-Z]\+\)\s\+\([.0-9]\+\)\?\+.*|\1 ^fn(Noto Emoji-10)📪^fn(Lato-10) \3|' | head -c -1 | tr '\n' '/' | sed -e 's|/| / |g' -e 's|^|\^fn(Noto Emoji-10)🌏^fn(Lato-10) |') \
+      "^fn(Noto Emoji-10)⏳^fn($font-10)" $(uptime -p) \
+      "^fn(Noto Emoji-10)💾^fn($font-10)" $(free -h | awk '/^Mem:/ {mem=$4} /^Swap:/ {swap=$4} END {print mem " / " swap}') \
+      $(ip --brief addr show | grep '\s\+UP\s\+' | grep -v '\(docker\|veth\)' | sed -e "s|\([0-9a-z]\{4,\}\)\s\+\([A-Z]\+\)\s\+\([.0-9]\+\)\?\+.*|\1 ^fn(Noto Emoji-10)📪^fn($font-10) \3|" | head -c -1 | tr '\n' '/' | sed -e 's|/| / |g' -e 's|^|\^fn(Noto Emoji-10)🌏^fn($font-10) |') \
       $(if [ "$iwctl_exists" = true ]; then
-        echo "$wireless_info" | grep -m 1 'Connected' | sed -e 's/Connected network/^fn(Noto Emoji-10)🛜^fn(Lato-10) /'
-        echo "$wireless_info" | grep -m 1 RSSI | grep -o '\-\?[0-9]\+' | sed -e 's|^-|^fn(Noto Emoji-10)📶^fn(Lato-10) -|'
+        echo "$wireless_info" | grep -m 1 'Connected' | sed -e "s/Connected network/^fn(Noto Emoji-10)🛜^fn($font-10) /"
+        echo "$wireless_info" | grep -m 1 RSSI | grep -o '\-\?[0-9]\+' | sed -e "s|^-|^fn(Noto Emoji-10)📶^fn($font-10) -|"
       fi) \
-      $(if [[ $muted =~ "Mute: yes" ]]; then echo '^fn(Noto Emoji-10)🔇^fn(Lato-10) MUTE'; else echo '^fn(Noto Emoji-10)🔊^fn(Lato-10)'; pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1; fi) \
-      $short_sinkname \
-      $(acpi | sed -e 's/Battery 0: /^fn(Noto Emoji-10)🔋^fn(Lato-10)/' -e 's/Discharging/\^bg(red) Discharging/') \
+      $(if [[ $muted =~ "Mute: yes" ]]; then echo "^fn(Noto Emoji-10)🔇^fn($font-10) MUTE"; else echo "^fn(Noto Emoji-10)🔊^fn($font-10)"; pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1; fi) \
+      "^fg(#999999)$short_sinkname^fg($FGCOLOR)" \
+      "^fn(Noto Emoji-10)🔔^fn($font-10)" \
+      $(sqlite3 ~/.cache/xfce4/notifyd/log.sqlite "select substr(app_id || ': ' || summary || ' / ' || body, 1, 128) from notifications order by timestamp desc limit 1;") \
+      $(acpi | sed -e "s/Battery 0: /^fn(Noto Emoji-10)🔋^fn($font-10)/" -e 's/Discharging/\^bg(red)^fg(white) Discharging/') \
       '';
     checkFullscreen
     sleep 3

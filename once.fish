@@ -62,6 +62,16 @@ if [ -d ~/.ghcup ]
     set -x PATH $HOME"/.ghcup/bin" $PATH
 end
 
+# aliases
+function nvs
+    if [ -e Session.vim ]
+      # vim --servername (head --bytes 32 /dev/urandom | b2sum | head -c 32) -S
+        nvim --servername (pwd) -S
+    else
+        nvim --servername (pwd) -c ':Obsession'
+    end
+end
+
 # >>> conda initialize >>>
 
 set -gx CONDA_EXE "/opt/miniconda3/bin/conda"

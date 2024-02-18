@@ -7,7 +7,7 @@ notimon &
 BROWSER=firefox
 source ~/.../z13/init_monitor.sh
 xrdb -merge ~/.Xresources
-source ~/.../z13/monitor.sh
+~/.../z13/monitor.sh
 
 source ~/.../z13/configure_touchpad.sh
 syndaemon -i 1 -t -k -R -d
