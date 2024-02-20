@@ -25,7 +25,7 @@ checkFullscreen()
   done
 }
 
-command -v iwctl && iwctl_exists=true
+command -v iwctl > /dev/null && iwctl_exists=true
 
 resolution=$(xrandr | rg '\*' | awk '{print $1}')
 
@@ -72,7 +72,6 @@ while true; do
       fi) \
       $(if [[ $muted =~ "Mute: yes" ]]; then echo "^fn(Noto Emoji-10)🔇^fn($font-10) MUTE"; else echo "^fn(Noto Emoji-10)🔊^fn($font-10)"; pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1; fi) \
       "^fg(#999999)$short_sinkname^fg($FGCOLOR)" \
-      "^fn(Noto Emoji-10)🔔^fn($font-10)" \
       $(acpi | sed -e "s/Battery 0: /^fn(Noto Emoji-10)🔋^fn($font-10)/" -e 's/Discharging/\^bg(red)^fg(white) Discharging/') \
       '';
     checkFullscreen
