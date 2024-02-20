@@ -73,7 +73,6 @@ while true; do
       $(if [[ $muted =~ "Mute: yes" ]]; then echo "^fn(Noto Emoji-10)🔇^fn($font-10) MUTE"; else echo "^fn(Noto Emoji-10)🔊^fn($font-10)"; pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1; fi) \
       "^fg(#999999)$short_sinkname^fg($FGCOLOR)" \
       "^fn(Noto Emoji-10)🔔^fn($font-10)" \
-      $(sqlite3 ~/.cache/xfce4/notifyd/log.sqlite "select substr(app_id || ': ' || summary || ' / ' || body, 1, 128) from notifications order by timestamp desc limit 1;") \
       $(acpi | sed -e "s/Battery 0: /^fn(Noto Emoji-10)🔋^fn($font-10)/" -e 's/Discharging/\^bg(red)^fg(white) Discharging/') \
       '';
     checkFullscreen
