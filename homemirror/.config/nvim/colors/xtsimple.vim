@@ -17,6 +17,7 @@ hi Keyword ctermbg=NONE ctermfg=5 cterm=BOLD
 hi Constant ctermbg=NONE ctermfg=2
 hi Comment ctermbg=NONE ctermfg=9 cterm=italic
 hi String ctermbg=NONE ctermfg=3
+hi Search ctermbg=11 ctermfg=0
 
 hi pythonBuiltin ctermbg=NONE ctermfg=10
 hi pythonConditional ctermbg=NONE ctermfg=13 cterm=BOLD

@@ -37,7 +37,6 @@ let g:dirvish_git_indicators = {
 \ 'Unknown'   : '?'
 \ }
 
-
 let g:coc_global_extensions =
       \[ '@yaegassy/coc-ruff'
       \, 'coc-git'
@@ -46,6 +45,8 @@ let g:coc_global_extensions =
       \, 'coc-pyright'
       \, 'coc-rust-analyzer'
       \]
+
+let g:ctrlp_working_path_mode = '0'
 
 command! Fourmolu
     \ execute ':w'
@@ -65,4 +66,37 @@ autocmd FileType python
     \ nnoremap <C-s> :RuffFormat<CR>
     \ | inoremap <C-s> <ESC>:RuffFormat<CR>
 
+command! CargoFmt
+    \ execute ':w'
+    \ | execute ':silent !cargo +nightly fmt --' shellescape(expand('%'))
+    \ | execute ':e!'
+
+autocmd FileType rust
+    \ nnoremap <C-s> :CargoFmt<CR>
+    \ | inoremap <C-s> <ESC>:CargoFmt<CR>
+
 set spell
+
+function! DedentToMaxCommonDepth() range
+  let l:min_indent = -1
+  for l:line in getline(a:firstline, a:lastline)
+    if l:line =~ '^\s*$' | continue | endif
+    let l:current_indent = matchend(l:line, '^\s\+')
+    if l:min_indent == -1 || l:current_indent < l:min_indent
+      let l:min_indent = l:current_indent
+    endif
+  endfor
+  if l:min_indent > 0
+    execute a:firstline . ',' . a:lastline . 's/^\s\{' . l:min_indent . '}//'
+  endif
+endfunction
+
+command! -range=% DedentBlock <line1>,<line2>call DedentToMaxCommonDepth()
+
+vnoremap <leader>d :DedentBlock<CR>
+
+nnoremap <leader>` :set spell!<CR>
+nnoremap <leader><space> :nohlsearch<CR>
+
+" visually select the last inserted text
+nnoremap gV `[v`]

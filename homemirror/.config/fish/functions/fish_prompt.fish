@@ -11,7 +11,7 @@ function fish_prompt
     (set_color -o blue)(pwd | sed -e "s|^$HOME/work/prex-||" -e "s|^$HOME/code/||" -e "s|^$HOME/work/||" -e "s|^$HOME/||" -e "s|^$HOME|~|")(set_color normal)\
     (if set -l tartar_gitrev (git rev-parse --is-inside-work-tree --abbrev-ref HEAD 2>/dev/null)
       git diff-index --quiet HEAD; and set -l tartar_gitbg green; or set -l tartar_gitbg yellow
-      echo -n (set_color -b $tartar_gitbg white)$tartar_gitrev[2]
+      echo -n (set_color -b $tartar_gitbg brwhite)$tartar_gitrev[2]
       set -l tartar_untracked_count (string trim (git ls-files --others --exclude-standard | wc -l))
       if [ $tartar_untracked_count != 0 ]
         echo -n '+'$tartar_untracked_count
