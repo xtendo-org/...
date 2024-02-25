@@ -21,6 +21,16 @@ function vs
     end
 end
 
+# aliases
+function nvs
+    if [ -e Session.vim ]
+      # vim --servername (head --bytes 32 /dev/urandom | b2sum | head -c 32) -S
+        nvim --servername (pwd) -S
+    else
+        nvim --servername (pwd) -c ':Obsession'
+    end
+end
+
 # pyenv
 function pyenv
   set command $argv[1]

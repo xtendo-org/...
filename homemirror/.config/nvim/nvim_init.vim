@@ -7,9 +7,6 @@ function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
 endfunction
 
-nnoremap <C-s> :w<CR>
-inoremap <C-s> <ESC>:w<CR>
-
 let g:ctrlp_max_depth = 40
 let g:ctrlp_max_files = 100000
 
@@ -53,27 +50,34 @@ command! Fourmolu
     \ | execute ':silent !fourmolu --mode inplace' shellescape(expand('%'))
     \ | execute ':e!'
 
-autocmd FileType haskell
-    \ nnoremap <C-s> :Fourmolu<CR>
-    \ | inoremap <C-s> <ESC>:Fourmolu<CR>
-
 command! RuffFormat
     \ execute ':w'
     \ | execute ':silent !ruff format' shellescape(expand('%'))
     \ | execute ':e!'
-
-autocmd FileType python
-    \ nnoremap <C-s> :RuffFormat<CR>
-    \ | inoremap <C-s> <ESC>:RuffFormat<CR>
 
 command! CargoFmt
     \ execute ':w'
     \ | execute ':silent !cargo +nightly fmt --' shellescape(expand('%'))
     \ | execute ':e!'
 
-autocmd FileType rust
-    \ nnoremap <C-s> :CargoFmt<CR>
-    \ | inoremap <C-s> <ESC>:CargoFmt<CR>
+augroup FileTypeMappings
+  autocmd!
+
+  autocmd FileType haskell
+    \ nnoremap <buffer> <C-s> :Fourmolu<CR>
+    \ | inoremap <buffer> <C-s> <ESC>:Fourmolu<CR>
+
+  autocmd FileType python
+    \ nnoremap <buffer> <C-s> :RuffFormat<CR>
+    \ | inoremap <buffer> <C-s> <ESC>:RuffFormat<CR>
+
+  autocmd FileType rust
+    \ nnoremap <buffer> <C-s> :CargoFmt<CR>
+    \ | inoremap <buffer> <C-s> <ESC>:CargoFmt<CR>
+
+  autocmd BufEnter * if index(['haskell', 'python', 'rust'], &filetype) == -1 | nnoremap <buffer> <C-s> :w<CR> | inoremap <buffer> <C-s> <ESC>:w<CR> | endif
+
+augroup END
 
 set spell
 

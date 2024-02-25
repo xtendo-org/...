@@ -13,18 +13,31 @@ let g:colors_name = 'xtsimple'
 set t_Co=16
 
 hi Identifier ctermbg=NONE ctermfg=4
-hi Keyword ctermbg=NONE ctermfg=5 cterm=BOLD
-hi Constant ctermbg=NONE ctermfg=2
+hi Keyword ctermbg=NONE ctermfg=3 cterm=BOLD
+hi Constant ctermbg=NONE ctermfg=2 cterm=BOLD
 hi Comment ctermbg=NONE ctermfg=9 cterm=italic
-hi String ctermbg=NONE ctermfg=3
+hi String ctermbg=NONE ctermfg=1
 hi Search ctermbg=11 ctermfg=0
+hi Special ctermbg=NONE ctermfg=4
+hi Statement ctermbg=NONE ctermfg=3 cterm=BOLD
+hi PreProc ctermbg=NONE ctermfg=13 cterm=italic,BOLD
+hi Todo ctermbg=10 ctermfg=0
+hi Include ctermfg=9
+hi Type ctermfg=12 cterm=BOLD
 
-hi pythonBuiltin ctermbg=NONE ctermfg=10
+hi MatchParen cterm=BOLD ctermfg=0 ctermbg=10
+
+hi SpellBad ctermbg=224 ctermfg=NONE cterm=underline
+" hi SpellCap ctermbg=NONE ctermfg=4 cterm=underline
+" hi SpellLocal ctermbg=NONE ctermfg=5 cterm=underline
+" hi SpellRare ctermbg=NONE ctermfg=6 cterm=underline
+
+hi pythonBuiltin ctermbg=NONE ctermfg=2 cterm=BOLD
 hi pythonConditional ctermbg=NONE ctermfg=13 cterm=BOLD
-hi pythonFunction ctermbg=NONE ctermfg=6
-hi pythonOperator ctermbg=NONE ctermfg=5
-hi pythonRepeat ctermbg=NONE ctermfg=5
-hi pythonStatement ctermbg=NONE ctermfg=5 cterm=BOLD
+" hi pythonFunction ctermbg=NONE ctermfg=6
+" hi pythonOperator ctermbg=NONE ctermfg=5
+" hi pythonRepeat ctermbg=NONE ctermfg=5
+" hi pythonStatement ctermbg=NONE ctermfg=5 cterm=BOLD
 
 hi signColumn ctermbg=NONE ctermfg=4
 hi vimBracket ctermbg=NONE ctermfg=7
@@ -34,8 +47,21 @@ hi vimNotation ctermbg=NONE ctermfg=4
 hi vimUserCommand ctermbg=NONE ctermfg=1 cterm=BOLD
 hi xdefaultsValue ctermbg=NONE ctermfg=7
 hi DirvishGitModified ctermbg=1 ctermfg=5
-hi ColorColumn ctermbg=4 ctermfg=0
+hi ColorColumn ctermbg=7 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=6
+
+hi CocHighlightText ctermbg=231
+" hi CocHintHighlight ctermfg=NONE ctermbg=231
+" hi CocHintSign ctermbg=231
+" hi CocHintFloat ctermbg=231
+" hi CocHintVirtualText ctermbg=231
+" hi Visual ctermbg=231 ctermfg=NONE
+" hi PmenuSel ctermbg=231 ctermfg=NONE
+" hi CocFloating ctermbg=231
+" hi CocMenuSel ctermbg=231
+" hi CocListLine ctermbg=231
+" hi CocFloatThumb ctermbg=231
+" hi CocInfoHighlight ctermbg=231
 
 " hi ALEError ctermbg=NONE ctermfg=1
 " hi ALEErrorSign ctermbg=NONE ctermfg=1
