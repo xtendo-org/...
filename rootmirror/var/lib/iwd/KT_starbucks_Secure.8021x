@@ -1,0 +1,8 @@
+[Security]
+EAP-Method=PEAP
+EAP-PEAP-Phase2-Method=MSCHAPV2
+EAP-PEAP-Phase2-Identity=starbucks
+EAP-PEAP-Phase2-Password=starbucks
+
+[Settings]
+AutoConnect=true
