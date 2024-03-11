@@ -111,6 +111,11 @@ function snipe
   echo $_ps | rg $argv[1] | fzf | awk '{print $2}' | xargs kill
 end
 
+function snipe9
+  set -l _ps (ps aux | string split0)
+  echo $_ps | rg $argv[1] | fzf | awk '{print $2}' | xargs kill -9
+end
+
 alias chipsedit "v ~/.config/chips/plugin.yaml"
 
 # chips
