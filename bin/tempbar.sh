@@ -65,7 +65,7 @@ while true; do
       $(date +'%Y-%m-%d (%a) %H:%M') \
       "^fn(Noto Emoji-10)⏳^fn($font-10)" $(uptime -p) \
       "^fn(Noto Emoji-10)💾^fn($font-10)" $(free -h | awk '/^Mem:/ {mem=$4} /^Swap:/ {swap=$4} END {print mem " / " swap}') \
-      $(ip --brief addr show | grep '\s\+UP\s\+' | grep -v '\(docker\|veth\)' | sed -e "s|\([0-9a-z]\{4,\}\)\s\+\([A-Z]\+\)\s\+\([.0-9]\+\)\?\+.*|\1 ^fn(Noto Emoji-10)📪^fn($font-10) \3|" | head -c -1 | tr '\n' '/' | sed -e 's|/| / |g' -e 's|^|\^fn(Noto Emoji-10)🌏^fn($font-10) |') \
+      $(ip --brief addr show | grep '\s\+UP\s\+' | grep -v '^\(docker\|veth\|br-\)' | sed -e "s|\([0-9a-z]\{4,\}\)\s\+\([A-Z]\+\)\s\+\([.0-9]\+\)\?\+.*|\1 ^fn(Noto Emoji-10)📪^fn($font-10) \3|" | head -c -1 | tr '\n' '/' | sed -e 's|/| / |g' -e 's|^|\^fn(Noto Emoji-10)🌏^fn($font-10) |') \
       $(if [ "$iwctl_exists" = true ]; then
         echo "$wireless_info" | grep -m 1 'Connected' | sed -e "s/Connected network/^fn(Noto Emoji-10)🛜^fn($font-10) /"
         echo "$wireless_info" | grep -m 1 RSSI | grep -o '\-\?[0-9]\+' | sed -e "s|^-|^fn(Noto Emoji-10)📶^fn($font-10) -|"
