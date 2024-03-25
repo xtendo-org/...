@@ -79,8 +79,6 @@ augroup FileTypeMappings
 
 augroup END
 
-set spell
-
 function! DedentToMaxCommonDepth() range
   let l:min_indent = -1
   for l:line in getline(a:firstline, a:lastline)
@@ -104,3 +102,11 @@ nnoremap <leader><space> :nohlsearch<CR>
 
 " visually select the last inserted text
 nnoremap gV `[v`]
+
+command! GitFilePath let @+=system('git rev-parse --show-prefix')[:-2] . expand('%') | echo @+
+command! CoreURL let @+='https://github.prex.sh/Prex/prex-core/tree/' . system('git rev-parse HEAD')[:-2] . '/' . system('git rev-parse --show-prefix')[:-2] . expand('%') | echo @+
+
+set mouse=
+
+let g:enable_spelunker_vim = 1
+let g:ctrlp_custom_ignore = 'target\|\.stack-work\|\.git\|_pb2\.py\|\.pyi'

@@ -1,3 +1,9 @@
 #!/bin/bash
-firefox -P Reset $(stack path --snapshot-doc-root)/$(stack ls dependencies | grep "^$1 " | sed -e 's/ /-/')/index.html
-# echo $(stack path --snapshot-doc-root)/$(stack ls dependencies | grep "^$1 " | sed -e 's/ /-/')/index.html
+if [ $1 ]; then
+  package_str=$(stack ls dependencies | grep "^$1 " | sed -e 's/ /-/')"/"
+else
+  package_str=""
+fi
+html_path="$(stack path --snapshot-doc-root)/${package_str}index.html"
+echo $html_path
+firefox -P Reset $html_path

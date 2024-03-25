@@ -4,32 +4,56 @@ from random import SystemRandom
 import os.path
 import subprocess
 import sys
+import argparse
 
-HOME = os.path.expanduser('~')
+HOME = os.path.expanduser("~")
 
 random = SystemRandom()
 
-flags = {
-    'a': 'abcdefghijklmnopqrstuvwxyz',
-    'A': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    '0': '0123456789',
-    '!': '!@#$%^&*~',
-    '/': '()"\'+,-./:;<=>?[\\]_`{|}'
+groups = {
+    "a": "abcdefghijklmnopqrstuvwxyz",
+    "A": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "0": "0123456789",
+    "!": "!@#$%^&*~",
+    "/": "()\"'+,-./:;<=>?[\\]_`{|}",
 }
 
-choices = ''.join(flags[c] for c in sys.argv[1])
+
+def main():
+    arg_parser = argparse.ArgumentParser(
+        prog="pw-gen",
+    )
+    arg_parser.add_argument("purpose")
+    arg_parser.add_argument("-g", "--groups", type=str, default="a0")
+    arg_parser.add_argument("-l", "--length", type=int, default=25)
+    arg_parser.add_argument("-d", "--dry", action="store_true")
+    args = arg_parser.parse_args()
+
+    print(args)
+
+    choices = "".join(groups[c] for c in args.groups)
+
+    stamp = (
+        subprocess.check_output(["date", "--iso-8601=seconds"]).decode("ascii").rstrip()
+    )
+    pw = "".join(random.choice(choices) for _ in range(args.length))
+    output = f"[{stamp}] {args.purpose} {pw}\n"
+
+    # 1. Print
+    print(output, end="")
+
+    # 2. Save log to file
+    if not args.dry:
+        with open(HOME + "/.pw-gen.log", "a") as f:
+            f.write(output)
+
+    # 3. Copy to clipboard
+    p = subprocess.Popen(["xclip", "-sel", "clip"], stdin=subprocess.PIPE)
+    assert p.stdin is not None
+    p.stdin.write(pw.encode("utf-8"))
+    p.stdin.close()
+    p.wait()
 
 
-stamp = subprocess.check_output(['date', '--iso-8601=seconds']).decode('ascii').rstrip()
-pw = ''.join(random.choice(choices) for _ in range(int(sys.argv[2])))
-output = '[{}] {}\n'.format(stamp, pw)
-
-p = subprocess.Popen(['xclip', '-sel', 'clip'], stdin=subprocess.PIPE)
-p.stdin.write(pw.encode('utf-8'))
-p.stdin.close()
-p.wait()
-
-if '--dry' not in sys.argv:
-    with open(HOME + '/.pw-gen.log', 'a') as f:
-        f.write(output)
-print(output, end='')
+if __name__ == "__main__":
+    main()

@@ -39,6 +39,9 @@ hi pythonConditional ctermbg=NONE ctermfg=13 cterm=BOLD
 " hi pythonRepeat ctermbg=NONE ctermfg=5
 " hi pythonStatement ctermbg=NONE ctermfg=5 cterm=BOLD
 
+hi ConId ctermfg=4
+hi hsImportModuleName ctermfg=6
+
 hi signColumn ctermbg=NONE ctermfg=4
 hi vimBracket ctermbg=NONE ctermfg=7
 hi vimCommentString ctermbg=NONE ctermfg=8
@@ -50,11 +53,15 @@ hi DirvishGitModified ctermbg=1 ctermfg=5
 hi ColorColumn ctermbg=7 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=6
 
-hi CocHighlightText ctermbg=231
-" hi CocHintHighlight ctermfg=NONE ctermbg=231
-" hi CocHintSign ctermbg=231
-" hi CocHintFloat ctermbg=231
-" hi CocHintVirtualText ctermbg=231
+hi CocHighlightText ctermbg=230
+hi CocHintHighlight ctermfg=NONE ctermbg=230
+hi CocHintSign ctermbg=230
+hi CocHintFloat ctermbg=230
+hi CocHintVirtualText ctermbg=230
+
+hi SpelunkerSpellBad ctermbg=224 ctermfg=NONE
+hi SpelunkerComplexOrCompoundWord ctermbg=224 ctermfg=NONE
+
 " hi Visual ctermbg=231 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE
 " hi CocFloating ctermbg=231

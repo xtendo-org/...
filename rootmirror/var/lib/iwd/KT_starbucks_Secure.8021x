@@ -1,5 +1,7 @@
 [Security]
 EAP-Method=PEAP
+EAP-Identity=starbucks
+EAP-Password=starbucks
 EAP-PEAP-Phase2-Method=MSCHAPV2
 EAP-PEAP-Phase2-Identity=starbucks
 EAP-PEAP-Phase2-Password=starbucks
