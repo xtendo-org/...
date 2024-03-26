@@ -59,8 +59,9 @@ hi CocHintSign ctermbg=230
 hi CocHintFloat ctermbg=230
 hi CocHintVirtualText ctermbg=230
 
-hi SpelunkerSpellBad ctermbg=224 ctermfg=NONE
-hi SpelunkerComplexOrCompoundWord ctermbg=224 ctermfg=NONE
+hi SpelunkerSpellBad cterm=undercurl ctermbg=NONE ctermfg=NONE
+" hi SpelunkerComplexOrCompoundWord cterm=undercurl ctermbg=224 ctermfg=NONE
+hi SpelunkerComplexOrCompoundWord cterm=undercurl ctermbg=NONE ctermfg=NONE
 
 " hi Visual ctermbg=231 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE
