@@ -348,3 +348,10 @@ let g:python_highlight_all = 1
 nnoremap q :call append('.', '')<CR>
 " Q adds a new line before the current line AND keep the cursor position.
 nnoremap Q :call append(line('.')-1, '')<CR>
+
+if &term =~ 'xterm\|kitty\|alacritty\|tmux'
+    let &t_Ts = "\e[9m"   " Strikethrough
+    let &t_Te = "\e[29m"
+    let &t_Cs = "\e[4:3m" " Undercurl
+    let &t_Ce = "\e[4:0m"
+endif
