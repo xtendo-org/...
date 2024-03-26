@@ -44,7 +44,7 @@ def main():
 
     # 2. Save log to file
     if not args.dry:
-        with open(HOME + "/.pw-gen.log", "a") as f:
+        with open(HOME + "/.ssh/pw-gen.log", "a") as f:
             f.write(output)
 
     # 3. Copy to clipboard
