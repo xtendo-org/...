@@ -1,0 +1,2 @@
+#!/bin/bash
+dbus-monitor "interface='org.freedesktop.Notifications'" 2>&1 | stdbuf -oL grep "^   string" | grep --line-buffered -v 'string ""' | stdbuf -oL sed -e 's|^   string ||' | ts '[%Y-%m-%d %H:%M:%.S]' > ~/log/notifications/$(date --iso-8601=seconds).log

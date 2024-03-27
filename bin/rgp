@@ -1,0 +1,4 @@
+#!/bin/bash
+# Paged rg
+unbuffer rg --hidden "$@" | less -R
+

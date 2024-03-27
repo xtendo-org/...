@@ -1,0 +1,5 @@
+#!/bin/sh
+while wmctrl -c Firefox; do
+  echo Gone.
+  sleep 0.1
+done

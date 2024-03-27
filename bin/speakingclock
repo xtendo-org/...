@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+while true; do
+    now=$(date +%s.%N)
+    sleep_for=$(echo 10 - $now % 10 | bc)
+    echo "Sleeping for $sleep_for seconds"
+    sleep $sleep_for
+    echo "Voice testing" | pico-tts | aplay -q -f S16_LE -r 16
+done
