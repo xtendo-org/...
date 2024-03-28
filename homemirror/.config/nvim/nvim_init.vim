@@ -5,6 +5,7 @@ augroup END
 
 function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
+  nnoremap <silent> <buffer> <c-p> :CtrlP<CR>
 endfunction
 
 let g:ctrlp_max_depth = 40
@@ -110,18 +111,8 @@ command! CoreURL let @+='https://github.prex.sh/Prex/prex-core/tree/' . system('
 set mouse=
 
 let g:enable_spelunker_vim = 1
-let g:ctrlp_custom_ignore = 'target\|\.stack-work\|\.git\|_pb2\.py\|\.pyi'
+let g:ctrlp_custom_ignore = 'target\|\.stack-work\|\.git\|_pb2\.py\|\.pyi\|\.pyc'
 
-" command! -range FinishTask call s:FinishTaskFunction()
-" function! s:FinishTaskFunction()
-"   let l:original_search = @/
-"   execute a:firstline . ',' . a:lastline . 's/\(\s*-\s*\)\(.*\)/\1\<del\>\2<\/del>/g'
-"   let @/ = l:original_search
-" endfunction
-" vnoremap <leader>f :FinishTask<CR>
-" nnoremap <leader>f :.FinishTask<CR>
-
-command! -range FinishTask call s:FinishTaskFunction(<line1>, <line2>)
 function! s:FinishTaskFunction(line1, line2)
   let l:original_search = @/
   execute a:line1 . ',' . a:line2 . 's/\(\s*-\s*\)\(.*\)/\1<del>\2<\/del>/'
@@ -132,3 +123,13 @@ vnoremap <leader>f :'<,'>FinishTask<CR>
 
 " Copy to clipboard
 vnoremap <C-c> "+ygv
+
+nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
+nnoremap <silent> <c-p> :CtrlP<CR>
+
+" Do not wrap around when searching
+set nowrapscan
+
+" Turn off auto-wrapping of long lines on an empty file
+autocmd BufRead,BufNewFile * if &filetype == '' | setlocal textwidth=0 | endif
+autocmd VimEnter * if &filetype == '' | setlocal textwidth=0 | endif
