@@ -93,7 +93,7 @@ function! DedentToMaxCommonDepth() range
   endif
 endfunction
 
-command! -range=% DedentBlock <line1>,<line2>call DedentToMaxCommonDepth()
+command! -range DedentBlock <line1>,<line2>call DedentToMaxCommonDepth()
 
 vnoremap <leader>d :DedentBlock<CR>
 
@@ -111,15 +111,23 @@ set mouse=
 let g:enable_spelunker_vim = 1
 let g:ctrlp_custom_ignore = 'target\|\.stack-work\|\.git\|_pb2\.py\|\.pyi'
 
+" command! -range FinishTask call s:FinishTaskFunction()
+" function! s:FinishTaskFunction()
+"   let l:original_search = @/
+"   execute a:firstline . ',' . a:lastline . 's/\(\s*-\s*\)\(.*\)/\1\<del\>\2<\/del>/g'
+"   let @/ = l:original_search
+" endfunction
+" vnoremap <leader>f :FinishTask<CR>
+" nnoremap <leader>f :.FinishTask<CR>
+
+command! -range FinishTask call s:FinishTaskFunction(<line1>, <line2>)
 function! s:FinishTaskFunction(line1, line2)
   let l:original_search = @/
-  execute a:line1 . ',' . a:line2 . 's/\(\s*-\s*\)\(.*\)/\1\<del\>\2<\/del>/'
+  execute a:line1 . ',' . a:line2 . 's/\(\s*-\s*\)\(.*\)/\1<del>\2<\/del>/'
   let @/ = l:original_search
 endfunction
-
-command! -range=1 FinishTask <line1>,<line2>call s:FinishTaskFunction(<line1>, <line2>)
 nnoremap <leader>f :FinishTask<CR>
-vnoremap <leader>f :FinishTask<CR>
+vnoremap <leader>f :'<,'>FinishTask<CR>
 
 " Copy to clipboard
 vnoremap <C-c> "+ygv
