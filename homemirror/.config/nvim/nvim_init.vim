@@ -23,6 +23,7 @@ endfunction
 call SetTextWidthFromRuff()
 
 autocmd FileType markdown let b:coc_suggest_disable = 1
+autocmd FileType text let b:coc_suggest_disable = 1
 
 let g:dirvish_git_indicators = {
 \ 'Modified'  : '✹',
