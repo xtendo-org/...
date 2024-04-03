@@ -133,3 +133,7 @@ set nowrapscan
 " Turn off auto-wrapping of long lines on an empty file
 autocmd BufRead,BufNewFile * if &filetype == '' | setlocal textwidth=0 | endif
 autocmd VimEnter * if &filetype == '' | setlocal textwidth=0 | endif
+
+" Stop auto wrapping
+set formatoptions-=t
+set formatoptions-=c
