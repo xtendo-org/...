@@ -5,9 +5,10 @@ augroup END
 
 function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
-  nnoremap <silent> <buffer> <c-p> :CtrlP<CR>
+  nnoremap <silent> <buffer> <c-p> :CtrlPMRU<CR>
 endfunction
 
+let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_max_depth = 40
 let g:ctrlp_max_files = 100000
 

@@ -274,8 +274,8 @@ nnoremap <leader>s vip:sort<CR>
 " sort inside the parentheses
 nnoremap <leader>i vi):sort<CR>
 
-" " ctrlp
-" let g:ctrlp_cmd = 'CtrlPMRU'
+" ctrlp
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 " insert ISO 8601 timestamp
 nnoremap <leader>d i<C-r>=strftime("%FT%T%z")<CR><Esc>
