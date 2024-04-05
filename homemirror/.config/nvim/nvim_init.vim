@@ -11,6 +11,7 @@ endfunction
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_max_depth = 40
 let g:ctrlp_max_files = 100000
+let g:ctrlp_types = ['mru', 'fil', 'buf']
 
 function! SetTextWidthFromRuff()
   if filereadable("ruff.toml")
