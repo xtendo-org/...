@@ -120,6 +120,7 @@ function! s:FinishTaskFunction(line1, line2)
   execute a:line1 . ',' . a:line2 . 's/\(\s*-\s*\)\(.*\)/\1<del>\2<\/del>/'
   let @/ = l:original_search
 endfunction
+command! -range FinishTask call s:FinishTaskFunction(<line1>, <line2>)
 nnoremap <leader>f :FinishTask<CR>
 vnoremap <leader>f :'<,'>FinishTask<CR>
 
