@@ -6,12 +6,13 @@ augroup END
 function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
   nnoremap <silent> <buffer> <c-p> :CtrlPMRU<CR>
+  nnoremap <silent> <buffer> ' :CtrlP<CR>
 endfunction
 
-let g:ctrlp_cmd = 'CtrlPMRU'
+" let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_max_depth = 40
 let g:ctrlp_max_files = 100000
-let g:ctrlp_types = ['mru', 'fil', 'buf']
+let g:ctrlp_types = ['fil', 'mru', 'buf']
 
 function! SetTextWidthFromRuff()
   if filereadable("ruff.toml")
@@ -61,7 +62,7 @@ command! RuffFormat
 
 command! CargoFmt
     \ execute ':w'
-    \ | execute ':silent !cargo +nightly fmt --' shellescape(expand('%'))
+    \ | execute ':silent !rustfmt +nightly --edition 2021 --' shellescape(expand('%'))
     \ | execute ':e!'
 
 augroup FileTypeMappings
@@ -128,7 +129,8 @@ vnoremap <leader>f :'<,'>FinishTask<CR>
 vnoremap <C-c> "+ygv
 
 nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
-nnoremap <silent> <c-p> :CtrlP<CR>
+nnoremap <silent> <c-p> :CtrlPMRU<CR>
+nnoremap <silent> ' :CtrlP<CR>
 
 " Do not wrap around when searching
 set nowrapscan
@@ -140,3 +142,13 @@ autocmd VimEnter * if &filetype == '' | setlocal textwidth=0 | endif
 " Stop auto wrapping
 set formatoptions-=t
 set formatoptions-=c
+
+set cursorline
+set cursorcolumn
+
+" Restore the last editing position
+au BufReadPost *
+\ if line("'\"") > 0 && line("'\"") <= line("$")  && &filetype != "gitcommit"
+\ | exe "norm g`\""
+\ | endif
+
