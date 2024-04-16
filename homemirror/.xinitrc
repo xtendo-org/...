@@ -37,9 +37,6 @@ xset r rate 300 40
 # stop xscreensaver for when a full screen app is running
 bash ~/.../arch/xscreensaverstopper.sh &
 
-# fullscreen clock
-~/.../lpx/wall.sh &
-
 # # notification
 # /usr/lib/notification-daemon-1.0/notification-daemon --debug -r > ~/notification-daemon.txt &
 
