@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Assign the source and destination file paths
+src="$1"
+dst="$2"
+
+# Define the maximum dimension for the longer side
+max_dim=1024
+
+# Resize the image while preserving the aspect ratio, convert to high-quality JPEG, and strip EXIF data
+convert "$src" -resize "${max_dim}x${max_dim}>" -quality 100 -strip "$dst"
