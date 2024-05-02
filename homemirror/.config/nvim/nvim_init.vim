@@ -26,8 +26,12 @@ endfunction
 
 call SetTextWidthFromRuff()
 
-autocmd FileType markdown let b:coc_suggest_disable = 1
-autocmd FileType text let b:coc_suggest_disable = 1
+augroup SuggestDisable
+  autocmd FileType markdown let b:coc_suggest_disable = 1
+  autocmd FileType text let b:coc_suggest_disable = 1
+  autocmd BufRead,BufNewFile * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
+  autocmd VimEnter * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
+augroup END
 
 let g:dirvish_git_indicators = {
 \ 'Modified'  : '✹',
@@ -48,41 +52,63 @@ let g:coc_global_extensions =
       \, 'coc-rust-analyzer'
       \]
 
-let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_working_path_mode = 'rw'
+
+function! TrimEnd()
+  " Find the last non-empty line from the end of the file
+  let total_lines = line('$')
+  let last_non_empty_line = total_lines
+  while last_non_empty_line > 0 && getline(last_non_empty_line) == ''
+    let last_non_empty_line -= 1
+  endwhile
+
+  " Delete all empty lines after the last non-empty line
+  if last_non_empty_line < total_lines
+    execute (last_non_empty_line + 1) . ',$d'
+  endif
+endfunction
 
 command! Fourmolu
-    \ execute ':w'
+    \ write
     \ | execute ':silent !fourmolu --mode inplace' shellescape(expand('%'))
-    \ | execute ':e!'
+    \ | edit!
+    \ | call TrimEnd()
+    \ | write
 
 command! RuffFormat
-    \ execute ':w'
+    \ write
     \ | execute ':silent !ruff format' shellescape(expand('%'))
-    \ | execute ':e!'
+    \ | edit!
 
 command! CargoFmt
-    \ execute ':w'
+    \ write
     \ | execute ':silent !rustfmt +nightly --edition 2021 --' shellescape(expand('%'))
-    \ | execute ':e!'
+    \ | edit!
 
-augroup FileTypeMappings
-  autocmd!
+" augroup FileTypeMappings
+"   autocmd!
 
-  autocmd FileType haskell
-    \ nnoremap <buffer> <C-s> :Fourmolu<CR>
-    \ | inoremap <buffer> <C-s> <ESC>:Fourmolu<CR>
+"   autocmd FileType haskell
+"     \ nnoremap <buffer> <C-s> :CocCommand editor.action.formatDocument<CR>:w<CR>
+"     \ | inoremap <buffer> <C-s> <ESC>:CocCommand editor.action.formatDocument<CR>:w<CR>
+"     \ | nnoremap <leader>gf :CocCommand editor.action.formatDocument<CR>
 
-  autocmd FileType python
-    \ nnoremap <buffer> <C-s> :RuffFormat<CR>
-    \ | inoremap <buffer> <C-s> <ESC>:RuffFormat<CR>
+"   autocmd FileType python
+"     \ nnoremap <buffer> <C-s> :RuffFormat<CR>
+"     \ | inoremap <buffer> <C-s> <ESC>:RuffFormat<CR>
 
-  autocmd FileType rust
-    \ nnoremap <buffer> <C-s> :CargoFmt<CR>
-    \ | inoremap <buffer> <C-s> <ESC>:CargoFmt<CR>
+"   autocmd FileType rust
+"     \ nnoremap <buffer> <C-s> :CargoFmt<CR>
+"     \ | inoremap <buffer> <C-s> <ESC>:CargoFmt<CR>
 
-  autocmd BufEnter * if index(['haskell', 'python', 'rust'], &filetype) == -1 | nnoremap <buffer> <C-s> :w<CR> | inoremap <buffer> <C-s> <ESC>:w<CR> | endif
+"   autocmd BufEnter * if index(['haskell', 'python', 'rust'], &filetype) == -1 | nnoremap <buffer> <C-s> :w<CR> | inoremap <buffer> <C-s> <ESC>:w<CR> | endif
 
-augroup END
+" augroup END
+
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <ESC>:w<CR>
+nnoremap <leader>gf :CocCommand editor.action.formatDocument<CR>
+nnoremap gf :CocCommand editor.action.formatDocument<CR>
 
 function! DedentToMaxCommonDepth() range
   let l:min_indent = -1
@@ -135,14 +161,6 @@ nnoremap <silent> ' :CtrlP<CR>
 " Do not wrap around when searching
 set nowrapscan
 
-" Turn off auto-wrapping of long lines on an empty file
-autocmd BufRead,BufNewFile * if &filetype == '' | setlocal textwidth=0 | endif
-autocmd VimEnter * if &filetype == '' | setlocal textwidth=0 | endif
-
-" Stop auto wrapping
-set formatoptions-=t
-set formatoptions-=c
-
 set cursorline
 set cursorcolumn
 
@@ -154,12 +172,16 @@ au BufReadPost *
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace ctermbg=darkred guibg=#382424
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+augroup ExtraWhiteSpaceOn
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+augroup END
 
 " The above flashes annoyingly while typing, be calmer in insert mode
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+augroup ExtraWhiteSpaceOff
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+augroup END
 
 function! s:FixWhitespace(line1,line2)
     let l:save_cursor = getpos(".")
@@ -169,3 +191,33 @@ endfunction
 
 " Run :FixWhitespace to remove end of line white space
 command! -range=% FixWhitespace call <SID>FixWhitespace(<line1>,<line2>)
+
+" 'Fix' the behavior of including a space (?!) in the `a` motion for quotes
+function! SelectInsideQuotes(quote)
+    let l:quote = a:quote
+    " Check if cursor is at a quote
+    if getline('.')[col('.') - 1] == l:quote || getline('.')[col('.')] == l:quote
+        " Determine if at the start or end of the quote
+        let l:start_pos = search(l:quote, 'bcnW')
+        let l:end_pos = search(l:quote, 'cnW')
+        if l:end_pos > l:start_pos
+            execute "normal! " . (l:start_pos - 1) . '|lv' . (l:end_pos - 2) . '|'
+        endif
+    else
+        " Normal case: search backward then forward
+        execute "normal! F" . l:quote . "vf" . l:quote
+    endif
+endfunction
+
+onoremap <silent> a' :<C-U>call SelectInsideQuotes("'")<CR>
+onoremap <silent> a" :<C-U>call SelectInsideQuotes('"')<CR>
+onoremap <silent> a` :<C-U>call SelectInsideQuotes('`')<CR>
+xnoremap <silent> a' :<C-U>call SelectInsideQuotes("'")<CR>
+xnoremap <silent> a" :<C-U>call SelectInsideQuotes('"')<CR>
+xnoremap <silent> a` :<C-U>call SelectInsideQuotes('`')<CR>
+
+" Stop auto wrapping
+augroup FormatOptions
+  autocmd!
+  autocmd BufEnter,BufWinEnter,BufRead,BufNewFile * set formatoptions-=tc
+augroup END

@@ -215,18 +215,12 @@ keyset("i", "<C-b>",
 keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
 keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 
+keyset("n", "gn", "<Plug>(coc-git-nextchunk)", {})
+keyset("n", "gp", "<Plug>(coc-git-prevchunk)", {})
+
 -- end coc.nvim --
 
-
-
--- vim.opt.termguicolors = false
--- vim.cmd([[ set t_Co=16 ]])
--- vim.cmd([[ set t_ut= ]])
-
 vim.g.coc_default_semantic_highlight_groups = 1
-
--- vim.cmd.colorscheme('codedark')
-
 
 local vimrc = vim.fn.stdpath("config") .. "/nvim_init.vim"
 vim.cmd.source(vimrc)

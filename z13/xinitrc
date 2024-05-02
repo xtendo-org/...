@@ -1,6 +1,6 @@
 #!/bin/sh
 # sudo powertop --auto-tune &
-swapon --show=SIZE | tail -n +2 | rg -q '[1-9][0-9]*[A-Z]' || sudo swapon /swapfile
+swapon --show=SIZE | tail -n +2 | rg -q '[1-9][0-9]*[A-Z]' || sudo swapon /swapfile &
 
 notimon &
 
@@ -9,7 +9,8 @@ source ~/.../z13/init_monitor.sh
 xrdb -merge ~/.Xresources
 ~/.../z13/monitor.sh
 
-source ~/.../z13/configure_touchpad.sh
+~/.../lpx/wall.sh &
+~/.../z13/configure_touchpad.sh &
 syndaemon -i 1 -t -k -R -d
 sudo rmmod uvcvideo
 xmodmap ~/.Xmodmap

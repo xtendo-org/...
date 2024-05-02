@@ -1,4 +1,5 @@
 font="source han sans kr"
+# font="Lato"
 
 checkFullscreen()
 {
@@ -25,9 +26,10 @@ checkFullscreen()
   done
 }
 
+
 command -v iwctl > /dev/null && iwctl_exists=true
 
-resolution=$(xrandr | rg '\*' | awk '{print $1}')
+resolution=$(xrandr | rg -m 1 '\*' | awk '{print $1}')
 
 case $resolution in
   1920x1080)
@@ -54,24 +56,29 @@ fi
 echo "Resolution is $resolution. Bar thickness is $thickness."
 
 while true; do
-    sinkname=$(pactl get-default-sink)
-    muted=$(pactl get-sink-mute $sinkname)
-    short_sinkname=$(echo $sinkname | sed -e 's/.*\.//')
+    if systemctl --user is-active --quiet pipewire; then
+      sinkname=$(pactl get-default-sink)
+      muted=$(pactl get-sink-mute $sinkname)
+      short_sinkname=$(echo $sinkname | sed -e 's/.*\.//')
+    fi
 
-    if [ "$iwctl_exists" = true ]; then
+    if [ -n "$iwctl_exists" ] && systemctl is-active --quiet iwd.service ; then
       wireless_info=$(iwctl station wlan0 show)
     fi
     echo "^fn($font-10)" \
       $(date +'%Y-%m-%d (%a) %H:%M') \
       "^fn(Noto Emoji-10)⏳^fn($font-10)" $(uptime -p) \
       "^fn(Noto Emoji-10)💾^fn($font-10)" $(free -h | awk '/^Mem:/ {mem=$4} /^Swap:/ {swap=$4} END {print mem " / " swap}') \
-      $(ip --brief addr show | grep '\s\+UP\s\+' | grep -v '^\(docker\|veth\|br-\)' | sed -e "s|\([0-9a-z]\{4,\}\)\s\+\([A-Z]\+\)\s\+\([.0-9]\+\)\?\+.*|\1 ^fn(Noto Emoji-10)📪^fn($font-10) \3|" | head -c -1 | tr '\n' '/' | sed -e 's|/| / |g' -e 's|^|\^fn(Noto Emoji-10)🌏^fn($font-10) |') \
-      $(if [ "$iwctl_exists" = true ]; then
+     $(ip --brief addr show | grep '\s\+UP\s\+' | grep -v '^\(docker\|veth\|br-\)' | sed -e "s|\([0-9a-z]\{4,\}\)\s\+\([A-Z]\+\)\s\+\([.0-9]\+\)\?\+.*|\1 ^fn(Noto Emoji-10)📪^fn($font-10) \3|" | head -c -1 | tr '\n' '/' | sed -e 's|/| / |g' -e 's|^|\^fn(Noto Emoji-10)🌏^fn($font-10) |') \
+      $(if [ -n "$wireless_info" ] ; then
         echo "$wireless_info" | grep -m 1 'Connected' | sed -e "s/Connected network/^fn(Noto Emoji-10)🛜^fn($font-10) /"
         echo "$wireless_info" | grep -m 1 RSSI | grep -o '\-\?[0-9]\+' | sed -e "s|^-|^fn(Noto Emoji-10)📶^fn($font-10) -|"
       fi) \
-      $(if [[ $muted =~ "Mute: yes" ]]; then echo "^fn(Noto Emoji-10)🔇^fn($font-10) MUTE"; else echo "^fn(Noto Emoji-10)🔊^fn($font-10)"; pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1; fi) \
-      "^fg(#999999)$short_sinkname^fg($FGCOLOR)" \
+      $(if [ -n "$sinkname" ] ; then
+        if [[ $muted =~ "Mute: yes" ]]; then echo "^fn(Noto Emoji-10)🔇^fn($font-10) MUTE"; else echo "^fn(Noto Emoji-10)🔊^fn($font-10)"; fi
+        pactl get-sink-volume $sinkname | rg -m 1 -o '[0-9]*%' | head -n 1
+        echo "^fg(#999999)$short_sinkname^fg($FGCOLOR)"
+      fi) \
       $(acpi | sed -e "s/Battery 0: /^fn(Noto Emoji-10)🔋^fn($font-10)/" -e 's/Discharging/\^bg(red)^fg(white) Discharging/') \
       '';
     checkFullscreen

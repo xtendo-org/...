@@ -37,8 +37,8 @@ if [ -d ~/.rbenv ]
     . (rbenv init -|psub)
 end
 
-# autojump
-[ -f /usr/share/autojump/autojump.fish ]; and source /usr/share/autojump/autojump.fish
+# # autojump
+# [ -f /usr/share/autojump/autojump.fish ]; and source /usr/share/autojump/autojump.fish
 
 # cargo
 set -x PATH $HOME/.cargo/bin $PATH

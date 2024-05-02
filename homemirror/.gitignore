@@ -12,6 +12,7 @@ __pycache__/
 build/
 coc-target/
 dist/
+dist-newstyle/
 ignoreme_*
 node_modules/
 npm-debug.log

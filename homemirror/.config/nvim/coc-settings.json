@@ -4,10 +4,18 @@
       "command": "haskell-language-server-wrapper",
       "args": ["--lsp"],
       "rootPatterns": ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"],
-      "filetypes": ["haskell", "lhaskell"]
-    },
-    "rust-analyzer.server.extraEnv": {
-        "CARGO_TARGET_DIR": "coc-target"
+      "filetypes": ["haskell", "lhaskell"],
+      "settings": {
+        "haskell": {
+          "checkParents": "CheckOnSave",
+          "checkProject": true,
+          "maxCompletions": 40,
+          "formattingProvider": "fourmolu"
+        }
+      }
     }
+  },
+  "rust-analyzer.server.extraEnv": {
+      "CARGO_TARGET_DIR": "coc-target"
   }
 }

@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+period=${1:-"10"}
+
+set -e
 while true; do
-    now=$(date +%s.%N)
-    sleep_for=$(echo 10 - $now % 10 | bc)
+    date +"%H %M, %S seconds" | tee /dev/tty | pico-tts | aplay -q -f S16_LE -r 16
+    sleep_for=$(echo $period - $(date +%s.%N) % $period | bc)
     echo "Sleeping for $sleep_for seconds"
     sleep $sleep_for
-    echo "Voice testing" | pico-tts | aplay -q -f S16_LE -r 16
 done
