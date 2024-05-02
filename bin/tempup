@@ -1,6 +1,0 @@
-#!/bin/bash
-
-sudo pacman -Sy
-set -e
-pacman -Qu | sed -e 's|^\([^ ]\+\) .*|\1|' | python -c "import sys; ups=set(sys.stdin.read().rstrip().split('\n')); deps=set('$(pacman -Qi compiz | grep ^Depends)'.partition(':')[2].strip().split('  ')); intersection = ups.intersection(deps); print(intersection); sys.exit(-1 if intersection else 0)"
-LOG_FILE_DIR=
