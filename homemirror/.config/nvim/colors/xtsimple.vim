@@ -1,5 +1,5 @@
-hi clear
 set background=light
+set notermguicolors
 
 if exists('syntax_on')
     syntax reset
@@ -10,7 +10,7 @@ let g:colors_name = 'xtsimple'
 
 " highlight groups {{{
 
-set t_Co=16
+set t_Co=256
 
 hi Identifier ctermbg=NONE ctermfg=4
 hi Keyword ctermbg=NONE ctermfg=3 cterm=BOLD
