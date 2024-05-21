@@ -25,9 +25,9 @@ end
 function nvs
     if [ -e Session.vim ]
       # vim --servername (head --bytes 32 /dev/urandom | b2sum | head -c 32) -S
-        nvim --servername (pwd) -S
+        nvim -S
     else
-        nvim --servername (pwd) -c ':Obsession'
+        nvim -c ':Obsession'
     end
 end
 

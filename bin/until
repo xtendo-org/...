@@ -1,0 +1,82 @@
+#!/usr/bin/env python
+
+import itertools
+import datetime
+import sys
+import time
+
+
+def debug(routine):
+    try:
+        routine()
+    except Exception:
+        import pdb
+        import sys
+        import traceback
+
+        extype, value, tb = sys.exc_info()
+        traceback.print_exc()
+        pdb.post_mortem(tb)
+
+
+def parse_hms(duration: str) -> int:
+    time_list = [0, 0, 0]  # hour, minute, second
+    unit_position = {"h": 0, "m": 1, "s": 2}
+    while True:
+        if duration == "":
+            break
+        number_str = "".join(itertools.takewhile(str.isdigit, duration))
+        duration = duration[len(number_str) :]
+        if duration != "":
+            unit = duration[0]
+            pos = unit_position.get(unit)
+            if pos is not None:
+                time_list[pos] = int(number_str)
+            duration = duration[1:]
+        else:
+            time_list[2] = int(number_str)
+    return (time_list[0] * 60 + time_list[1]) * 60 + time_list[2]
+
+
+def hms(seconds: int | float):
+    if isinstance(seconds, float):
+        seconds = int(seconds)
+    hours, remainder = divmod(seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    return f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
+
+if __name__ == "__main__":
+    arg = sys.argv[1]
+
+    begin: datetime.datetime = datetime.datetime.now()
+    if arg.startswith("+"):
+        target = begin + datetime.timedelta(seconds=parse_hms(arg[1:]))
+    else:
+        h_str, _, m_str = sys.argv[1].partition(":")
+        h = int(h_str)
+        m = int(m_str)
+        target_base = (
+            begin + datetime.timedelta(days=1)
+            if h * 60 + m <= begin.hour * 60 + begin.minute
+            else begin
+        )
+        target = target_base.replace(hour=h, minute=m, second=0)
+
+    while True:
+        now = datetime.datetime.now()
+        delta = (target - now).total_seconds()
+        if delta <= 0:
+            sys.stdout.write("\n")
+            break
+
+        subsecond = delta % 1
+
+        sys.stdout.write(
+            f'[{now.strftime("%H:%M:%S")}]'
+            f' {begin.strftime("%H:%M:%S")}'
+            f' -({hms(delta)})->'
+            f' {target.strftime("%H:%M:%S")}'
+            '\r'
+        )
+        time.sleep(subsecond)
