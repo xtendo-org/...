@@ -32,7 +32,7 @@ require("lazy").setup({
   'tpope/vim-surround',
   'tpope/vim-vinegar',
   'vim-airline/vim-airline',
-  -- 'numirias/semshi',
+  'numirias/semshi',
   -- 'nvim-lua/plenary.nvim',
   -- 'nvim-tree/nvim-web-devicons',
   -- 'tamago324/lir.nvim',
@@ -136,14 +136,33 @@ end
 keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 
 
--- Highlight the symbol and its references on a CursorHold event(cursor is idle)
-vim.api.nvim_create_augroup("CocGroup", {})
+-- Highlight the symbol and its references on a CursorHold event (cursor is idle)
+vim.api.nvim_create_augroup("CocGroup", { clear = true})
+
+-- List of file types to exclude from coc highlighting
+local coc_highlight_excluded_filetypes = { "python", "text", "markdown" }
+
+-- Function to check if a file type is excluded
+local function is_coc_highlight_excluded_filetype(filetype)
+    for _, ft in ipairs(coc_highlight_excluded_filetypes) do
+        if ft == filetype then
+            return true
+        end
+    end
+    return false
+end
+
+-- Define the autocmd for files not in the excluded list
 vim.api.nvim_create_autocmd("CursorHold", {
     group = "CocGroup",
-    command = "silent call CocActionAsync('highlight')",
-    desc = "Highlight symbol under cursor on CursorHold"
+    pattern = "*",
+    callback = function()
+        if not is_coc_highlight_excluded_filetype(vim.bo.filetype) then
+            vim.cmd("silent call CocActionAsync('highlight')")
+        end
+    end,
+    desc = "Highlight symbol under cursor on CursorHold for allowed file types",
 })
-
 
 -- Symbol renaming
 keyset("n", "<leader>rn", "<Plug>(coc-rename)", {silent = true})

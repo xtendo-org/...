@@ -221,3 +221,28 @@ augroup FormatOptions
   autocmd!
   autocmd BufEnter,BufWinEnter,BufRead,BufNewFile * set formatoptions-=tc
 augroup END
+
+" vim-airline
+let g:airline_section_b=""
+let g:airline_section_x="%{airline#util#wrap(airline#parts#filetype(),0)}"
+let g:airline_section_y=""
+let g:airline_section_z="%l/%L,%v"
+
+function MySemshiOverrides()
+  hi semshiLocal           ctermfg=2
+  hi semshiGlobal          ctermfg=3
+  hi semshiImported        ctermfg=2
+  hi semshiParameter       ctermfg=5
+  hi semshiParameterUnused ctermfg=14
+  hi semshiFree            ctermfg=9
+  hi semshiBuiltin         ctermfg=4 cterm=BOLD
+  hi semshiAttribute       ctermfg=5
+  hi semshiSelf            ctermfg=3 cterm=BOLD
+  hi semshiUnresolved      ctermfg=1 cterm=none
+  hi semshiSelected        ctermbg=14 ctermfg=0
+
+  hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+  hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+  sign define semshiError text=🚨 texthl=semshiErrorSign
+endfunction
+autocmd FileType python call MySemshiOverrides()

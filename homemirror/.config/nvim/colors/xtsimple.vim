@@ -19,11 +19,14 @@ hi Comment ctermbg=NONE ctermfg=9 cterm=italic
 hi String ctermbg=NONE ctermfg=1
 hi Search ctermbg=11 ctermfg=0
 hi Special ctermbg=NONE ctermfg=4
-hi Statement ctermbg=NONE ctermfg=3 cterm=BOLD
+hi Statement ctermbg=NONE ctermfg=12 cterm=BOLD
 hi PreProc ctermbg=NONE ctermfg=13 cterm=italic,BOLD
 hi Todo ctermbg=10 ctermfg=0
 hi Include ctermfg=9
 hi Type ctermfg=12 cterm=BOLD
+hi Operator ctermbg=NONE ctermfg=5
+hi Function ctermfg=4
+hi NormalFloat ctermbg=7
 
 hi MatchParen cterm=BOLD ctermfg=0 ctermbg=10
 
@@ -32,7 +35,7 @@ hi SpellBad ctermbg=224 ctermfg=NONE cterm=underline
 " hi SpellLocal ctermbg=NONE ctermfg=5 cterm=underline
 " hi SpellRare ctermbg=NONE ctermfg=6 cterm=underline
 
-hi pythonBuiltin ctermbg=NONE ctermfg=2 cterm=BOLD
+" hi pythonBuiltin ctermbg=NONE ctermfg=2 cterm=BOLD
 hi pythonConditional ctermbg=NONE ctermfg=13 cterm=BOLD
 " hi pythonFunction ctermbg=NONE ctermfg=6
 " hi pythonOperator ctermbg=NONE ctermfg=5
@@ -55,14 +58,25 @@ hi CursorColumn ctermbg=255 ctermfg=NONE
 hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=6
 
-hi CocHighlightText ctermbg=230
-hi CocHintHighlight ctermfg=NONE ctermbg=230
-hi CocHintSign ctermbg=230
-hi CocHintFloat ctermbg=230
-hi CocHintVirtualText ctermbg=230
+hi CocHighlightText ctermbg=14 ctermfg=0
+hi CocHintHighlight ctermbg=14 ctermfg=0
+hi CocHintSign ctermbg=14 ctermfg=0
+hi CocHintFloat ctermbg=14 ctermfg=0
+hi CocHintHighlight ctermbg=14 ctermfg=0
+hi CocMenuSel ctermbg=11
 
-hi SpelunkerSpellBad cterm=undercurl guisp=#64d777
+hi SpellBad ctermbg=NONE ctermfg=NONE cterm=undercurl
+hi SpellCap ctermbg=NONE ctermfg=NONE cterm=underline
+hi SpellLocal ctermbg=NONE ctermfg=NONE cterm=underline
+hi SpellRare ctermbg=NONE ctermfg=NONE cterm=underline
+hi SpelunkerSpellBad ctermfg=NONE cterm=undercurl guisp=#64d777
 hi SpelunkerComplexOrCompoundWord cterm=undercurl guisp=#64d777
+
+hi DiagnosticUnderlineError cterm=underline gui=underline guisp=#cf494c
+hi DiagnosticUnderlineWarn cterm=underline gui=underline guisp=#ff9900
+hi DiagnosticUnderlineInfo cterm=underline gui=underline guisp=#0575d8
+hi DiagnosticUnderlineHint cterm=underline gui=underline guisp=Cyan
+hi DiagnosticUnderlineOk cterm=underline gui=underline guisp=Green
 
 " hi Visual ctermbg=231 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE
