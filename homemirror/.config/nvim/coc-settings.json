@@ -18,5 +18,6 @@
   "rust-analyzer.server.extraEnv": {
       "CARGO_TARGET_DIR": "coc-target"
   },
+  "semanticTokens.enable": true,
   "inlayHint.display": false
 }

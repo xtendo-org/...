@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
+  'Vimjas/vim-python-pep8-indent',
   'chrisbra/Recover.vim',
   'christoomey/vim-tmux-navigator',
   'ctrlpvim/ctrlp.vim',
@@ -22,6 +23,7 @@ require("lazy").setup({
   'glts/vim-radical',
   'jparise/vim-graphql',
   'jremmen/vim-ripgrep',
+  'junegunn/fzf.vim',
   'kamykn/spelunker.vim',
   'simnalamburt/vim-mundo',
   'tpope/vim-commentary',
@@ -32,11 +34,13 @@ require("lazy").setup({
   'tpope/vim-surround',
   'tpope/vim-vinegar',
   'vim-airline/vim-airline',
-  'numirias/semshi',
+  'vim-python/python-syntax',
+  -- 'numirias/semshi',
   -- 'nvim-lua/plenary.nvim',
   -- 'nvim-tree/nvim-web-devicons',
   -- 'tamago324/lir.nvim',
   {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+  {'junegunn/fzf', run = "./install --all"},
   {'neoclide/coc.nvim', branch = 'release'},
 })
 
@@ -64,7 +68,10 @@ require("lazy").setup({
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
+vim.opt.smarttab = true
 vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 vim.opt.nu = true
 
 -- begin coc.nvim --
@@ -140,7 +147,7 @@ keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', {silent = true})
 vim.api.nvim_create_augroup("CocGroup", { clear = true})
 
 -- List of file types to exclude from coc highlighting
-local coc_highlight_excluded_filetypes = { "python", "text", "markdown" }
+local coc_highlight_excluded_filetypes = { "text", "markdown" }
 
 -- Function to check if a file type is excluded
 local function is_coc_highlight_excluded_filetype(filetype)

@@ -1,3 +1,6 @@
+filetype plugin indent on
+syntax on
+
 augroup netrw_mapping
   autocmd!
   autocmd filetype netrw call NetrwMapping()
@@ -228,6 +231,7 @@ let g:airline_section_x="%{airline#util#wrap(airline#parts#filetype(),0)}"
 let g:airline_section_y=""
 let g:airline_section_z="%l/%L,%v"
 
+" Semshi colors
 function MySemshiOverrides()
   hi semshiLocal           ctermfg=2
   hi semshiGlobal          ctermfg=3
@@ -246,3 +250,19 @@ function MySemshiOverrides()
   sign define semshiError text=🚨 texthl=semshiErrorSign
 endfunction
 autocmd FileType python call MySemshiOverrides()
+
+" FZF colors
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }

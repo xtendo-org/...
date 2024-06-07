@@ -1,11 +1,16 @@
 #!/bin/bash
 
+# Define the maximum dimension for the longer side
+
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <src> <dst>"
+    exit 1
+fi
+
 # Assign the source and destination file paths
 src="$1"
 dst="$2"
-
-# Define the maximum dimension for the longer side
-max_dim=1024
+max_dim=${3:-"1024"}  # Use default if not provided
 
 # Resize the image while preserving the aspect ratio, convert to high-quality JPEG, and strip EXIF data
-convert "$src" -resize "${max_dim}x${max_dim}>" -quality 100 -strip "$dst"
+magick "$src" -resize "${max_dim}x${max_dim}>" -quality 100 -strip "$dst"
