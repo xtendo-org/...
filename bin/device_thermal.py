@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import os
+import re
 
 _SYS_HWMON_PATH = "/sys/class/hwmon"
+_RE_TEMP = re.compile(r"temp[0-9]+_(input|label)")
 
 
 def sread(path: str):
@@ -35,7 +37,8 @@ def main():
                 for line in content_lines:
                     print(f"        {line}")
             else:
-                print(f"    \033[31m{sub_name}\033[0m: \033[34m{content}\033[0m")
+                if _RE_TEMP.match(sub_name):
+                    print(f"    \033[31m{sub_name}\033[0m: \033[34m{content}\033[0m")
 
 
 if __name__ == "__main__":
