@@ -9,7 +9,7 @@ augroup END
 function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
   nnoremap <silent> <buffer> <c-p> :CtrlPMRU<CR>
-  nnoremap <silent> <buffer> ' :CtrlP<CR>
+  nnoremap <silent> <buffer> ' :FZF<CR>
 endfunction
 
 " let g:ctrlp_cmd = 'CtrlP'
@@ -159,7 +159,7 @@ vnoremap <C-c> "+ygv
 
 nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
 nnoremap <silent> <c-p> :CtrlPMRU<CR>
-nnoremap <silent> ' :CtrlP<CR>
+nnoremap <silent> ' :FZF<CR>
 
 " Do not wrap around when searching
 set nowrapscan
@@ -251,18 +251,59 @@ function MySemshiOverrides()
 endfunction
 autocmd FileType python call MySemshiOverrides()
 
-" FZF colors
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+nnoremap <leader>tm a™<ESC>
+nnoremap <leader>em a—<ESC>
+nnoremap <leader>en a–<ESC>
+" insert ISO 8601 timestamp
+nnoremap <leader>d i<C-r>=strftime("%FT%T%z")<CR><Esc>
+nnoremap <leader>t i<C-r>=strftime("%s")<CR><Esc>
+
+" " FZF colors
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
+"
+" function! s:update_fzf_colors()
+"   let rules =
+"   \ { 'fg':      [['Normal',       'fg']],
+"     \ 'bg':      [['Normal',       'bg']],
+"     \ 'hl':      [['Comment',      'fg']],
+"     \ 'fg+':     [['CursorColumn', 'fg'], ['Normal', 'fg']],
+"     \ 'bg+':     [['CursorColumn', 'bg']],
+"     \ 'hl+':     [['Statement',    'fg']],
+"     \ 'info':    [['PreProc',      'fg']],
+"     \ 'prompt':  [['Conditional',  'fg']],
+"     \ 'pointer': [['Exception',    'fg']],
+"     \ 'marker':  [['Keyword',      'fg']],
+"     \ 'spinner': [['Label',        'fg']],
+"     \ 'header':  [['Comment',      'fg']] }
+"   let cols = []
+"   for [name, pairs] in items(rules)
+"     for pair in pairs
+"       let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
+"       if !empty(name) && code > 0
+"         call add(cols, name.':'.code)
+"         break
+"       endif
+"     endfor
+"   endfor
+"   let s:orig_fzf_default_opts = get(s:, 'orig_fzf_default_opts', $FZF_DEFAULT_OPTS)
+"   let $FZF_DEFAULT_OPTS = s:orig_fzf_default_opts .
+"         \ empty(cols) ? '' : (' --color='.join(cols, ','))
+" endfunction
+
+" augroup _fzf
+"   autocmd!
+"   autocmd ColorScheme * call <sid>update_fzf_colors()
+" augroup END

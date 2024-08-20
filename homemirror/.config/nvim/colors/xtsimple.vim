@@ -68,7 +68,7 @@ hi DirvishGitModified ctermbg=1 ctermfg=5
 hi ColorColumn ctermbg=255 ctermfg=NONE
 hi CursorColumn ctermbg=255 ctermfg=NONE
 hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE
-hi Conceal ctermbg=NONE ctermfg=6
+hi Conceal ctermbg=NONE ctermfg=3 cterm=BOLD
 hi Operator ctermfg=6 cterm=BOLD
 
 hi CocHighlightText ctermbg=15 ctermfg=0

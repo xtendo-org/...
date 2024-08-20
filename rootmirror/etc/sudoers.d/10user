@@ -1,5 +1,6 @@
 user ALL =NOPASSWD: \
   /usr/bin/cryptsetup, \
+  /usr/bin/cpupower, \
   /usr/bin/fdisk, \
   /usr/bin/journalctl, \
   /usr/bin/modprobe, \

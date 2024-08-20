@@ -29,3 +29,10 @@ stdout
 stderr
 uuid
 newtype
+limitCount
+classmethod
+staticmethod
+asyncio
+stdin
+hostname
+randrange
