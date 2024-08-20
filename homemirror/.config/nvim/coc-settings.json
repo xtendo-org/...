@@ -15,6 +15,15 @@
       }
     }
   },
+
+  "ruff.enable": true,
+  "ruff.nativeBinaryPath": "/usr/bin/ruff",
+  "ruff.args": ["check", "--output-format", "json", "-"],
+  "ruff.lint.args": ["check", "--output-format", "json", "-"],
+  "ruff.lint.run": "onType",
+  "ruff.enableExperimentalFormatter": true,
+  "python.formatting.provider": "none",
+
   "rust-analyzer.server.extraEnv": {
       "CARGO_TARGET_DIR": "coc-target"
   },

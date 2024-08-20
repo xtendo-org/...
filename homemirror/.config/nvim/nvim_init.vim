@@ -29,12 +29,12 @@ endfunction
 
 call SetTextWidthFromRuff()
 
-augroup SuggestDisable
-  autocmd FileType markdown let b:coc_suggest_disable = 1
-  autocmd FileType text let b:coc_suggest_disable = 1
-  autocmd BufRead,BufNewFile * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
-  autocmd VimEnter * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
-augroup END
+" augroup SuggestDisable
+"   autocmd FileType markdown let b:coc_suggest_disable = 1
+"   autocmd FileType text let b:coc_suggest_disable = 1
+"   autocmd BufRead,BufNewFile * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
+"   autocmd VimEnter * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
+" augroup END
 
 let g:dirvish_git_indicators = {
 \ 'Modified'  : '✹',
@@ -46,14 +46,14 @@ let g:dirvish_git_indicators = {
 \ 'Unknown'   : '?'
 \ }
 
-let g:coc_global_extensions =
-      \[ '@yaegassy/coc-ruff'
-      \, 'coc-git'
-      \, 'coc-highlight'
-      \, 'coc-json'
-      \, 'coc-pyright'
-      \, 'coc-rust-analyzer'
-      \]
+" let g:coc_global_extensions =
+"       \[ '@yaegassy/coc-ruff'
+"       \, 'coc-git'
+"       \, 'coc-highlight'
+"       \, 'coc-json'
+"       \, 'coc-pyright'
+"       \, 'coc-rust-analyzer'
+"       \]
 
 let g:ctrlp_working_path_mode = 'rw'
 
@@ -110,8 +110,9 @@ command! CargoFmt
 
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
-nnoremap <leader>gf :CocCommand editor.action.formatDocument<CR>
-nnoremap gf :CocCommand editor.action.formatDocument<CR>
+
+" nnoremap <leader>gf :CocCommand editor.action.formatDocument<CR>
+" nnoremap gf :CocCommand editor.action.formatDocument<CR>
 
 function! DedentToMaxCommonDepth() range
   let l:min_indent = -1

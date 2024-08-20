@@ -111,6 +111,29 @@ hi pythonConditional ctermbg=NONE ctermfg=13 cterm=BOLD
 " hi CocFloatThumb ctermbg=231
 " hi CocInfoHighlight ctermbg=231
 
+hi @lsp.mod.deprecated       ctermfg=9   cterm=undercurl
+hi @lsp.type.class           ctermfg=3   cterm=BOLD
+hi @lsp.type.decorator       ctermfg=6   cterm=BOLD
+hi @lsp.type.enum            ctermfg=1
+hi @lsp.type.enumMember      ctermfg=3
+hi @lsp.type.event           ctermfg=7
+hi @lsp.type.function        ctermfg=4
+hi @lsp.type.interface       ctermfg=6
+hi @lsp.type.keyword         ctermfg=2   cterm=BOLD
+hi @lsp.type.macro           ctermfg=6   cterm=BOLD
+hi @lsp.type.method          ctermfg=4
+hi @lsp.type.modifier        ctermfg=6
+hi @lsp.type.namespace       ctermfg=5
+hi @lsp.type.number          ctermfg=9
+hi @lsp.type.parameter       ctermfg=12  cterm=BOLD
+hi @lsp.type.property        ctermfg=5
+hi @lsp.type.regexp          ctermfg=13
+hi @lsp.type.string          ctermfg=1
+hi @lsp.type.struct          ctermfg=1
+hi @lsp.type.type            ctermfg=13  cterm=BOLD      ctermbg=255
+hi @lsp.type.typeParameter   ctermfg=5   ctermbg=255
+hi @lsp.type.variable        ctermfg=5
+
 " hi ALEError ctermbg=NONE ctermfg=1
 " hi ALEErrorSign ctermbg=NONE ctermfg=1
 " hi ALEWarning ctermbg=NONE ctermfg=3
