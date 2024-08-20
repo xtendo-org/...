@@ -1,0 +1,4 @@
+#!/bin/bash
+LOG_FILE_DIR="$HOME/log/yay/$(date +%Y)/$(date +%m)"
+mkdir -p $LOG_FILE_DIR
+yay -R --noconfirm $1 | ts '[%Y-%m-%d %H:%M:%.S]' | tee /dev/tty > $LOG_FILE_DIR/$(date --iso-8601=seconds).log

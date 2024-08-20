@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+tmp_img_path="/tmp/$(head --bytes 64 /dev/urandom | b2sum | head --bytes 32).png"
+echo $tmp_img_path
+gnome-screenshot -a -f $tmp_img_path
+~/.pyenv/versions/imgurup/bin/python ~/code/imgurup/upload.py $tmp_img_path
+xclip -selection clipboard -t UTF8_STRING -o | dzen2 -x -400 -y 100 -w 300 -h 100 -p 2 -bg '#ff0000' -fg '#ffffff' -fn 'Noto Sans CJK KR'
