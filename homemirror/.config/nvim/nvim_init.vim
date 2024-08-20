@@ -29,13 +29,6 @@ endfunction
 
 call SetTextWidthFromRuff()
 
-" augroup SuggestDisable
-"   autocmd FileType markdown let b:coc_suggest_disable = 1
-"   autocmd FileType text let b:coc_suggest_disable = 1
-"   autocmd BufRead,BufNewFile * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
-"   autocmd VimEnter * if &filetype == '' | let b:coc_suggest_disable = 1 | endif
-" augroup END
-
 let g:dirvish_git_indicators = {
 \ 'Modified'  : '✹',
 \ 'Staged'    : '✚',
@@ -45,15 +38,6 @@ let g:dirvish_git_indicators = {
 \ 'Ignored'   : '☒',
 \ 'Unknown'   : '?'
 \ }
-
-" let g:coc_global_extensions =
-"       \[ '@yaegassy/coc-ruff'
-"       \, 'coc-git'
-"       \, 'coc-highlight'
-"       \, 'coc-json'
-"       \, 'coc-pyright'
-"       \, 'coc-rust-analyzer'
-"       \]
 
 let g:ctrlp_working_path_mode = 'rw'
 
@@ -88,31 +72,8 @@ command! CargoFmt
     \ | execute ':silent !rustfmt +nightly --edition 2021 --' shellescape(expand('%'))
     \ | edit!
 
-" augroup FileTypeMappings
-"   autocmd!
-
-"   autocmd FileType haskell
-"     \ nnoremap <buffer> <C-s> :CocCommand editor.action.formatDocument<CR>:w<CR>
-"     \ | inoremap <buffer> <C-s> <ESC>:CocCommand editor.action.formatDocument<CR>:w<CR>
-"     \ | nnoremap <leader>gf :CocCommand editor.action.formatDocument<CR>
-
-"   autocmd FileType python
-"     \ nnoremap <buffer> <C-s> :RuffFormat<CR>
-"     \ | inoremap <buffer> <C-s> <ESC>:RuffFormat<CR>
-
-"   autocmd FileType rust
-"     \ nnoremap <buffer> <C-s> :CargoFmt<CR>
-"     \ | inoremap <buffer> <C-s> <ESC>:CargoFmt<CR>
-
-"   autocmd BufEnter * if index(['haskell', 'python', 'rust'], &filetype) == -1 | nnoremap <buffer> <C-s> :w<CR> | inoremap <buffer> <C-s> <ESC>:w<CR> | endif
-
-" augroup END
-
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
-
-" nnoremap <leader>gf :CocCommand editor.action.formatDocument<CR>
-" nnoremap gf :CocCommand editor.action.formatDocument<CR>
 
 function! DedentToMaxCommonDepth() range
   let l:min_indent = -1
@@ -258,53 +219,3 @@ nnoremap <leader>en a–<ESC>
 " insert ISO 8601 timestamp
 nnoremap <leader>d i<C-r>=strftime("%FT%T%z")<CR><Esc>
 nnoremap <leader>t i<C-r>=strftime("%s")<CR><Esc>
-
-" " FZF colors
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'border':  ['fg', 'Ignore'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-"
-" function! s:update_fzf_colors()
-"   let rules =
-"   \ { 'fg':      [['Normal',       'fg']],
-"     \ 'bg':      [['Normal',       'bg']],
-"     \ 'hl':      [['Comment',      'fg']],
-"     \ 'fg+':     [['CursorColumn', 'fg'], ['Normal', 'fg']],
-"     \ 'bg+':     [['CursorColumn', 'bg']],
-"     \ 'hl+':     [['Statement',    'fg']],
-"     \ 'info':    [['PreProc',      'fg']],
-"     \ 'prompt':  [['Conditional',  'fg']],
-"     \ 'pointer': [['Exception',    'fg']],
-"     \ 'marker':  [['Keyword',      'fg']],
-"     \ 'spinner': [['Label',        'fg']],
-"     \ 'header':  [['Comment',      'fg']] }
-"   let cols = []
-"   for [name, pairs] in items(rules)
-"     for pair in pairs
-"       let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
-"       if !empty(name) && code > 0
-"         call add(cols, name.':'.code)
-"         break
-"       endif
-"     endfor
-"   endfor
-"   let s:orig_fzf_default_opts = get(s:, 'orig_fzf_default_opts', $FZF_DEFAULT_OPTS)
-"   let $FZF_DEFAULT_OPTS = s:orig_fzf_default_opts .
-"         \ empty(cols) ? '' : (' --color='.join(cols, ','))
-" endfunction
-
-" augroup _fzf
-"   autocmd!
-"   autocmd ColorScheme * call <sid>update_fzf_colors()
-" augroup END

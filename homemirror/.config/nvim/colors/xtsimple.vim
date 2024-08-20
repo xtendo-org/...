@@ -12,30 +12,6 @@ let g:colors_name = 'xtsimple'
 
 set t_Co=256
 
-hi CocSemTypeKeyword        ctermfg=2   cterm=BOLD
-hi CocSemTypeMacro          ctermfg=6   cterm=BOLD
-hi CocSemTypeEnumMember     ctermfg=3
-hi CocSemTypeProperty       ctermfg=5
-hi CocSemTypeClass          ctermfg=3   cterm=BOLD
-hi CocSemTypeStruct         ctermfg=1
-hi CocSemTypeRegexp         ctermfg=13
-hi CocSemTypeBoolean        ctermfg=6   cterm=BOLD
-hi CocSemTypeMethod         ctermfg=4
-hi CocSemTypeNamespace      ctermfg=5
-hi CocSemTypeModifier       ctermfg=6
-hi CocSemTypeNumber         ctermfg=9
-hi CocSemTypeTypeParameter  ctermfg=5   ctermbg=255
-hi CocSemModDeprecated      ctermfg=9   cterm=undercurl
-hi CocSemTypeFunction       ctermfg=4
-hi CocSemTypeDecorator      ctermfg=6   cterm=BOLD
-hi CocSemTypeEnum           ctermfg=1
-hi CocSemTypeParameter      ctermfg=12  cterm=BOLD
-hi CocSemTypeType           ctermfg=13  cterm=BOLD      ctermbg=255
-hi CocSemTypeString         ctermfg=1
-hi CocSemTypeVariable       ctermfg=5
-hi CocSemTypeInterface      ctermfg=6
-hi CocSemTypeEvent          ctermfg=7
-
 hi Identifier ctermbg=NONE ctermfg=4
 hi Keyword ctermbg=NONE ctermfg=3 cterm=BOLD
 hi Constant ctermbg=NONE ctermfg=12 cterm=BOLD
@@ -71,12 +47,6 @@ hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=3 cterm=BOLD
 hi Operator ctermfg=6 cterm=BOLD
 
-hi CocHighlightText ctermbg=15 ctermfg=0
-hi CocHintHighlight ctermbg=15 ctermfg=0
-hi CocHintSign ctermbg=13 ctermfg=0
-hi CocHintFloat ctermbg=13 ctermfg=0
-hi CocMenuSel ctermbg=11
-
 hi SpellBad ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpellCap ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpellLocal ctermbg=224 ctermfg=0 cterm=undercurl
@@ -90,26 +60,8 @@ hi DiagnosticUnderlineInfo cterm=undercurl guisp=#0575d8
 hi DiagnosticUnderlineHint cterm=undercurl guisp=Cyan
 hi DiagnosticUnderlineOk cterm=undercurl guisp=Green
 
-hi @keyword ctermbg=NONE ctermfg=4 cterm=BOLD
-hi @constructor ctermbg=NONE ctermfg=3 cterm=BOLD
-hi @function ctermbg=NONE ctermfg=2
-hi Type ctermfg=5 cterm=BOLD
-hi @variable ctermfg=3
-
-hi pythonBuiltin ctermbg=NONE ctermfg=4
-hi pythonConditional ctermbg=NONE ctermfg=13 cterm=BOLD
-" hi pythonFunction ctermbg=NONE ctermfg=6
-" hi pythonOperator ctermbg=NONE ctermfg=5
-" hi pythonRepeat ctermbg=NONE ctermfg=5
-" hi pythonStatement ctermbg=NONE ctermfg=5 cterm=BOLD
-
 " hi Visual ctermbg=231 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE
-" hi CocFloating ctermbg=231
-" hi CocMenuSel ctermbg=231
-" hi CocListLine ctermbg=231
-" hi CocFloatThumb ctermbg=231
-" hi CocInfoHighlight ctermbg=231
 
 hi @lsp.mod.deprecated       ctermfg=9   cterm=undercurl
 hi @lsp.type.class           ctermfg=3   cterm=BOLD
