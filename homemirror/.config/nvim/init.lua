@@ -65,6 +65,19 @@ end
 
 lspconfig.ruff.setup{root_dir = get_root_dir}
 lspconfig.basedpyright.setup{root_dir = get_root_dir}
+lspconfig.hls.setup{
+  root_dir = get_root_dir,
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+  settings = {
+    haskell = {
+      formattingProvider = "fourmolu",
+      plugin = {
+        hlint = { globalOn = true },
+        semanticTokens = { globalOn = true },
+      },
+    },
+  },
+}
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
@@ -109,6 +122,16 @@ cmp.setup({
     { name = 'nvim_lsp' },
   })
 })
+
+vim.api.nvim_set_keymap('n', 'q', '<Nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'qr', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'qq', '<cmd>lua vim.lsp.buf.code_action({ filter = function(a) return a.isPreferred end, apply = true })<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'qa', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
+
+-- Disable the wraparound behavior of "go to prev/next diagnostic"
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ wrap = false })<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ wrap = false })<CR>', { noremap = true, silent = true })
+
 
 -- end neovim-lsp --
 

@@ -12,79 +12,114 @@ let g:colors_name = 'xtsimple'
 
 set t_Co=256
 
-hi Identifier ctermbg=NONE ctermfg=4
-hi Keyword ctermbg=NONE ctermfg=3 cterm=BOLD
-hi Constant ctermbg=NONE ctermfg=12 cterm=BOLD
 hi Comment ctermbg=NONE ctermfg=1 cterm=italic
-hi String ctermbg=NONE ctermfg=1
-hi Search ctermbg=11 ctermfg=0
-hi Special ctermbg=NONE ctermfg=5 cterm=BOLD
-hi Statement ctermbg=NONE ctermfg=12 cterm=BOLD
-hi PreProc ctermbg=NONE ctermfg=13 cterm=italic,BOLD
-hi Todo ctermbg=10 ctermfg=0
-hi Include ctermfg=9
-hi Type ctermfg=12 cterm=BOLD
-hi Operator ctermbg=NONE ctermfg=5
+hi Conditional ctermfg=3 cterm=bold
+hi Constant ctermbg=NONE ctermfg=12 cterm=bold
 hi Function ctermfg=4
+hi Identifier ctermbg=none ctermfg=none cterm=bold
+hi Include ctermfg=1
+hi Keyword ctermbg=NONE ctermfg=3 cterm=bold
 hi NormalFloat ctermbg=7
+hi Operator ctermfg=3 cterm=bold
+hi PreProc ctermbg=NONE ctermfg=13 cterm=italic,bold
+hi Repeat ctermfg=5 cterm=bold
+hi Search ctermbg=11 ctermfg=0
+hi Special ctermbg=NONE ctermfg=5 cterm=bold
+hi Statement ctermbg=NONE ctermfg=9 cterm=italic,bold
+hi String ctermbg=NONE ctermfg=1
+hi Structure ctermfg=4 cterm=none
+hi Todo ctermbg=10 ctermfg=0
+hi Type ctermfg=12 cterm=bold
 
-hi MatchParen cterm=BOLD ctermfg=0 ctermbg=10
+hi @function.builtin ctermfg=5 cterm=bold
 
-hi ConId ctermfg=4
-hi hsImportModuleName ctermfg=6
+" Semantic tokens (LSP).
+
+hi @lsp.type.parameter ctermfg=8 cterm=bold
+hi @lsp.type.function cterm=underline guisp=#32e0fb
+hi @lsp.type.method ctermfg=6 cterm=bold
+hi @lsp.type.variable ctermfg=0
+hi @lsp.type.keyword ctermfg=white ctermbg=1 cterm=bold
+hi @lsp.type.namespace ctermfg=12
+hi @lsp.type.class ctermfg=none cterm=bold
+hi @lsp.type.decorator ctermfg=none
+hi @lsp.type.enum ctermfg=2 cterm=bold
+hi @lsp.type.enumMember ctermfg=5 cterm=bold
+hi @lsp.type.type ctermbg=255 cterm=bold,italic
+hi @lsp.type.typeParameter ctermbg=255
+
+" Python
+
+hi pythonBuiltinConstant ctermfg=5 cterm=italic
+hi pythonBuiltinFunction ctermfg=13 cterm=bold,italic
+hi pythonBuiltinException ctermfg=5 cterm=bold
+hi pythonBuiltinModule ctermfg=11 cterm=bold
+hi pythonConventional ctermfg=5 cterm=bold
+hi pythonCapital ctermfg=2
+
+" Mostly Haskell
+
+hi! link hsImportModuleName Structure
+hi VarId ctermfg=0
+hi ConId ctermfg=2
+
+" Vim-specific
+
+hi MatchParen cterm=bold ctermfg=0 ctermbg=10
 
 hi signColumn ctermbg=NONE ctermfg=4
 hi vimBracket ctermbg=NONE ctermfg=7
 hi vimCommentString ctermbg=NONE ctermfg=8
 hi vimMapModKey ctermbg=NONE ctermfg=4
 hi vimNotation ctermbg=NONE ctermfg=4
-hi vimUserCommand ctermbg=NONE ctermfg=1 cterm=BOLD
+hi vimUserCommand ctermbg=NONE ctermfg=1 cterm=bold
 hi xdefaultsValue ctermbg=NONE ctermfg=7
 hi DirvishGitModified ctermbg=1 ctermfg=5
 hi ColorColumn ctermbg=255 ctermfg=NONE
 hi CursorColumn ctermbg=255 ctermfg=NONE
 hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE
-hi Conceal ctermbg=NONE ctermfg=3 cterm=BOLD
-hi Operator ctermfg=6 cterm=BOLD
+hi Conceal ctermbg=NONE ctermfg=3 cterm=bold
+
+hi DiagnosticUnderlineError cterm=underline guisp=#cf494c
+hi DiagnosticUnderlineWarn cterm=underline guisp=#ff9900
+hi DiagnosticUnderlineInfo cterm=underline guisp=#0575d8
+hi DiagnosticUnderlineHint cterm=underline guisp=Cyan
+hi DiagnosticUnderlineOk cterm=underline guisp=Green
+
+" Spell
 
 hi SpellBad ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpellCap ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpellLocal ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpellRare ctermbg=224 ctermfg=0 cterm=undercurl
-hi SpelunkerSpellBad ctermbg=224 ctermfg=0 cterm=NONE  " cterm=undercurl guisp=#64d777
-hi SpelunkerComplexOrCompoundWord ctermbg=NONE cterm=undercurl guisp=#64d777
-
-hi DiagnosticUnderlineError cterm=undercurl guisp=#cf494c
-hi DiagnosticUnderlineWarn cterm=undercurl guisp=#ff9900
-hi DiagnosticUnderlineInfo cterm=undercurl guisp=#0575d8
-hi DiagnosticUnderlineHint cterm=undercurl guisp=Cyan
-hi DiagnosticUnderlineOk cterm=undercurl guisp=Green
+hi SpelunkerSpellBad ctermfg=NONE cterm=undercurl guisp=#ff9900
+hi SpelunkerComplexOrCompoundWord ctermbg=NONE cterm=undercurl guisp=Red
 
 " hi Visual ctermbg=231 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE
 
-hi @lsp.mod.deprecated       ctermfg=9   cterm=undercurl
-hi @lsp.type.class           ctermfg=3   cterm=BOLD
-hi @lsp.type.decorator       ctermfg=6   cterm=BOLD
-hi @lsp.type.enum            ctermfg=1
-hi @lsp.type.enumMember      ctermfg=3
-hi @lsp.type.event           ctermfg=7
-hi @lsp.type.function        ctermfg=4
-hi @lsp.type.interface       ctermfg=6
-hi @lsp.type.keyword         ctermfg=2   cterm=BOLD
-hi @lsp.type.macro           ctermfg=6   cterm=BOLD
-hi @lsp.type.method          ctermfg=4
-hi @lsp.type.modifier        ctermfg=6
-hi @lsp.type.namespace       ctermfg=5
-hi @lsp.type.number          ctermfg=9
-hi @lsp.type.parameter       ctermfg=12  cterm=BOLD
-hi @lsp.type.property        ctermfg=5
-hi @lsp.type.regexp          ctermfg=13
-hi @lsp.type.string          ctermfg=1
-hi @lsp.type.struct          ctermfg=1
-hi @lsp.type.type            ctermfg=13  cterm=BOLD      ctermbg=255
-hi @lsp.type.typeParameter   ctermfg=5   ctermbg=255
-hi @lsp.type.variable        ctermfg=5
+" hi @lsp.mod.deprecated       ctermfg=15  cterm=underline  ctermbg=1
+" hi @lsp.type.class           ctermfg=3   cterm=bold
+" hi @lsp.type.decorator       ctermfg=2   cterm=bold
+" hi @lsp.type.enum            ctermfg=1
+" hi @lsp.type.enumMember      ctermfg=3
+" hi @lsp.type.event           ctermfg=7
+" hi @lsp.type.function        ctermfg=2
+" hi @lsp.type.interface       ctermfg=3
+" hi @lsp.type.keyword         ctermfg=1   cterm=bold
+" hi @lsp.type.macro           ctermfg=3   cterm=bold
+" hi @lsp.type.method          ctermfg=6   cterm=bold
+" hi @lsp.type.modifier        ctermfg=3
+" hi @lsp.type.namespace       ctermfg=12
+" hi @lsp.type.number          ctermfg=9
+" hi @lsp.type.parameter       ctermfg=1   cterm=bold
+" hi @lsp.type.property        ctermfg=5
+" hi @lsp.type.regexp          ctermfg=13
+" hi @lsp.type.string          ctermfg=1
+" hi @lsp.type.struct          ctermfg=1
+" hi @lsp.type.type            ctermfg=13  cterm=bold      ctermbg=255
+" hi @lsp.type.typeParameter   ctermfg=5   ctermbg=255
+" hi @lsp.type.variable        ctermfg=NONE
 
 " hi ALEError ctermbg=NONE ctermfg=1
 " hi ALEErrorSign ctermbg=NONE ctermfg=1
@@ -106,7 +141,7 @@ hi @lsp.type.variable        ctermfg=5
 " hi DiffDelete ctermbg=NONE ctermfg=1
 " hi DiffText ctermbg=NONE ctermfg=4
 " hi Directory ctermbg=NONE ctermfg=4
-" hi Error ctermbg=1 ctermfg=7 cterm=BOLD
+" hi Error ctermbg=1 ctermfg=7 cterm=bold
 " hi ErrorMsg ctermbg=NONE ctermfg=8
 " hi Float ctermbg=NONE ctermfg=5
 " hi FoldColumn ctermbg=NONE ctermfg=7
@@ -123,7 +158,7 @@ hi @lsp.type.variable        ctermfg=5
 " hi NERDTreeDirSlash ctermbg=NONE ctermfg=4
 " hi NERDTreeExecFile ctermbg=NONE ctermfg=7
 " hi NonText ctermbg=NONE ctermfg=8
-" hi Normal ctermbg=NONE ctermfg=0 cterm=BOLD
+" hi Normal ctermbg=NONE ctermfg=0 cterm=bold
 " hi Number ctermbg=NONE ctermfg=3
 " hi Operator ctermbg=NONE ctermfg=5
 " hi Pmenu ctermbg=8 ctermfg=7
@@ -144,10 +179,10 @@ hi @lsp.type.variable        ctermfg=5
 " hi SpellCap ctermbg=NONE ctermfg=4 cterm=underline
 " hi SpellLocal ctermbg=NONE ctermfg=5 cterm=underline
 " hi SpellRare ctermbg=NONE ctermfg=6 cterm=underline
-" hi Statement ctermbg=NONE ctermfg=3 cterm=BOLD
+" hi Statement ctermbg=NONE ctermfg=3 cterm=bold
 " hi StatusLine ctermbg=7 ctermfg=0
 " hi StatusLineNC ctermbg=8 ctermfg=0
-" hi Structure ctermbg=NONE ctermfg=6 cterm=BOLD
+" hi Structure ctermbg=NONE ctermfg=6 cterm=bold
 " hi TabLine ctermbg=NONE ctermfg=8
 " hi TabLineFill ctermbg=NONE ctermfg=8
 " hi TabLineSel ctermbg=4 ctermfg=0
@@ -175,13 +210,13 @@ hi @lsp.type.variable        ctermfg=5
 " hi cssValueNumber ctermbg=NONE ctermfg=7
 " hi helpLeadBlank ctermbg=NONE ctermfg=7
 " hi helpNormal ctermbg=NONE ctermfg=7
-" hi htmlBold ctermbg=NONE ctermfg=3 cterm=BOLD
+" hi htmlBold ctermbg=NONE ctermfg=3 cterm=bold
 " hi htmlEndTag ctermbg=NONE ctermfg=7
 " hi htmlH1 ctermbg=NONE ctermfg=7
 " hi htmlItalic ctermbg=NONE ctermfg=5
 " hi htmlLink ctermbg=NONE ctermfg=1 cterm=underline
 " hi htmlTag ctermbg=NONE ctermfg=7
-" hi htmlTagName ctermbg=NONE ctermfg=1 cterm=BOLD
+" hi htmlTagName ctermbg=NONE ctermfg=1 cterm=bold
 " hi javaScript ctermbg=NONE ctermfg=7
 " hi javaScriptBraces ctermbg=NONE ctermfg=7
 " hi javaScriptNumber ctermbg=NONE ctermfg=5
@@ -263,7 +298,7 @@ hi @lsp.type.variable        ctermfg=5
 " hi DiffDelete ctermbg=NONE ctermfg=1
 " hi DiffText ctermbg=NONE ctermfg=4
 " hi Directory ctermbg=NONE ctermfg=4
-" hi Error ctermbg=1 ctermfg=7 cterm=BOLD
+" hi Error ctermbg=1 ctermfg=7 cterm=bold
 " hi ErrorMsg ctermbg=NONE ctermfg=8
 " hi Float ctermbg=NONE ctermfg=5
 " hi FoldColumn ctermbg=NONE ctermfg=7
@@ -282,7 +317,7 @@ hi @lsp.type.variable        ctermfg=5
 " hi NERDTreeDirSlash ctermbg=NONE ctermfg=4
 " hi NERDTreeExecFile ctermbg=NONE ctermfg=7
 " hi NonText ctermbg=NONE ctermfg=8
-" hi Normal ctermbg=NONE ctermfg=0 cterm=BOLD
+" hi Normal ctermbg=NONE ctermfg=0 cterm=bold
 " hi Number ctermbg=NONE ctermfg=3
 " hi Operator ctermbg=NONE ctermfg=5
 " hi Pmenu ctermbg=8 ctermfg=7
@@ -303,11 +338,11 @@ hi @lsp.type.variable        ctermfg=5
 " hi SpellCap ctermbg=NONE ctermfg=4 cterm=underline
 " hi SpellLocal ctermbg=NONE ctermfg=5 cterm=underline
 " hi SpellRare ctermbg=NONE ctermfg=6 cterm=underline
-" hi Statement ctermbg=NONE ctermfg=3 cterm=BOLD
+" hi Statement ctermbg=NONE ctermfg=3 cterm=bold
 " hi StatusLine ctermbg=7 ctermfg=0
 " hi StatusLineNC ctermbg=8 ctermfg=0
 " hi String ctermbg=NONE ctermfg=2
-" hi Structure ctermbg=NONE ctermfg=6 cterm=BOLD
+" hi Structure ctermbg=NONE ctermfg=6 cterm=bold
 " hi TabLine ctermbg=NONE ctermfg=8
 " hi TabLineFill ctermbg=NONE ctermfg=8
 " hi TabLineSel ctermbg=4 ctermfg=0
@@ -335,13 +370,13 @@ hi @lsp.type.variable        ctermfg=5
 " hi cssValueNumber ctermbg=NONE ctermfg=7
 " hi helpLeadBlank ctermbg=NONE ctermfg=7
 " hi helpNormal ctermbg=NONE ctermfg=7
-" hi htmlBold ctermbg=NONE ctermfg=3 cterm=BOLD
+" hi htmlBold ctermbg=NONE ctermfg=3 cterm=bold
 " hi htmlEndTag ctermbg=NONE ctermfg=7
 " hi htmlH1 ctermbg=NONE ctermfg=7
 " hi htmlItalic ctermbg=NONE ctermfg=5
 " hi htmlLink ctermbg=NONE ctermfg=1 cterm=underline
 " hi htmlTag ctermbg=NONE ctermfg=7
-" hi htmlTagName ctermbg=NONE ctermfg=1 cterm=BOLD
+" hi htmlTagName ctermbg=NONE ctermfg=1 cterm=bold
 " hi javaScript ctermbg=NONE ctermfg=7
 " hi javaScriptBraces ctermbg=NONE ctermfg=7
 " hi javaScriptNumber ctermbg=NONE ctermfg=5
@@ -359,7 +394,7 @@ hi @lsp.type.variable        ctermfg=5
 " hi pythonFunction ctermbg=NONE ctermfg=6
 " hi pythonOperator ctermbg=NONE ctermfg=5
 " hi pythonRepeat ctermbg=NONE ctermfg=5
-" hi pythonStatement ctermbg=NONE ctermfg=3 cterm=BOLD
+" hi pythonStatement ctermbg=NONE ctermfg=3 cterm=bold
 " hi rubyAttribute ctermbg=NONE ctermfg=4
 " hi rubyConstant ctermbg=NONE ctermfg=3
 " hi rubyDefine ctermbg=NONE ctermfg=5
@@ -385,7 +420,7 @@ hi @lsp.type.variable        ctermfg=5
 " hi vimCommentString ctermbg=NONE ctermfg=8
 " hi vimMapModKey ctermbg=NONE ctermfg=4
 " hi vimNotation ctermbg=NONE ctermfg=4
-" hi vimUserCommand ctermbg=NONE ctermfg=1 cterm=BOLD
+" hi vimUserCommand ctermbg=NONE ctermfg=1 cterm=bold
 " hi xdefaultsValue ctermbg=NONE ctermfg=7
 
 " }}}
