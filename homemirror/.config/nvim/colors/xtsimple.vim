@@ -15,14 +15,15 @@ set t_Co=256
 hi Comment ctermbg=NONE ctermfg=1 cterm=italic
 hi Conditional ctermfg=3 cterm=bold
 hi Constant ctermbg=NONE ctermfg=12 cterm=bold
-hi Function ctermfg=4
+hi clear Function
+hi Function cterm=italic
 hi Identifier ctermbg=none ctermfg=none cterm=bold
 hi Include ctermfg=1
 hi Keyword ctermbg=NONE ctermfg=3 cterm=bold
 hi NormalFloat ctermbg=7
 hi Operator ctermfg=3 cterm=bold
 hi PreProc ctermbg=NONE ctermfg=13 cterm=italic,bold
-hi Repeat ctermfg=5 cterm=bold
+hi Repeat ctermfg=1 cterm=bold
 hi Search ctermbg=11 ctermfg=0
 hi Special ctermbg=NONE ctermfg=5 cterm=bold
 hi Statement ctermbg=NONE ctermfg=9 cterm=italic,bold
@@ -33,29 +34,40 @@ hi Type ctermfg=12 cterm=bold
 
 hi @function.builtin ctermfg=5 cterm=bold
 
+" Custom groups
+
+hi Symbol ctermfg=4
+
 " Semantic tokens (LSP).
 
 hi @lsp.type.parameter ctermfg=8 cterm=bold
-hi @lsp.type.function cterm=underline guisp=#32e0fb
-hi @lsp.type.method ctermfg=6 cterm=bold
+hi link @lsp.type.function Function
+hi @lsp.type.method ctermfg=6 cterm=nocombine,bold
 hi @lsp.type.variable ctermfg=0
 hi @lsp.type.keyword ctermfg=white ctermbg=1 cterm=bold
-hi @lsp.type.namespace ctermfg=12
+hi @lsp.type.namespace ctermfg=12 ctermbg=15
 hi @lsp.type.class ctermfg=none cterm=bold
-hi @lsp.type.decorator ctermfg=none
+hi @lsp.type.decorator ctermfg=4 ctermfg=none
 hi @lsp.type.enum ctermfg=2 cterm=bold
 hi @lsp.type.enumMember ctermfg=5 cterm=bold
 hi @lsp.type.type ctermbg=255 cterm=bold,italic
 hi @lsp.type.typeParameter ctermbg=255
 
+hi clear LspReferenceText
+hi LspReferenceText ctermbg=226
+
 " Python
 
+hi! link pythonFunction Symbol
+hi pythonLocal ctermfg=2
 hi pythonBuiltinConstant ctermfg=5 cterm=italic
 hi pythonBuiltinFunction ctermfg=13 cterm=bold,italic
 hi pythonBuiltinException ctermfg=5 cterm=bold
 hi pythonBuiltinModule ctermfg=11 cterm=bold
+hi pythonDottedName ctermfg=4
 hi pythonConventional ctermfg=5 cterm=bold
-hi pythonCapital ctermfg=2
+hi pythonLower ctermfg=4
+hi pythonUpper ctermfg=12
 
 " Mostly Haskell
 

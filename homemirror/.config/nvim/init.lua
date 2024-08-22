@@ -123,15 +123,42 @@ cmp.setup({
   })
 })
 
+-- For vim-airline
+
+function LspStatus()
+  local clients = vim.lsp.get_active_clients()
+  if next(clients) == nil then
+    return ''
+  end
+  local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+  for _, client in ipairs(clients) do
+    if client.config.filetypes and vim.fn.index(client.config.filetypes, buf_ft) ~= -1 then
+      return client.name
+    end
+  end
+  return ''
+end
+
+-- Some `q` bindings to run LSP actions
+
 vim.api.nvim_set_keymap('n', 'q', '<Nop>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qr', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qq', '<cmd>lua vim.lsp.buf.code_action({ filter = function(a) return a.isPreferred end, apply = true })<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qa', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+
+function ClearAndHighlight()
+  vim.lsp.buf.clear_references()
+  vim.lsp.buf.document_highlight()
+end
+
+vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua ClearAndHighlight()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>R', '<cmd>lua vim.lsp.buf.clear_references()<CR>', { noremap = true, silent = true })
+
 -- Disable the wraparound behavior of "go to prev/next diagnostic"
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ wrap = false })<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ wrap = false })<CR>', { noremap = true, silent = true })
-
 
 -- end neovim-lsp --
 

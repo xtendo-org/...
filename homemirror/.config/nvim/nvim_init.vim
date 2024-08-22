@@ -190,19 +190,25 @@ augroup END
 " vim-airline
 let g:airline_section_b=""
 let g:airline_section_x="%{airline#util#wrap(airline#parts#filetype(),0)}"
-let g:airline_section_y=""
+let g:airline_section_y="%{v:lua.LspStatus()}"
 let g:airline_section_z="%l/%L,%v"
 
 nnoremap <leader>tm a™<ESC>
 nnoremap <leader>em a—<ESC>
 nnoremap <leader>en a–<ESC>
 " insert ISO 8601 timestamp
-nnoremap <leader>d i<C-r>=strftime("%FT%T%z")<CR><Esc>
-nnoremap <leader>t i<C-r>=strftime("%s")<CR><Esc>
+nnoremap <leader>td i<C-r>=strftime("%FT%T%z")<CR><Esc>
+nnoremap <leader>ts i<C-r>=strftime("%s")<CR><Esc>
 
 """ Begin LSP
+
 " It seems nvim-lspconfig dynamically enables/disables the column, which
 " results in the whole text shaking sideways whenever I enter/exit the INSERT
 " mode.
 set signcolumn=yes
+
+" Close quickfix upon choice
+autocmd FileType qf nnoremap <silent> <buffer> <CR> <CR>:cclose<CR>
+autocmd FileType qf nnoremap <silent> <buffer> <C-c> :cclose<CR>
+
 """ End LSP
