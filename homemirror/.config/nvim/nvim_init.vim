@@ -211,4 +211,9 @@ set signcolumn=yes
 autocmd FileType qf nnoremap <silent> <buffer> <CR> <CR>:cclose<CR>
 autocmd FileType qf nnoremap <silent> <buffer> <C-c> :cclose<CR>
 
+" Disable the auto pop-up of diagnostic
+autocmd! CursorHold,CursorHoldI
+
 """ End LSP
+
+nnoremap <leader>v 0v$h

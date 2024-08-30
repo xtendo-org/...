@@ -39,3 +39,5 @@ randrange
 traceback
 readline
 deque
+fmap
+mconcat
