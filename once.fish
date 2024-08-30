@@ -58,6 +58,8 @@ set -x PATH "/opt/flutter/bin" $PATH
 # status is-login; and pyenv init --path | source
 # pyenv init - | source
 
+set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
+
 if [ -d ~/.ghcup ]
     set -x PATH $HOME"/.ghcup/bin" $PATH
 end
