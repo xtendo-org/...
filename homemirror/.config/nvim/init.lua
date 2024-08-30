@@ -160,25 +160,6 @@ vim.api.nvim_set_keymap('n', '<leader>R', '<cmd>lua vim.lsp.buf.clear_references
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ wrap = false })<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ wrap = false })<CR>', { noremap = true, silent = true })
 
--- When using `K` don't override the window with a diagnostic
--- function ShowDocumentation()
---   -- Temporarily disable diagnostics
---   vim.diagnostic.disable(0)
-
---   -- Show documentation
---   vim.lsp.buf.hover()
-
---   -- Use an autocommand to re-enable diagnostics after closing the hover window
---   vim.api.nvim_create_autocmd("WinClosed", {
---     buffer = 0,
---     once = true,
---     callback = function()
---       vim.diagnostic.enable(0)
---     end,
---   })
--- end
--- vim.api.nvim_set_keymap('n', 'K', '<cmd>lua ShowDocumentation()<CR>', { noremap = true, silent = true })
-
 -- end neovim-lsp --
 
 local vimrc = vim.fn.stdpath("config") .. "/nvim_init.vim"
