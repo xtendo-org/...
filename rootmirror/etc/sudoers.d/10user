@@ -10,6 +10,7 @@ user ALL =NOPASSWD: \
   /usr/bin/powertop, \
   /usr/bin/rfkill, \
   /usr/bin/rmmod, \
+  /usr/bin/smartctl, \
   /usr/bin/swapon, \
   /usr/bin/systemctl, \
   /usr/bin/ufw, \
