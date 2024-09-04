@@ -199,6 +199,8 @@ nnoremap <leader>en a–<ESC>
 " insert ISO 8601 timestamp
 nnoremap <leader>td i<C-r>=strftime("%FT%T%z")<CR><Esc>
 nnoremap <leader>ts i<C-r>=strftime("%s")<CR><Esc>
+nnoremap <leader>< a《<ESC>
+nnoremap <leader>> a》<ESC>
 
 """ Begin LSP
 
