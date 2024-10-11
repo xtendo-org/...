@@ -66,7 +66,7 @@ end
 lspconfig.ruff.setup{root_dir = get_root_dir}
 lspconfig.basedpyright.setup{root_dir = get_root_dir}
 lspconfig.hls.setup{
-  root_dir = get_root_dir,
+  root_dir = lspconfig.util.root_pattern("hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml"),
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
   settings = {
     haskell = {
@@ -77,6 +77,9 @@ lspconfig.hls.setup{
       },
     },
   },
+}
+lspconfig.openscad_lsp.setup{
+  root_dir = get_root_dir,
 }
 
 vim.api.nvim_create_autocmd('LspAttach', {
