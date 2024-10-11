@@ -3,7 +3,6 @@ if not status is-interactive
 end
 
 if not set -q FISH_INITIALIZED
-    echo "sourcing once.fish..."
     source ~/.../once.fish
     set -x FISH_INITIALIZED 1
 end

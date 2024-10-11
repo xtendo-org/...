@@ -16,6 +16,7 @@ add control = Control_R
 keycode 108 = Mode_switch
 keycode 130 = Mode_switch
 add mod5    = Mode_switch
+keycode  92 = Mode_switch
 
 keycode  65 = space space Hangul
 
