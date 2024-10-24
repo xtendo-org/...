@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
+from collections.abc import Callable
 import itertools
 import datetime
 import sys
 import time
 
 
-def debug(routine):
+def debug(routine: Callable[[], None]):
     try:
         routine()
     except Exception:
@@ -15,6 +16,7 @@ def debug(routine):
         import traceback
 
         extype, value, tb = sys.exc_info()
+        _ = extype, value
         traceback.print_exc()
         pdb.post_mortem(tb)
 
@@ -67,16 +69,14 @@ if __name__ == "__main__":
         now = datetime.datetime.now()
         delta = (target - now).total_seconds()
         if delta <= 0:
-            sys.stdout.write("\n")
+            _ = sys.stdout.write("\n")
             break
 
         subsecond = delta % 1
 
-        sys.stdout.write(
-            f'[{now.strftime("%H:%M:%S")}]'
-            f' {begin.strftime("%H:%M:%S")}'
-            f' -({hms(delta)})->'
-            f' {target.strftime("%H:%M:%S")}'
-            '\r'
-        )
+        now_s = now.strftime("%H:%M:%S")
+        begin_s = begin.strftime("%H:%M:%S")
+        target_s = target.strftime("%H:%M:%S")
+
+        _ = sys.stdout.write(f"[{now_s}] {begin_s} -({hms(delta)})-> {target_s}\r")
         time.sleep(subsecond)

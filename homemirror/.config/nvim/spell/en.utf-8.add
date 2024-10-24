@@ -41,3 +41,4 @@ readline
 deque
 fmap
 mconcat
+cryptsetup
