@@ -1,8 +1,9 @@
 *.egg-info
 *.hie
+*.swp
 .mypy_cache
 .pyenv-virtualenv
-.stack-work/
+.stack-work
 /.vscode/
 /Cargo.lock
 /target/
@@ -11,8 +12,8 @@ Session.vim
 __pycache__/
 build/
 coc-target/
-dist/
-dist-newstyle/
+dist
+dist-newstyle
 ignoreme_*
 node_modules/
 npm-debug.log

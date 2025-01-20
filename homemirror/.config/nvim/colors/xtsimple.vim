@@ -12,6 +12,8 @@ let g:colors_name = 'xtsimple'
 
 set t_Co=256
 
+hi LineNr ctermbg=NONE ctermfg=3
+
 hi Comment ctermbg=NONE ctermfg=1 cterm=italic
 hi Conditional ctermfg=3 cterm=bold
 hi Constant ctermbg=NONE ctermfg=12 cterm=bold

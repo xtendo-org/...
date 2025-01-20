@@ -42,3 +42,6 @@ deque
 fmap
 mconcat
 cryptsetup
+renderable
+finalizer
+posix

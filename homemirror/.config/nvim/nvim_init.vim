@@ -126,9 +126,6 @@ nnoremap <silent> ' :FZF<CR>
 " Do not wrap around when searching
 set nowrapscan
 
-set cursorline
-set cursorcolumn
-
 " Restore the last editing position
 au BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line("$")  && &filetype != "gitcommit"
@@ -219,3 +216,9 @@ autocmd! CursorHold,CursorHoldI
 """ End LSP
 
 nnoremap <leader>v 0v$h
+
+" Disable fancy indentation for HTML
+autocmd FileType html setlocal autoindent
+autocmd FileType html setlocal nocindent
+autocmd FileType html setlocal nosmartindent
+autocmd FileType html setlocal indentexpr=

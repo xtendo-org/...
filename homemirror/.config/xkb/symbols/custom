@@ -1,0 +1,41 @@
+// We create a "partial" variant for the US layout
+partial alphanumeric_keys
+xkb_symbols "xtnav" {
+    // First, include the standard US layout so we keep all original mappings
+    include "us(basic)"
+    include "level3(ralt_switch)"
+
+    // Optionally give it a descriptive name (not strictly required, but nice)
+    name[Group1] = "XT custom nav variant (AltGr)";
+
+    // Now override only the keys we want to swap:
+    // See /usr/share/X11/xkb/symbols/us
+
+    key <BKSP> { [ comma, less ] };   // Backspace -> Comma
+    key <AB08> { [ BackSpace, BackSpace ] };     // Comma -> Backspace
+
+    key <AD01> { [ q, Q, underscore, underscore ] };
+    key <AD03> { [ e, E, End, End ] };
+    key <AD05> { [ t, T, equal, equal ] };
+    key <AD10> { [ p, P, minus, minus ] };
+
+    key <AC01> { [ a, A, Home, Home ] };
+    key <AC02> { [ s, S, Prior, Prior ] };
+    key <AC03> { [ d, D, Next, Next ] };
+    key <AC04> { [ f, F, Escape, Escape ] };
+    key <AC05> { [ g, G, plus, plus ] };
+
+    key <AC06> { [ h, H, Left, Left ] };
+    key <AC07> { [ j, J, Down, Down ] };
+    key <AC08> { [ k, K, Up, Up ] };
+    key <AC09> { [ l, L, Right, Right ] };
+    key <AC10> { [ semicolon, colon, Hangul_Hanja, Hangul_Hanja ] };
+
+    key <AB01> { [ z, Z, less, less ] };
+    key <AB02> { [ x, X, greater, greater ] };
+    key <AB03> { [ c, C, parenleft, parenleft ] };
+    key <AB04> { [ v, V, parenright, parenright ] };
+
+    key <SPCE> { [ space, space, Hangul, Hangul ] };
+};
+
