@@ -223,10 +223,17 @@ bar {
     }
 }
 
+## Mostly custom configurations
+
+font pango:Noto Sans CJK KR Black 10
+
+default_border none
+
 for_window {
   [shell="xwayland"] title_format "[X] %title"
   [app_id="firefox"] inhibit_idle fullscreen
-  [app_id="vlc"] border pixel 0
+  [app_id="vlc"] border normal 1
+  [shell="xwayland"] border normal 1
   # [app_id="ulauncher"] floating enable, border none
   # [window_role="pop-up"] floating enable
   # [window_role="bubble"] floating enable
@@ -234,7 +241,17 @@ for_window {
   # [window_type="dialog"] floating enable
 }
 
+hide_edge_borders both
+
 set $XKB_CONFIG_ROOT ~/.config/xkb
+
+input type:keyboard {
+  xkb_layout custom
+  xkb_variant xtnav
+  # Capslock key should work as escape key
+  # See /usr/share/X11/xkb/rules/xorg.lst for options
+  xkb_options ctrl:nocaps
+}
 
 input type:touchpad {
     # Disable-while-typing
@@ -256,20 +273,7 @@ input type:touchpad {
     natural_scroll enabled  # For natural scrolling; set to 'disabled' for traditional scrolling
 }
 
-input type:keyboard {
-  xkb_layout custom
-  xkb_variant xtnav
-  # Capslock key should work as escape key
-  # See /usr/share/X11/xkb/rules/xorg.lst for options
-  xkb_options ctrl:nocaps
-}
-
-
 # Start your launcher
 bindsym $mod+d exec fuzzel
 
 output eDP-1 scale 1.5
-
-default_border none
-
-font pango:Noto Sans CJK KR Black 10
