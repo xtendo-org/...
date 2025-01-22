@@ -1,15 +1,11 @@
 include /etc/sway/config.d/*
 
+exec --no-startup-id fcitx5 -r -d
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
 
 # Your preferred terminal emulator
 set $term alacritty
@@ -82,22 +78,22 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Moving around:
 #
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+    # # Move your focus around
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
+    # # Or use $mod+[up|down|left|right]
+    # bindsym $mod+Left focus left
+    # bindsym $mod+Down focus down
+    # bindsym $mod+Up focus up
+    # bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    bindsym $mod+Shift+h move left
+    bindsym $mod+Shift+j move down
+    bindsym $mod+Shift+k move up
+    bindsym $mod+Shift+l move right
     # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -145,13 +141,10 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    # bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
-
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
@@ -175,10 +168,10 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym h resize shrink width 10px
+    bindsym j resize grow height 10px
+    bindsym k resize shrink height 10px
+    bindsym l resize grow width 10px
 
     # Ditto, with arrow keys
     bindsym Left resize shrink width 10px
@@ -190,7 +183,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 #
 # Utilities:
 #
@@ -221,11 +214,18 @@ bar {
         background #323232
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
+
+    tray_output none
+
+    mode hide
+    hidden_state hide
+
+    pango_markup enabled
 }
 
 ## Mostly custom configurations
 
-font pango:Noto Sans CJK KR Black 10
+font pango:Noto Sans CJK KR 10
 
 default_border none
 
@@ -234,6 +234,7 @@ for_window {
   [app_id="firefox"] inhibit_idle fullscreen
   [app_id="vlc"] border normal 1
   [shell="xwayland"] border normal 1
+  [app_id="gmrun"] floating enable
   # [app_id="ulauncher"] floating enable, border none
   # [window_role="pop-up"] floating enable
   # [window_role="bubble"] floating enable
@@ -258,15 +259,15 @@ input type:touchpad {
     dwt enabled
 
     accel_profile adaptive  # Options: adaptive or flat
-    pointer_accel 0.05
+    pointer_accel 0.2
 
     # Enable tap-to-click
     tap enabled
     # Tap button mapping: 1=left-click, 2=middle-click, 3=right-click
     tap_button_map lrm
-    # Tapping timeouts and behavior (not all are configurable in libinput)
+
     drag enabled
-    drag_lock disabled
+    drag_lock enabled
 
     # Enable two-finger scrolling
     scroll_method two_finger
@@ -275,5 +276,33 @@ input type:touchpad {
 
 # Start your launcher
 bindsym $mod+d exec fuzzel
+bindsym $mod+r exec gmrun
+
+# Lock
+
+exec_always swayidle -w \
+    timeout 180 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    timeout 600 'waylock -fork-on-lock' \
+    before-sleep 'waylock -fork-on-lock' \
+    lock 'waylock -fork-on-lock'
+
+bindsym $mod+z exec "waylock -fork-on-lock; sleep 5; killall -USR1 swayidle"
+
+# Touchpad toggle
+
+exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled
+
+# bindsym Mod1+t input type:touchpad events toggle enabled disabled
+bindsym Mod4+c exec brightnessctl -d platform::micmute set 1; input type:touchpad events disabled
+bindsym Mod4+space exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled
+
+# $mod+f to choose the floating window
+bindsym $mod+f focus mode_toggle
+bindsym $mod+Tab focus next
+bindsym $mod+F11 fullscreen
+
+bindsym $mod+Right move workspace to output right
+bindsym $mod+Left move workspace to output left
 
 output eDP-1 scale 1.5

@@ -29,7 +29,6 @@ xkb_symbols "xtnav" {
     key <AC07> { [ j, J, Down, Down ] };
     key <AC08> { [ k, K, Up, Up ] };
     key <AC09> { [ l, L, Right, Right ] };
-    key <AC10> { [ semicolon, colon, Hangul_Hanja, Hangul_Hanja ] };
 
     key <AB01> { [ z, Z, less, less ] };
     key <AB02> { [ x, X, greater, greater ] };
@@ -37,5 +36,6 @@ xkb_symbols "xtnav" {
     key <AB04> { [ v, V, parenright, parenright ] };
 
     key <SPCE> { [ space, space, Hangul, Hangul ] };
+    key <AC10> { [ semicolon, colon, Hangul_Hanja, Hangul_Hanja ] };
 };
 

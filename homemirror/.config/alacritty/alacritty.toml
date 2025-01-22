@@ -1,2 +1,5 @@
 [general]
 import = ["dimidium.toml"]
+
+[font]
+normal = { family = "Envy Code R for Powerline", style = "Regular" }

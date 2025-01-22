@@ -4,7 +4,7 @@ daemon:
   - Wayland
   - Indicator
 indicator:
-  icon_color: Black
+  icon_color: White
 log:
   global_level: DEBUG
 engine:
@@ -15,40 +15,50 @@ engine:
     M-C-Backslash:
       behavior: !Mode Math
       result: ConsumeIfProcessed
-    Super-Space:
-      behavior: !Toggle
-      - Hangul
-      - Latin
-      result: Consume
+    # Super-Space:
+    #   behavior: !Toggle
+    #   - Hangul
+    #   - Latin
+    #   result: Consume
     M-C-E:
       behavior: !Mode Emoji
       result: ConsumeIfProcessed
     Esc:
       behavior: !Switch Latin
       result: Bypass
-    Muhenkan:
+    # Muhenkan:
+    #   behavior: !Toggle
+    #   - Hangul
+    #   - Latin
+    #   result: Consume
+    M-Space:
       behavior: !Toggle
       - Hangul
       - Latin
       result: Consume
+    # F13:
+    #   behavior: !Switch Latin
+    #   result: Consume
+    # F14:
+    #   behavior: !Switch Hangul
+    #   result: Consume
     AltR:
-      behavior: !Toggle
-      - Hangul
-      - Latin
-      result: Consume
+      behavior: Ignore
+      result: Bypass
     Hangul:
-      behavior: !Toggle
-      - Hangul
-      - Latin
+      behavior: !Switch Latin
+      result: Consume
+    M-Hangul:
+      behavior: !Switch Latin
+      result: Consume
+    HangulHanja:
+      behavior: !Switch Hangul
+      result: Consume
+    M-HangulHanja:
+      behavior: !Switch Hangul
       result: Consume
   category_hotkeys:
     Hangul:
-      ControlR:
-        behavior: !Mode Hanja
-        result: Consume
-      HangulHanja:
-        behavior: !Mode Hanja
-        result: Consume
       F9:
         behavior: !Mode Hanja
         result: ConsumeIfProcessed
@@ -82,7 +92,7 @@ engine:
     layout: Qwerty
     preferred_direct: true
   hangul:
-    layout: dubeolsik
+    layout: sebeolsik-3-91
     word_commit: false
     preedit_johab: Needed
     addons:
@@ -90,3 +100,5 @@ engine:
       - ComposeChoseongSsang
       dubeolsik:
       - TreatJongseongAsChoseong
+      sebeolsik-3-91:
+      - FlexibleComposeOrder
