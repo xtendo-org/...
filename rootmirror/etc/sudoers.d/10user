@@ -16,4 +16,6 @@ user ALL =NOPASSWD: \
   /usr/bin/ufw, \
   /usr/bin/umount, \
   /usr/bin/yay, \
-  /home/user/.../bin/chattering_fix.py
+  /home/user/.../bin/chattering_fix.py, \
+  /home/user/.../bin/ELAN06A0-bind.sh, \
+  /home/user/.../bin/ELAN06A0-unbind.sh

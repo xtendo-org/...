@@ -94,8 +94,10 @@ hi vimNotation ctermbg=NONE ctermfg=4
 hi vimUserCommand ctermbg=NONE ctermfg=1 cterm=bold
 hi xdefaultsValue ctermbg=NONE ctermfg=7
 hi DirvishGitModified ctermbg=1 ctermfg=5
-hi ColorColumn ctermbg=255 ctermfg=NONE
-hi CursorColumn ctermbg=255 ctermfg=NONE
+
+hi ColorColumn ctermbg=7 ctermfg=NONE
+hi CursorColumn ctermbg=7 ctermfg=NONE
+
 hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=3 cterm=bold
 

@@ -189,8 +189,13 @@ mode "resize" {
 #
     # Special keys to adjust volume via PulseAudio
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
+
+    bindsym --locked Mod4+XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked Mod4+XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
+    bindsym --locked Mod4+XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
+
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
@@ -203,11 +208,11 @@ mode "resize" {
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
+    position bottom
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command waytmpbar.sh
+    status_command qw-nothread +RTS -C3600 -V3600 -Z --no-automatic-heap-samples --io-manager=native
 
     colors {
         statusline #ffffff
@@ -217,23 +222,24 @@ bar {
 
     tray_output none
 
-    mode hide
+    mode dock
     hidden_state hide
 
+    font pango:Noto Sans CJK KR 10
     pango_markup enabled
+
+    height 24
 }
 
 ## Mostly custom configurations
-
-font pango:Noto Sans CJK KR 10
 
 default_border none
 
 for_window {
   [shell="xwayland"] title_format "[X] %title"
   [app_id="firefox"] inhibit_idle fullscreen
-  [app_id="vlc"] border normal 1
-  [shell="xwayland"] border normal 1
+  [app_id="vlc"] border normal 0
+  [shell="xwayland"] border normal 0
   [app_id="gmrun"] floating enable
   # [app_id="ulauncher"] floating enable, border none
   # [window_role="pop-up"] floating enable
@@ -267,7 +273,7 @@ input type:touchpad {
     tap_button_map lrm
 
     drag enabled
-    drag_lock enabled
+    drag_lock disabled
 
     # Enable two-finger scrolling
     scroll_method two_finger
@@ -280,22 +286,22 @@ bindsym $mod+r exec gmrun
 
 # Lock
 
-exec_always swayidle -w \
-    timeout 180 'swaymsg "output * dpms off"' \
+exec_always killall swayidle; swayidle -w \
+    timeout 300 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    timeout 600 'waylock -fork-on-lock' \
-    before-sleep 'waylock -fork-on-lock' \
-    lock 'waylock -fork-on-lock'
+    timeout 600 "waylock -fork-on-lock" \
+    before-sleep "waylock -fork-on-lock" \
+    lock "waylock -fork-on-lock"
 
-bindsym $mod+z exec "waylock -fork-on-lock; sleep 5; killall -USR1 swayidle"
+bindsym $mod+z exec "waylock -fork-on-lock; sleep 1; killall -USR1 swayidle"
 
 # Touchpad toggle
 
 exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled
 
 # bindsym Mod1+t input type:touchpad events toggle enabled disabled
-bindsym Mod4+c exec brightnessctl -d platform::micmute set 1; input type:touchpad events disabled
-bindsym Mod4+space exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled
+bindsym Mod4+space exec brightnessctl -d platform::micmute set 1; input type:touchpad events disabled; exec sudo ELAN06A0-bind.sh
+bindsym Mod4+grave exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled; exec sudo ELAN06A0-unbind.sh
 
 # $mod+f to choose the floating window
 bindsym $mod+f focus mode_toggle
@@ -306,3 +312,9 @@ bindsym $mod+Right move workspace to output right
 bindsym $mod+Left move workspace to output left
 
 output eDP-1 scale 1.5
+output eDP-1 adaptive_sync on
+output eDP-1 allow_tearing no
+output * bg ~/zzal/stay_motivated.png center '#222222'
+
+seat * hide_cursor 3000
+seat * hide_cursor when-typing enable

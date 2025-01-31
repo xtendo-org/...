@@ -15,6 +15,7 @@ vim.g.mapleader = " "
 
 require("lazy").setup({
   'Vimjas/vim-python-pep8-indent',
+  'airblade/vim-gitgutter',
   'chrisbra/Recover.vim',
   'christoomey/vim-tmux-navigator',
   'ctrlpvim/ctrlp.vim',

@@ -3,3 +3,8 @@ import = ["dimidium.toml"]
 
 [font]
 normal = { family = "Envy Code R for Powerline", style = "Regular" }
+# normal = { family = "monospace", style = "Regular" }
+size = 10
+
+[window]
+padding = { x = 1, y = 1 }

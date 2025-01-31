@@ -1,48 +1,59 @@
 #!/usr/bin/env python
 
+from dataclasses import dataclass, field
 import os
-import re
 import sys
-
-_SYS_HWMON_PATH = f"/sys/{sys.argv[1]}"
-_RE_TEMP = re.compile(r"temp[0-9]+_(input|label)")
+from pathlib import Path
 
 
-def sread(path: str):
-    with open(path, "r") as f:
-        return f.read()
+_PREFIX_LEN = len("/sys/class/")
 
 
-def main():
-    devs: list[str] = os.listdir(_SYS_HWMON_PATH)
-    print(f"Looking at {len(devs)=}")
-    for dev_name in sorted(devs):
-        dev_path = f"{_SYS_HWMON_PATH}/{dev_name}"
-        name_part: str = ''
-        try:
-            stored_name = sread(f"{dev_path}/name").rstrip()
-        except Exception:
-            pass
+def clip(path: str) -> str:
+    return path[_PREFIX_LEN:]
+
+
+def print_content(path: str) -> None:
+    try:
+        content = Path(path).read_text().rstrip()
+    except OSError:
+        print(f"{clip(path)} (OS blocked)")
+    except UnicodeDecodeError:
+        print(f"{clip(path)} (not decodable)")
+    else:
+        first_line, delimiter, _ = content.partition("\n")
+        print(
+            f"\033[31m{clip(path)}\033[0m: "
+            + f"\033[34m{first_line}\033[0m{'...' if delimiter else ''}"
+        )
+
+
+@dataclass
+class Recursor:
+    inode_seen: set[int] = field(default_factory=set)
+
+    def recurse(self, path: str, depth: int):
+        realpath = os.path.realpath(path)
+        stat = os.stat(realpath)
+        if stat.st_ino in self.inode_seen:
+            return
+
         else:
-            name_part = f' \033[1m{stored_name}\033[0m'
-        print(f"{dev_path}{name_part}")
-        for sub_name in sorted(os.listdir(dev_path)):
-            sub_path = f"{dev_path}/{sub_name}"
-            try:
-                content = sread(sub_path).rstrip()
-            except Exception:
-                continue
-            content_lines = content.split("\n")
-            if 1 < len(content_lines):
-                print(f"    {sub_path}")
-                for line in content_lines:
-                    print(f"        {line}")
+            self.inode_seen.add(stat.st_ino)
+
+        for entry in os.scandir(path):
+            if entry.is_dir():
+                print(clip(entry.path), "[dir]")
+                if entry.name == 'subsystem':
+                    continue
+                if depth < 10:
+                    self.recurse(entry.path, depth + 1)
             else:
-                if _RE_TEMP.match(sub_name):
-                    print(f"    \033[31m{sub_name}\033[0m: \033[34m{content}\033[0m")
+                print_content(entry.path)
 
 
 if __name__ == "__main__":
     print("entering main")
-    main()
+    recursor = Recursor()
+    recursor.recurse(f"/sys/class/{sys.argv[1]}", 0)
     print("exiting main")

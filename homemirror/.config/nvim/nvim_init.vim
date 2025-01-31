@@ -125,6 +125,7 @@ nnoremap <silent> ' :FZF<CR>
 
 " Do not wrap around when searching
 set nowrapscan
+set cursorcolumn
 
 " Restore the last editing position
 au BufReadPost *
