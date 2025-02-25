@@ -199,6 +199,11 @@ nnoremap <leader>tm a™<ESC>
 nnoremap <leader>em a—<ESC>
 nnoremap <leader>en a–<ESC>
 
+nnoremap <leader>zh a←<ESC>
+nnoremap <leader>zj a↓<ESC>
+nnoremap <leader>zk a↑<ESC>
+nnoremap <leader>zl a→<ESC>
+
 " visually select the last inserted text
 nnoremap gV `[v`]
 

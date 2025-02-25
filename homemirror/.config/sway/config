@@ -1,3 +1,5 @@
+# output eDP-1 disable
+
 include /etc/sway/config.d/*
 
 exec --no-startup-id fcitx5 -r -d
@@ -55,7 +57,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    # bindsym $mod+Return exec $term
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -71,7 +73,7 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym --locked $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -203,6 +205,10 @@ mode "resize" {
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
+    bindsym --locked XF86Display output eDP-1 enable
+
+font pango:Noto Sans CJK KR 10
+
 #
 # Status Bar:
 #
@@ -225,22 +231,35 @@ bar {
     mode dock
     hidden_state hide
 
-    font pango:Noto Sans CJK KR 10
+    font pango:Roboto 10
     pango_markup enabled
 
     height 24
 }
 
+default_border normal 1
+smart_borders on
+
 ## Mostly custom configurations
 
-default_border none
-
 for_window {
-  [shell="xwayland"] title_format "[X] %title"
   [app_id="firefox"] inhibit_idle fullscreen
-  [app_id="vlc"] border normal 0
-  [shell="xwayland"] border normal 0
+  [class="MPlayer"] floating enable
+  [class="MPlayer"] border normal 1
+  [class="vlc"] floating enable
+  [class="vlc"] border normal 1
+  [app_id="org.gnome.Terminal"] floating enable
+  [app_id="org.gnome.Terminal"] border normal 1
+  [app_id="io.github.celluloid_player.Celluloid"] floating enable
+  [app_id="io.github.celluloid_player.Celluloid"] border normal 1
+  [app_id="eog"] floating enable
+  [app_id="eog"] border csd
+  [app_id="chromium"] border csd
   [app_id="gmrun"] floating enable
+  [app_id="gmrun"] border normal 1
+  [app_id="Alacritty"] border none
+  [shell="xwayland"] title_format "[X] %title"
+  [shell="xwayland"] border normal 0
   # [app_id="ulauncher"] floating enable, border none
   # [window_role="pop-up"] floating enable
   # [window_role="bubble"] floating enable
@@ -282,7 +301,8 @@ input type:touchpad {
 
 # Start your launcher
 bindsym $mod+d exec fuzzel
-bindsym $mod+r exec gmrun
+bindsym $mod+Return exec gmrun
+bindsym $mod+c exec gnome-terminal
 
 # Lock
 
@@ -300,8 +320,8 @@ bindsym $mod+z exec "waylock -fork-on-lock; sleep 1; killall -USR1 swayidle"
 exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled
 
 # bindsym Mod1+t input type:touchpad events toggle enabled disabled
-bindsym Mod4+space exec brightnessctl -d platform::micmute set 1; input type:touchpad events disabled; exec sudo ELAN06A0-bind.sh
-bindsym Mod4+grave exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled; exec sudo ELAN06A0-unbind.sh
+bindsym Mod4+space exec brightnessctl -d platform::micmute set 1; input type:touchpad events disabled; exec sudo ELAN06A0-unbind.sh
+bindsym Mod4+grave exec brightnessctl -d platform::micmute set 0; input type:touchpad events enabled; exec sudo ELAN06A0-bind.sh
 
 # $mod+f to choose the floating window
 bindsym $mod+f focus mode_toggle
@@ -318,3 +338,5 @@ output * bg ~/zzal/stay_motivated.png center '#222222'
 
 seat * hide_cursor 3000
 seat * hide_cursor when-typing enable
+
+exec alacritty -e nvim ~/log/yay/2025

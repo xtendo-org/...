@@ -51,13 +51,13 @@ hi link @lsp.type.function Function
 hi @lsp.type.method ctermfg=6 cterm=nocombine,bold
 hi @lsp.type.variable ctermfg=0
 hi @lsp.type.keyword ctermfg=white ctermbg=1 cterm=bold
-hi @lsp.type.namespace ctermbg=255 ctermfg=8
+hi @lsp.type.namespace ctermbg=239 ctermfg=15
 hi @lsp.type.class ctermfg=none cterm=bold
 hi @lsp.type.decorator ctermfg=4 ctermfg=none
 hi @lsp.type.enum ctermfg=2 cterm=bold
 hi @lsp.type.enumMember ctermfg=5 cterm=bold
-hi @lsp.type.type ctermbg=255 cterm=bold,italic
-hi @lsp.type.typeParameter ctermbg=255
+hi @lsp.type.type ctermbg=239 cterm=bold,italic
+hi @lsp.type.typeParameter ctermbg=239
 
 hi clear LspReferenceText
 hi LspReferenceText ctermbg=226
@@ -95,10 +95,10 @@ hi vimUserCommand ctermbg=NONE ctermfg=1 cterm=bold
 hi xdefaultsValue ctermbg=NONE ctermfg=7
 hi DirvishGitModified ctermbg=1 ctermfg=5
 
-hi ColorColumn ctermfg=255 ctermbg=0
-hi CursorColumn ctermbg=255 ctermfg=NONE
+hi ColorColumn ctermfg=239 ctermbg=15
+hi CursorColumn ctermbg=239 ctermfg=NONE
 
-hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE
+hi CursorLine cterm=NONE ctermbg=239 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=3 cterm=bold
 
 hi DiagnosticUnderlineError cterm=underline guisp=#cf494c
@@ -116,7 +116,7 @@ hi SpellRare ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpelunkerSpellBad ctermfg=NONE cterm=undercurl guisp=#ff9900
 hi SpelunkerComplexOrCompoundWord ctermbg=NONE cterm=undercurl guisp=Red
 
-" hi Visual ctermbg=231 ctermfg=NONE
+hi Visual ctermbg=231 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE
 
 " hi @lsp.mod.deprecated       ctermfg=15  cterm=underline  ctermbg=1
@@ -138,8 +138,8 @@ hi SpelunkerComplexOrCompoundWord ctermbg=NONE cterm=undercurl guisp=Red
 " hi @lsp.type.regexp          ctermfg=13
 " hi @lsp.type.string          ctermfg=1
 " hi @lsp.type.struct          ctermfg=1
-" hi @lsp.type.type            ctermfg=13  cterm=bold      ctermbg=255
-" hi @lsp.type.typeParameter   ctermfg=5   ctermbg=255
+" hi @lsp.type.type            ctermfg=13  cterm=bold      ctermbg=239
+" hi @lsp.type.typeParameter   ctermfg=5   ctermbg=239
 " hi @lsp.type.variable        ctermfg=NONE
 
 " hi ALEError ctermbg=NONE ctermfg=1

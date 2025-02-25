@@ -7,5 +7,5 @@ normal = { family = "Envy Code R for Powerline", style = "Regular" }
 size = 10
 
 [window]
-# padding = { x = 1, y = 1 }
-padding = { x = 0, y = 0 }
+padding = { x = 1, y = 1 }
+# padding = { x = 0, y = 0 }

@@ -1,0 +1,2 @@
+#!/bin/bash
+curl "localhost:54193/dict/$1/$2" 2>/dev/null

@@ -125,7 +125,10 @@ nnoremap <silent> ' :FZF<CR>
 
 " Do not wrap around when searching
 set nowrapscan
+
 set cursorcolumn
+
+set colorcolumn=79,80
 
 " Restore the last editing position
 au BufReadPost *
@@ -199,6 +202,10 @@ nnoremap <leader>td i<C-r>=strftime("%FT%T%z")<CR><Esc>
 nnoremap <leader>ts i<C-r>=strftime("%s")<CR><Esc>
 nnoremap <leader>< a《<ESC>
 nnoremap <leader>> a》<ESC>
+nnoremap <leader>zh a←<ESC>
+nnoremap <leader>zj a↓<ESC>
+nnoremap <leader>zk a↑<ESC>
+nnoremap <leader>zl a→<ESC>
 
 """ Begin LSP
 
@@ -223,3 +230,119 @@ autocmd FileType html setlocal autoindent
 autocmd FileType html setlocal nocindent
 autocmd FileType html setlocal nosmartindent
 autocmd FileType html setlocal indentexpr=
+
+" Dictionary!
+
+" Helper function: get selection from Visual mode
+function! s:get_visual_selection() abort
+  " Save current register
+  let old_reg = getreg('"')
+
+  " Yank the visually selected text into register x
+  normal! gv"xy
+
+  " Capture that text
+  let selected_text = getreg('x')
+
+  " Restore old register
+  call setreg('"', old_reg)
+  return selected_text
+endfunction
+
+" Function to allow `:En keyword`, `:Ja keyword`, etc.
+function! MyDictLookupDirect(lang, word) abort
+  " Open a 20-line horizontal split at the bottom
+  execute 'botright 20split'
+
+  " Run `mydict <lang> <word>` in a terminal
+  execute 'terminal flatdict ' . a:lang . ' ' . shellescape(a:word)
+endfunction
+
+function! MyDictLookupSelected(lang) range
+  let l:selected_text = s:get_visual_selection()
+  if empty(l:selected_text)
+    echo "No text selected."
+    return
+  endif
+
+  call MyDictLookupDirect(a:lang, l:selected_text)
+endfunction
+
+function! MyDictLookupWord(lang) abort
+  " Get the word under the cursor
+  let l:word = expand('<cword>')
+  if empty(l:word)
+    echo "No word under the cursor."
+    return
+  endif
+
+  call MyDictLookupDirect(a:lang, l:word)
+endfunction
+
+" Visual‐mode mappings:
+"   - <leader>k for Korean
+"   - <leader>l for English
+"   - <leader>j for Japanese
+
+" First, let's reconfigure GitGutter mappings
+let g:gitgutter_map_keys = 0
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+
+xnoremap <silent> <leader>l :<C-u>call MyDictLookupSelected('en')<CR>
+xnoremap <silent> <leader>k :<C-u>call MyDictLookupSelected('ko')<CR>
+xnoremap <silent> <leader>j :<C-u>call MyDictLookupSelected('ja')<CR>
+xnoremap <silent> <leader>h :<C-u>call MyDictLookupSelected('hanja')<CR>
+
+" Custom commands for direct dictionary lookup
+command! -nargs=1 Ko call MyDictLookupDirect('ko', <q-args>)
+command! -nargs=1 Eo call MyDictLookupDirect('en', <q-args>)
+command! -nargs=1 Ja call MyDictLookupDirect('ja', <q-args>)
+command! -nargs=1 Hanja call MyDictLookupDirect('hanja', <q-args>)
+
+nnoremap <silent> <leader>l :call MyDictLookupWord('en')<CR>
+nnoremap <silent> <leader>k :call MyDictLookupWord('ko')<CR>
+nnoremap <silent> <leader>j :call MyDictLookupWord('ja')<CR>
+nnoremap <silent> <leader>h :call MyDictLookupWord('hanja')<CR>
+
+" End of Dictionary!
+
+function! Autosync() abort
+  " Get the full path of the file being edited.
+  let l:current_file = expand('%:p')
+  if empty(l:current_file)
+    echoerr "No file name found."
+    return
+  endif
+
+  " Get the directory of the current file.
+  let l:file_dir = fnamemodify(l:current_file, ':h')
+
+  " Determine the Git repository root for the current file.
+  let l:repo_root = system('git -C ' . shellescape(l:file_dir) . ' rev-parse --show-toplevel')
+  if v:shell_error
+    echoerr "Not a Git repository."
+    return
+  endif
+  " Remove any trailing newline
+  let l:repo_root = substitute(l:repo_root, '\n', '', 'g')
+
+  " Stage all changes (tracked, untracked, and removals)
+  let l:add_cmd = 'git -C ' . shellescape(l:repo_root) . ' add -A :/'
+  let l:add_out = system(l:add_cmd)
+  if v:shell_error
+    echoerr "Error staging changes:" . l:add_out
+    return
+  endif
+
+  " Commit the staged changes
+  let l:commit_cmd = 'git -C ' . shellescape(l:repo_root) . ' commit -m autosync'
+  let l:commit_out = system(l:commit_cmd)
+  if v:shell_error
+    echoerr "Git commit failed:" . l:commit_out
+  else
+    echo l:commit_out
+  endif
+endfunction
+
+command! Autosync call Autosync()

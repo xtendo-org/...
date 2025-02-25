@@ -10,7 +10,7 @@ end
 set -q FISH_HOSTNAME || set FISH_HOSTNAME (string shorten -m12 (hostname))
 
 # aliases
-alias v "vim"
+alias v "nvim"
 function vs
     if [ -e Session.vim ]
       # vim --servername (head --bytes 32 /dev/urandom | b2sum | head -c 32) -S
