@@ -7,12 +7,17 @@ local function starts_with(str, prefix)
   return string.sub(str, 1, #prefix) == prefix
 end
 
-if starts_with(cwd, home .. "/code/") then
-  local modules_code = dofile(home .. "/.config/nvim/modules-code.lua")
-  ll_modules = vim.list_extend(
-    modules_always.l_modules or {},
-    modules_code.l_modules or {}
-  )
+if starts_with(cwd, home) then
+  local home_rel = string.sub(cwd, #home + 2)
+  if starts_with(home_rel, "code/") or home_rel == "serverprint" then
+    local modules_code = dofile(home .. "/.config/nvim/modules-code.lua")
+    ll_modules = vim.list_extend(
+      modules_always.l_modules or {},
+      modules_code.l_modules or {}
+    )
+  else
+    ll_modules = modules_always.l_modules
+  end
 else
   ll_modules = modules_always.l_modules
 end
