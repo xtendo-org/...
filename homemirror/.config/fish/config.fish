@@ -22,11 +22,11 @@ end
 
 # aliases
 function nvs
-    if [ -e Session.vim ]
-      # vim --servername (head --bytes 32 /dev/urandom | b2sum | head -c 32) -S
-        nvim -S
+    set -l OBSESSION_PATH "$HOME/.local/share/xtendo.org/vim/session/$(pwd_concise | base64).vim"
+    if [ -e $OBSESSION_PATH ]
+        nvim -S $OBSESSION_PATH
     else
-        nvim -c ':Obsession'
+        nvim -c ":Obsession $OBSESSION_PATH"
     end
 end
 

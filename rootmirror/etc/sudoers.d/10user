@@ -1,6 +1,7 @@
 user ALL =NOPASSWD: \
   /usr/bin/cryptsetup, \
   /usr/bin/cpupower, \
+  /usr/bin/ecryptfs-add-passphrase, \
   /usr/bin/fdisk, \
   /usr/bin/journalctl, \
   /usr/bin/modprobe, \

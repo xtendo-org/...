@@ -1,4 +1,4 @@
-# output eDP-1 disable
+output eDP-1 disable
 
 include /etc/sway/config.d/*
 
@@ -105,16 +105,17 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Workspaces:
 #
     # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    bindsym --no-repeat $mod+1 workspace number 1
+    bindsym --no-repeat $mod+2 workspace number 2
+    bindsym --no-repeat $mod+3 workspace number 3
+    bindsym --no-repeat $mod+4 workspace number 4
+    bindsym --no-repeat $mod+5 workspace number 5
+    bindsym --no-repeat $mod+6 workspace number 6
+    bindsym --no-repeat $mod+7 workspace number 7
+    bindsym --no-repeat $mod+8 workspace number 8
+    bindsym --no-repeat $mod+9 workspace number 9
+    bindsym --no-repeat $mod+0 workspace number 10
+
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -252,12 +253,15 @@ for_window {
   [app_id="org.gnome.Terminal"] border normal 1
   [app_id="io.github.celluloid_player.Celluloid"] floating enable
   [app_id="io.github.celluloid_player.Celluloid"] border normal 1
+  [app_id="org.keepassxc.KeePassXC"] floating enable
+  [app_id="evince"] floating enable
   [app_id="eog"] floating enable
   [app_id="eog"] border csd
-  [app_id="chromium"] border csd
+  [app_id="chromium"] border none
   [app_id="gmrun"] floating enable
   [app_id="gmrun"] border normal 1
   [app_id="Alacritty"] border none
+  [app_id="org.pulseaudio.pavucontrol"] floating enable
   [shell="xwayland"] title_format "[X] %title"
   [shell="xwayland"] border normal 0
   # [app_id="ulauncher"] floating enable, border none
@@ -306,10 +310,17 @@ bindsym $mod+c exec gnome-terminal
 
 # Lock
 
-exec_always killall swayidle; swayidle -w \
-    timeout 300 'swaymsg "output * dpms off"' \
+exec killall swayidle; swayidle -w \
+    timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    timeout 600 "waylock -fork-on-lock" \
+    timeout 1200 "waylock -fork-on-lock" \
+    before-sleep "waylock -fork-on-lock" \
+    lock "waylock -fork-on-lock"
+
+exec_always killall swayidle; swayidle -w \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    timeout 1200 "waylock -fork-on-lock" \
     before-sleep "waylock -fork-on-lock" \
     lock "waylock -fork-on-lock"
 
@@ -339,4 +350,14 @@ output * bg ~/zzal/stay_motivated.png center '#222222'
 seat * hide_cursor 3000
 seat * hide_cursor when-typing enable
 
+exec export EXPOSWAYDIR="$HOME/.local/state/exposway/"
+exec export EXPOSWAYMON="$EXPOSWAYDIR/output"
+exec exposwayd
+
+bindsym --no-repeat $mod+Down exec exposway
+
+# Launch the system upgrade log by default
 exec alacritty -e nvim ~/log/yay/2025
+
+# Press a hotkey to move the mouse pointer to (0, 0)
+bindsym $mod+x exec swaymsg "seat * cursor set 0 0"

@@ -64,6 +64,10 @@ if [ -d ~/.ghcup ]
     set -x PATH $HOME"/.ghcup/bin" $PATH
 end
 
+if [ -d ~/.deno ]
+    set -x PATH $HOME"/.ghcup/bin" $PATH
+end
+
 # aliases
 function nvs
     if [ -e Session.vim ]

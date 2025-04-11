@@ -55,23 +55,6 @@ function! TrimEnd()
   endif
 endfunction
 
-command! Fourmolu
-    \ write
-    \ | execute ':silent !fourmolu --mode inplace' shellescape(expand('%'))
-    \ | edit!
-    \ | call TrimEnd()
-    \ | write
-
-command! RuffFormat
-    \ write
-    \ | execute ':silent !ruff format' shellescape(expand('%'))
-    \ | edit!
-
-command! CargoFmt
-    \ write
-    \ | execute ':silent !rustfmt +nightly --edition 2021 --' shellescape(expand('%'))
-    \ | edit!
-
 nnoremap <C-s> :w<CR>
 inoremap <C-s> <ESC>:w<CR>
 
@@ -191,7 +174,6 @@ augroup END
 " vim-airline
 let g:airline_section_b=""
 let g:airline_section_x="%{airline#util#wrap(airline#parts#filetype(),0)}"
-let g:airline_section_y="%{v:lua.LspStatus()}"
 let g:airline_section_z="%l/%L,%v"
 
 nnoremap <leader>tm a™<ESC>
@@ -346,3 +328,15 @@ function! Autosync() abort
 endfunction
 
 command! Autosync call Autosync()
+
+function! UrlEncodeSelection() range
+  " Get the visually selected text (as lines) and join into a single string.
+  let l:orig = join(getline("'<", "'>"), "\n")
+  " Call Python to percent-encode the text.
+  let l:encoded = system('python3 -c "import sys, urllib.parse; sys.stdout.write(urllib.parse.quote(sys.stdin.read()))"', l:orig)
+  " Replace the selected text with the encoded version.
+  call setline("'<", split(l:encoded, "\n"))
+endfunction
+
+" Map <leader>c in visual mode to URL-encode the selection.
+vnoremap <leader>cu :<C-U>call UrlEncodeSelection()<CR>

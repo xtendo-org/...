@@ -46,12 +46,12 @@ hi SymbolThreatening ctermbg=10 ctermfg=0
 
 " Semantic tokens (LSP).
 
-hi @lsp.type.parameter ctermfg=8 cterm=bold
+hi @lsp.type.parameter ctermfg=7 cterm=bold
 hi link @lsp.type.function Function
 hi @lsp.type.method ctermfg=6 cterm=nocombine,bold
-hi @lsp.type.variable ctermfg=0
+hi @lsp.type.variable ctermfg=15
 hi @lsp.type.keyword ctermfg=white ctermbg=1 cterm=bold
-hi @lsp.type.namespace ctermbg=239 ctermfg=15
+hi @lsp.type.namespace ctermbg=52 ctermfg=15
 hi @lsp.type.class ctermfg=none cterm=bold
 hi @lsp.type.decorator ctermfg=4 ctermfg=none
 hi @lsp.type.enum ctermfg=2 cterm=bold
@@ -79,7 +79,7 @@ hi pythonBracket ctermfg=9
 " Mostly Haskell
 
 hi! link hsImportModuleName Structure
-hi VarId ctermfg=0
+hi VarId ctermfg=15
 hi ConId ctermfg=2
 
 " Vim-specific
@@ -96,7 +96,7 @@ hi xdefaultsValue ctermbg=NONE ctermfg=7
 hi DirvishGitModified ctermbg=1 ctermfg=5
 
 hi ColorColumn ctermfg=239 ctermbg=15
-hi CursorColumn ctermbg=239 ctermfg=NONE
+hi CursorColumn ctermbg=17 ctermfg=NONE
 
 hi CursorLine cterm=NONE ctermbg=239 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=3 cterm=bold
@@ -116,7 +116,7 @@ hi SpellRare ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpelunkerSpellBad ctermfg=NONE cterm=undercurl guisp=#ff9900
 hi SpelunkerComplexOrCompoundWord ctermbg=NONE cterm=undercurl guisp=Red
 
-hi Visual ctermbg=231 ctermfg=NONE
+hi Visual ctermbg=58 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE
 
 " hi @lsp.mod.deprecated       ctermfg=15  cterm=underline  ctermbg=1

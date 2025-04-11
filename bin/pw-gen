@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 from random import SystemRandom
+import os
 import os.path
 import subprocess
-import sys
 import argparse
 
 HOME = os.path.expanduser("~")
@@ -48,7 +48,12 @@ def main():
             f.write(output)
 
     # 3. Copy to clipboard
-    p = subprocess.Popen(["xclip", "-sel", "clip"], stdin=subprocess.PIPE)
+    cmd_args: list[str]
+    if os.environ.get('WAYLAND_DISPLAY'):
+        cmd_args = ['wl-copy']
+    else:
+        cmd_args = ["xclip", "-sel", "clip"]
+    p = subprocess.Popen(cmd_args, stdin=subprocess.PIPE)
     assert p.stdin is not None
     p.stdin.write(pw.encode("utf-8"))
     p.stdin.close()
