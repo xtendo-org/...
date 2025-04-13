@@ -39,10 +39,16 @@ Plug 'vim-scripts/synic.vim'
 Plug 'wavded/vim-stylus'
 " Plug 'wellle/context.vim'
 " Plug 'jiangmiao/auto-pairs'
+
+if exists('$WAYLAND_DISPLAY')
+    Plug 'jasonccox/vim-wayland-clipboard'
+endif
+
 " local plugins
 if filereadable($HOME . "/.vim/plugin.vim")
     source ~/.vim/plugin.vim
 endif
+
 call plug#end()
 
 " use space for leader

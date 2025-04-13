@@ -8,7 +8,7 @@ local function starts_with(str, prefix)
 end
 
 if starts_with(cwd, home) then
-  local home_rel = string.sub(cwd, #home + 2)
+  home_rel = string.sub(cwd, #home + 2)
   if starts_with(home_rel, "code/") or home_rel == "serverprint" then
     local modules_code = dofile(home .. "/.config/nvim/modules-code.lua")
     ll_modules = vim.list_extend(
@@ -59,7 +59,7 @@ if vim.fn.filereadable(file_path) == 1 then
   dofile(file_path)
 end
 
-if starts_with(cwd, home .. "/code/") then
+if home_rel and starts_with(home_rel, "code/") or home_rel == "serverprint" then
   local auto_lsp = dofile(home .. "/.config/nvim/auto-lsp.lua")
 end
 
