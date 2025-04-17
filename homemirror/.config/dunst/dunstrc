@@ -350,7 +350,7 @@
 [urgency_normal]
     background = "#28557799"
     foreground = "#ffffff"
-    timeout = 10
+    timeout = 0
     override_pause_level = 30
     # Icon for notifications with normal urgency
     default_icon = dialog-information
