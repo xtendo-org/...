@@ -22,7 +22,7 @@ class ProjectType(enum.Enum):
 
 def build_cache_dirs(ptype: ProjectType) -> list[str]:
     return {
-        ProjectType.Stack: [".stack-work"],
+        ProjectType.Stack: [".stack-work", "dist-newstyle"],
         ProjectType.Pyproject: [".venv"],
         ProjectType.Cargo: ["target", "output"],
     }[ptype]
@@ -48,24 +48,24 @@ def main():
     wd_rel = wd[len(HOME) + 1 :]
     wd_b64 = base64.urlsafe_b64encode(wd_rel.encode()).decode()
 
-    print(f"{project_type=}")
+    print(f"Project type is {project_type.name}")
     print(f"Identifying the project directory as: {wd_rel} ({wd_b64})")
     project_build_cache = f"{CENTRAL_BUILD_CACHE}/{wd_b64}"
 
     os.makedirs(project_build_cache, exist_ok=True)
     for d in build_cache_dirs(project_type):
-        abs_path = f'{wd}/{d}'
-        new_location = f'{project_build_cache}/{d}'
+        abs_path = f"{wd}/{d}"
+        new_location = f"{project_build_cache}/{d}"
         if os.path.exists(d):
             if os.path.islink(d):
-                print(f'./{d} is already a link')
+                print(f"./{d} is already a link")
                 continue
-            print(f'Moving ./{d}')
+            print(f"Moving ./{d}")
             shutil.move(abs_path, new_location)
         else:
-            print(f'Making directory for ./{d} at {abs_path}')
+            print(f"Making directory for ./{d} at {abs_path}")
             os.mkdir(new_location)
-        print(f'Making symlink at ./{d} that points to {abs_path}')
+        print(f"Making symlink at ./{d} that points to {abs_path}")
         os.symlink(new_location, d)
 
 
