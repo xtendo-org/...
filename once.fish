@@ -22,15 +22,6 @@ set -gx PATH "$PNPM_HOME" $PATH
 
 set -gx FISH_HOSTNAME (string shorten -m12 (hostname))
 
-# pyenv
-if [ -d ~/.pyenv ]
-    set -gx PATH $HOME"/.pyenv/bin" $PATH
-    # . (pyenv init -|psub)
-    # status --is-interactive; and source (pyenv virtualenv-init -|psub)
-    status --is-interactive; and pyenv init - | source
-    status --is-interactive; and pyenv virtualenv-init - | source
-end
-
 # rbenv
 if [ -d ~/.rbenv ]
     set -x PATH $HOME"/.rbenv/bin" $PATH
@@ -51,12 +42,6 @@ set -x ARDUINO_PATH /usr/local/arduino
 set -x LS_COLORS $LS_COLORS'ow=97;40'
 
 set -x PATH "/opt/flutter/bin" $PATH
-
-# set -Ux PYENV_ROOT $HOME/.pyenv
-# set -U fish_user_paths $PYENV_ROOT/bin $fish_user_paths
-
-# status is-login; and pyenv init --path | source
-# pyenv init - | source
 
 set -gx PYENV_VIRTUALENV_DISABLE_PROMPT 1
 

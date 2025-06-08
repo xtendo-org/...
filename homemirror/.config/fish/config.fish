@@ -30,33 +30,6 @@ function nvs
     end
 end
 
-# pyenv
-function pyenv
-  set command $argv[1]
-  set -e argv[1]
-
-  switch "$command"
-  case activate deactivate rehash shell
-    source (pyenv "sh-$command" $argv|psub)
-  case '*'
-    command pyenv "$command" $argv
-  end
-end
-
-# Directory-based pyenv-virtualenv
-function _pyenv-virtualenv
-  # command pyenv rehash 2>/dev/null
-  if [ -e .pyenv-virtualenv ]
-    [ (cat .pyenv-virtualenv) = (basename "$PYENV_VIRTUAL_ENV") ]
-    or pyenv activate --quiet (cat .pyenv-virtualenv)
-  else
-    [ "$PYENV_VIRTUAL_ENV" = '' ]
-    or pyenv deactivate
-  end
-end
-
-_pyenv-virtualenv
-
 function __check_pwd --on-variable PWD --description 'PWD change hook'
     status --is-command-substitution; and return
     # set tmux window name
@@ -66,8 +39,6 @@ function __check_pwd --on-variable PWD --description 'PWD change hook'
         # set maybe_pwd (basename $maybe_pwd)
         tmux rename-window $maybe_pwd
     end
-
-    # _pyenv-virtualenv
 
     autojump --add (pwd) >/dev/null 2>>~/autojump.log &
 end
@@ -140,3 +111,6 @@ function conda --inherit-variable CONDA_EXE
         end
     end
 end
+
+# eza
+abbr --add --global -- ez 'eza --color=always --icons=always --group-directories-first'

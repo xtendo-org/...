@@ -4,6 +4,7 @@ local l_modules = {
   'christoomey/vim-tmux-navigator',
   'ctrlpvim/ctrlp.vim',
   'junegunn/fzf.vim',
+  'kamykn/spelunker.vim',
   'simnalamburt/vim-mundo',
   'tpope/vim-commentary',
   'tpope/vim-eunuch',

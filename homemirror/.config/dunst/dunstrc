@@ -41,7 +41,7 @@
     # Offset from the origin
     # NOTE: Dunst from version 1.11 and older use this alternative notation
     # offset = 10x50
-    offset = (10, 50)
+    offset = (50, 50)
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -443,6 +443,20 @@
 #[fullscreen_show_critical]
 #    msg_urgency = critical
 #    fullscreen = show
+
+[volumecontrol]
+    appname = "volumecontrol"
+    background = "#00000099"
+    foreground = "#ffcc00"
+    timeout = 2
+    # Icon for notifications with low urgency
+    default_icon = audio-volume-high-symbolic
+    set_stack_tag = "volumecontrol"
+    history_ignore = yes
+
+[play_sound]
+  summary = "*"
+  script = ~/.../bin/sound_complete.sh
 
 #[espeak]
 #    summary = "*"

@@ -7,6 +7,7 @@ augroup netrw_mapping
 augroup END
 
 function! NetrwMapping()
+  nnoremap <silent> <buffer> <c-r> :Ex<CR>
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
   nnoremap <silent> <buffer> <c-p> :CtrlPMRU<CR>
   nnoremap <silent> <buffer> ' :FZF<CR>
@@ -87,7 +88,6 @@ command! CoreURL let @+='https://github.prex.sh/Prex/prex-core/tree/' . system('
 
 set mouse=
 
-let g:enable_spelunker_vim = 1
 let g:ctrlp_custom_ignore = 'target\|\.stack-work\|\.git\|_pb2\.py\|\.pyi\|\.pyc'
 
 function! s:FinishTaskFunction(line1, line2)
@@ -101,6 +101,10 @@ vnoremap <leader>f :'<,'>FinishTask<CR>
 
 " Copy to clipboard
 vnoremap <C-c> "+ygv
+
+" Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 
 nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
 nnoremap <silent> <c-p> :CtrlPMRU<CR>
@@ -180,8 +184,8 @@ nnoremap <leader>tm a™<ESC>
 nnoremap <leader>em a—<ESC>
 nnoremap <leader>en a–<ESC>
 " insert ISO 8601 timestamp
-nnoremap <leader>td i<C-r>=strftime("%FT%T%z")<CR><Esc>
-nnoremap <leader>ts i<C-r>=strftime("%s")<CR><Esc>
+nnoremap <leader>td a<C-r>=strftime("%FT%T%z")<CR><Esc>
+nnoremap <leader>ts a<C-r>=strftime("%s")<CR><Esc>
 nnoremap <leader>< a《<ESC>
 nnoremap <leader>> a》<ESC>
 nnoremap <leader>zh a←<ESC>
@@ -340,3 +344,23 @@ endfunction
 
 " Map <leader>c in visual mode to URL-encode the selection.
 vnoremap <leader>cu :<C-U>call UrlEncodeSelection()<CR>
+
+" For spelunker.vim
+" <https://github.com/kamykn/spelunker.vim>
+"
+" Spellcheck type: (default: 1)
+" 1: File is checked for spelling mistakes when opening and saving. This
+" may take a bit of time on large files.
+" 2: Spellcheck displayed words in buffer. Fast and dynamic. The waiting time
+" depends on the setting of CursorHold `set updatetime=1000`.
+let g:spelunker_check_type = 1
+
+" https://neovim.io/doc/user/pi_netrw.html#g%3Anetrw_sort_sequence
+let g:netrw_sort_options='n'
+let g:netrw_sort_by='extension'
+
+" Buffer cleanup: On entering any buffer, set it to delete itself when hidden
+augroup AutoBufHiddenDelete
+  autocmd!
+  autocmd BufEnter * setlocal bufhidden=delete
+augroup END

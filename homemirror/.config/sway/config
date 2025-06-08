@@ -1,5 +1,3 @@
-output eDP-1 disable
-
 include /etc/sway/config.d/*
 
 exec --no-startup-id fcitx5 -r -d
@@ -260,6 +258,7 @@ for_window {
   [app_id="chromium"] border none
   [app_id="gmrun"] floating enable
   [app_id="gmrun"] border normal 1
+  [app_id="blueberry.py"] floating enable
   [app_id="Alacritty"] border none
   [app_id="org.pulseaudio.pavucontrol"] floating enable
   [shell="xwayland"] title_format "[X] %title"
@@ -363,3 +362,12 @@ exec alacritty -e nvim ~/log/yay/2025
 bindsym $mod+x exec swaymsg "seat * cursor set 0 0"
 
 bindsym $mod+v exec dunstctl close-all
+
+# bindsym Ctrl+F12 exec \
+#   swaymsg "seat - cursor press button1"; \
+#   swaymsg "seat - cursor release button1";
+bindsym Ctrl+F12 exec --no-startup-id sh -c \
+  'for i in $(seq 1 20); do swaymsg seat "*" cursor press button1; swaymsg seat "*" cursor release button1; sleep 0.02; done'
+
+bindsym --whole-window BTN_EXTRA exec "pactl set-sink-volume @DEFAULT_SINK@ +10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
+bindsym --whole-window BTN_SIDE exec "pactl set-sink-volume @DEFAULT_SINK@ -10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"

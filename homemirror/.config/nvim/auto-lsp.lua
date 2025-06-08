@@ -1,14 +1,72 @@
-local lspconfig = require('lspconfig')
+-- Returns the Git repo root, or nil if no .git is found
+-- before reaching /home/<anyuser> or /
+local function get_git_root()
+  local fn   = vim.fn
+  local path = fn.getcwd()
 
-local function get_root_dir(fname)
-  return lspconfig.util.root_pattern('.git')(fname) or vim.fn.getcwd()
+  while path and path ~= "" do
+    -- Found a .git directory here?
+    if fn.isdirectory(path .. "/.git") == 1 then
+      return path
+    end
+
+    -- Stop if we've hit any /home/<username> or the root '/'
+    if path == "/" or path:match("^/home/[^/]+$") then
+      return nil
+    end
+
+    -- Climb up one directory
+    path = fn.fnamemodify(path, ":h")
+  end
+
+  return nil
 end
 
-lspconfig.ruff.setup{root_dir = get_root_dir}
-lspconfig.basedpyright.setup{root_dir = get_root_dir}
-lspconfig.hls.setup{
-  root_dir = lspconfig.util.root_pattern("hie.yaml", "stack.yaml", "cabal.project", "*.cabal", "package.yaml"),
-  filetypes = { 'haskell', 'lhaskell', 'cabal' },
+-- helper: look for `name` in ./.venv/bin/, else in $PATH
+local function find_executable(name)
+  local root = get_git_root()
+  if root == nil then
+    return nil
+  end
+
+  local venv_bin = root .. "/.venv/bin/" .. name
+  if vim.fn.executable(venv_bin) == 1 then
+    return venv_bin
+  elseif vim.fn.executable(name) == 1 then
+    return name
+  end
+
+  return nil
+end
+
+
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      }
+    }
+  },
+  root_markers = { '.git' },
+})
+
+vim.lsp.enable('ruff')
+
+-- Setup BasedPyright if found
+do
+  local cmd = find_executable("basedpyright-langserver")
+  if cmd then
+    vim.lsp.config('basedpyright', {
+      cmd = { cmd, "--stdio" },
+    })
+    vim.lsp.enable('basedpyright')
+  else
+    vim.lsp.enable('ty')
+  end
+end
+
+vim.lsp.config('hls', {
   settings = {
     haskell = {
       formattingProvider = "fourmolu",
@@ -18,22 +76,10 @@ lspconfig.hls.setup{
       },
     },
   },
-}
-lspconfig.openscad_lsp.setup{
-  root_dir = get_root_dir,
-}
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-    -- Check if the language server supports formatting
-    if client.supports_method('textDocument/formatting') then
-      -- Map the key combination to format the entire document
-      vim.api.nvim_buf_set_keymap(args.buf, 'n', 'gf', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', { noremap = true, silent = true })
-    end
-  end,
 })
+vim.lsp.enable('hls')
+
+vim.lsp.enable('openscad_lsp')
 
 vim.o.updatetime = 250  -- Update diagnostics quickly
 
@@ -98,12 +144,12 @@ vim.g.airline_section_y = "%{v:lua.LspStatus()}"
 
 -- Some `q` bindings to run LSP actions
 
-vim.api.nvim_set_keymap('n', 'q', '<Nop>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qr', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qq', '<cmd>lua vim.lsp.buf.code_action({ filter = function(a) return a.isPreferred end, apply = true })<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qa', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
 
 function ClearAndHighlight()
   vim.lsp.buf.clear_references()
@@ -116,3 +162,25 @@ vim.api.nvim_set_keymap('n', '<leader>R', '<cmd>lua vim.lsp.buf.clear_references
 -- Disable the wraparound behavior of "go to prev/next diagnostic"
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ wrap = false })<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ wrap = false })<CR>', { noremap = true, silent = true })
+
+
+----------------------------------------------------------------------
+-- 1. Stop LSP from hijacking gq and other built-in format commands
+----------------------------------------------------------------------
+-- Make it global, but also reset it every time an LSP attaches
+-- (some servers / plugins set it again)
+vim.o.formatexpr = ""
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    vim.bo[ev.buf].formatexpr = ""   -- keep it empty for this buffer
+  end,
+})
+
+----------------------------------------------------------------------
+-- 2. Map NORMAL-mode gf → LSP format whole buffer
+----------------------------------------------------------------------
+vim.keymap.set("n", "gf",
+  function() vim.lsp.buf.format({ async = true }) end,
+  { desc = "LSP format (whole file)" }
+)

@@ -9,3 +9,6 @@ size = 10
 [window]
 padding = { x = 1, y = 1 }
 # padding = { x = 0, y = 0 }
+
+[bell]
+command = { program = "mplayer", args = ["/usr/share/sounds/freedesktop/stereo/bell.oga"] }

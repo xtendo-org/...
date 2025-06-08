@@ -3,7 +3,6 @@ local l_modules = {
   'glts/vim-magnum',
   'glts/vim-radical',
   'jparise/vim-graphql',
-  'kamykn/spelunker.vim',
   'vim-python/python-syntax',
 
   -- LSP

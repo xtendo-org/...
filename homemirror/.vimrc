@@ -13,6 +13,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'elmcast/elm-vim'
 Plug 'endel/vim-github-colorscheme'
+Plug 'jasonccox/vim-wayland-clipboard'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
