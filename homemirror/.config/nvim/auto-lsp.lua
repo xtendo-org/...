@@ -53,18 +53,16 @@ vim.lsp.config('*', {
 
 vim.lsp.enable('ruff')
 
--- Setup BasedPyright if found
-do
-  local cmd = find_executable("basedpyright-langserver")
-  if cmd then
-    vim.lsp.config('basedpyright', {
-      cmd = { cmd, "--stdio" },
-    })
-    vim.lsp.enable('basedpyright')
-  else
-    vim.lsp.enable('ty')
-  end
-end
+-- -- Use "local" BasedPyright if found
+-- do
+--   local cmd = find_executable("basedpyright-langserver")
+--   if cmd then
+--     vim.lsp.config('basedpyright', {
+--       cmd = { cmd, "--stdio" },
+--     })
+--   end
+-- end
+vim.lsp.enable('basedpyright')
 
 vim.lsp.config('hls', {
   settings = {
@@ -76,10 +74,29 @@ vim.lsp.config('hls', {
       },
     },
   },
+
+  flags = { allow_incremental_sync = false },
+
 })
 vim.lsp.enable('hls')
 
+vim.api.nvim_create_autocmd("BufDelete", {
+  pattern = {"*.hs","*.lhs"},
+  callback = function(args)
+    vim.lsp.buf_notify(args.buf, "textDocument/didClose", {
+      textDocument = { uri = vim.uri_from_bufnr(args.buf) },
+    })
+  end,
+})
+
 vim.lsp.enable('openscad_lsp')
+
+if vim.fn.executable("./node_modules/.bin/typescript-language-server") == 1 then
+  vim.lsp.config('ts_ls', {
+    cmd = { "./node_modules/.bin/typescript-language-server", "--stdio" },
+  })
+  vim.lsp.enable('ts_ls')
+end
 
 vim.o.updatetime = 250  -- Update diagnostics quickly
 

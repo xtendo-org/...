@@ -32,7 +32,7 @@ hi Statement ctermbg=NONE ctermfg=9 cterm=italic,bold
 hi String ctermbg=NONE ctermfg=1
 hi Structure ctermfg=4 cterm=none
 hi Todo ctermbg=10 ctermfg=0
-hi Type ctermfg=12 cterm=bold
+hi Type ctermbg=255 cterm=bold,italic
 
 hi @function.builtin ctermfg=5 cterm=bold
 
@@ -41,30 +41,33 @@ hi @function.builtin ctermfg=5 cterm=bold
 hi SymbolMain ctermfg=4
 hi SymbolSpecial ctermfg=1 cterm=bold
 hi SymbolAux ctermfg=7
-hi SymbolAssignment ctermfg=1
 hi SymbolThreatening ctermbg=10 ctermfg=0
+
+hi! link SymbolAssignment Operator
+hi Bracket ctermfg=8 cterm=none
 
 " Semantic tokens (LSP).
 
 hi @lsp.type.parameter ctermfg=8 cterm=bold
 hi link @lsp.type.function Function
 hi @lsp.type.method ctermfg=6 cterm=nocombine,bold
-hi @lsp.type.variable ctermfg=0
+hi @lsp.type.variable ctermfg=8
 hi @lsp.type.keyword ctermfg=white ctermbg=1 cterm=bold
 hi @lsp.type.namespace ctermbg=255 ctermfg=8
 hi @lsp.type.class ctermfg=none cterm=bold
 hi @lsp.type.decorator ctermfg=4 ctermfg=none
 hi @lsp.type.enum ctermfg=2 cterm=bold
 hi @lsp.type.enumMember ctermfg=5 cterm=bold
-hi @lsp.type.type ctermbg=255 cterm=bold,italic
-hi @lsp.type.typeParameter ctermbg=255
+" hi @lsp.type.type ctermbg=255 cterm=bold,italic
+hi link @lsp.type.type Type
+hi @lsp.type.typeParameter ctermbg=230
 
 hi clear LspReferenceText
 hi LspReferenceText ctermbg=226
 
 " Python
 
-hi! link pythonFunction SymbolMain
+hi! link pythonFunction Function
 hi pythonLocal ctermfg=2
 hi pythonBuiltinConstant ctermfg=5 cterm=italic
 hi pythonBuiltinFunction ctermfg=13 cterm=bold,italic
@@ -72,15 +75,18 @@ hi pythonBuiltinException ctermfg=5 cterm=bold
 hi pythonBuiltinModule ctermfg=11 cterm=bold
 hi pythonDottedName ctermfg=4
 hi pythonConventional ctermfg=5 cterm=bold
-hi pythonLower ctermfg=4
-hi pythonUpper ctermfg=12
-hi pythonBracket ctermfg=9
+hi pythonLower ctermfg=8
+hi pythonUpper ctermfg=4
+hi link pythonBracket Bracket
+hi! link pythonAssignmentOperator Operator
 
 " Mostly Haskell
 
 hi! link hsImportModuleName Structure
-hi VarId ctermfg=0
-hi ConId ctermfg=2
+" hi VarId ctermfg=4
+hi link ConId Constant
+hi link hsVarSym Operator
+hi link hsDelimiter Bracket
 
 " Vim-specific
 
