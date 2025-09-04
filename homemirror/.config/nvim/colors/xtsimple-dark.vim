@@ -84,7 +84,7 @@ hi ConId ctermfg=2
 
 " Vim-specific
 
-hi MatchParen cterm=bold ctermfg=0 ctermbg=10
+hi MatchParen cterm=bold ctermfg=10 ctermbg=0
 
 hi signColumn ctermbg=NONE ctermfg=4
 hi vimBracket ctermbg=NONE ctermfg=7
