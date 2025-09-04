@@ -192,6 +192,7 @@ nnoremap <leader>zh a←<ESC>
 nnoremap <leader>zj a↓<ESC>
 nnoremap <leader>zk a↑<ESC>
 nnoremap <leader>zl a→<ESC>
+nnoremap <leader>: aː<ESC>
 
 """ Begin LSP
 
@@ -364,3 +365,7 @@ augroup AutoBufHiddenDelete
   autocmd!
   autocmd BufEnter * setlocal bufhidden=delete
 augroup END
+
+" disable PageUp / PageDown in INSERT mode
+inoremap <PageUp>   <Nop>
+inoremap <PageDown> <Nop>

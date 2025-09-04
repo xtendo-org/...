@@ -1,1 +1,1 @@
-xtsimple-bright.vim
+/home/user/.config/nvim/colors/xtsimple-dark.vim
