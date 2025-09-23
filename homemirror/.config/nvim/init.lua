@@ -32,6 +32,9 @@ local function check_code_override()
     if starts_with(lcwd, "work/") then
       return true
     end
+    if starts_with(lcwd, ".../bin") then
+      return true
+    end
   end
 
   local config_path = cwd .. "/ignoreme-neovim.json"

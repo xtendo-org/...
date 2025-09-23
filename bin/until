@@ -55,15 +55,21 @@ if __name__ == "__main__":
     if arg.startswith("+"):
         target = begin + datetime.timedelta(seconds=parse_hms(arg[1:]))
     else:
-        h_str, _, m_str = sys.argv[1].partition(":")
+        h_str, _, m_str_cand = sys.argv[1].partition(":")
+        m_str, sep_m_s, s_str = m_str_cand.partition(":")
         h = int(h_str)
         m = int(m_str)
+        if sep_m_s == ":":
+            s = int(s_str)
+        else:
+            s = 0
+
         target_base = (
             begin + datetime.timedelta(days=1)
             if h * 60 + m <= begin.hour * 60 + begin.minute
             else begin
         )
-        target = target_base.replace(hour=h, minute=m, second=0)
+        target = target_base.replace(hour=h, minute=m, second=s)
 
     while True:
         now = datetime.datetime.now()
