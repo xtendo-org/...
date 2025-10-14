@@ -88,6 +88,11 @@ hi link ConId Constant
 hi link hsVarSym Operator
 hi link hsDelimiter Bracket
 
+" Markdown
+
+hi markdownCode cterm=NONE ctermfg=5
+hi markdownCodeDelimiter cterm=NONE ctermfg=2
+
 " Vim-specific
 
 hi MatchParen cterm=bold ctermfg=0 ctermbg=10
@@ -115,7 +120,7 @@ hi DiagnosticUnderlineOk cterm=underline guisp=Green
 
 " Spell
 
-hi SpellBad ctermbg=224 ctermfg=0 cterm=undercurl
+hi SpellBad ctermbg=NONE ctermfg=0 cterm=undercurl guisp=#ff9900
 hi SpellCap ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpellLocal ctermbg=224 ctermfg=0 cterm=undercurl
 hi SpellRare ctermbg=224 ctermfg=0 cterm=undercurl

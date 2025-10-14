@@ -9,6 +9,7 @@ import enum
 import os
 import shutil
 import sys
+from pathlib import Path
 
 HOME = os.path.expanduser("~")
 CENTRAL_BUILD_CACHE = f"{HOME}/nodatacow/buildcache"
@@ -18,14 +19,36 @@ class ProjectType(enum.Enum):
     Stack = enum.auto()
     Pyproject = enum.auto()
     Cargo = enum.auto()
+    NodeModules = enum.auto()
 
 
 def build_cache_dirs(ptype: ProjectType) -> list[str]:
-    return {
-        ProjectType.Stack: [".stack-work", "dist-newstyle"],
-        ProjectType.Pyproject: [".venv"],
-        ProjectType.Cargo: ["target", "output"],
-    }[ptype]
+    match ptype:
+        case ProjectType.Stack:
+            return [".stack-work", "dist-newstyle"]
+        case ProjectType.Pyproject:
+            return [".venv"]
+        case ProjectType.Cargo:
+            return ["target", "output"]
+        case ProjectType.NodeModules:
+            return ["node_modules"]
+
+def determine_project_type() -> ProjectType:
+    if os.path.isfile("stack.yaml"):
+        return ProjectType.Stack
+    if os.path.isfile("pyproject.toml"):
+        return ProjectType.Pyproject
+    if os.path.isfile("Cargo.toml"):
+        return ProjectType.Cargo
+    if os.path.isdir("node_modules"):
+        return ProjectType.NodeModules
+
+    realpath = Path(".").resolve()
+    if os.path.isfile(f"{realpath.name}.cabal"):
+        return ProjectType.Stack
+
+    print("Sorry, could not determine the project type.")
+    sys.exit(-1)
 
 
 def main():
@@ -34,16 +57,7 @@ def main():
         print("Sorry, this script only works for directories under $HOME.")
         sys.exit(-1)
 
-    project_type: ProjectType
-    if os.path.isfile("stack.yaml"):
-        project_type = ProjectType.Stack
-    elif os.path.isfile("pyproject.toml"):
-        project_type = ProjectType.Pyproject
-    elif os.path.isfile("Cargo.toml"):
-        project_type = ProjectType.Cargo
-    else:
-        print("Sorry, could not determine the project type.")
-        sys.exit(-1)
+    project_type = determine_project_type()
 
     wd_rel = wd[len(HOME) + 1 :]
     wd_b64 = base64.urlsafe_b64encode(wd_rel.encode()).decode()
@@ -61,7 +75,7 @@ def main():
                 print(f"./{d} is already a link")
                 continue
             print(f"Moving ./{d}")
-            shutil.move(abs_path, new_location)
+            _ = shutil.move(abs_path, new_location)
         else:
             print(f"Making directory for ./{d} at {abs_path}")
             os.mkdir(new_location)

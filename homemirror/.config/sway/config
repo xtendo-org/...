@@ -15,7 +15,7 @@ set $menu wmenu-run
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -223,6 +223,9 @@ bar {
         statusline #ffffff
         background #323232
         inactive_workspace #32323200 #32323200 #5c5c5c
+        # statusline #000000
+        # background #ffffff
+        # inactive_workspace #cccccc #cccccc #5c5c5c
     }
 
     tray_output none
@@ -252,6 +255,7 @@ for_window {
   [app_id="io.github.celluloid_player.Celluloid"] floating enable
   [app_id="io.github.celluloid_player.Celluloid"] border normal 1
   [app_id="org.keepassxc.KeePassXC"] floating enable
+  [app_id="lxqt-openssh-askpass"] floating enable
   [app_id="evince"] floating enable
   [app_id="eog"] floating enable
   [app_id="eog"] border csd
@@ -302,6 +306,14 @@ input type:touchpad {
     natural_scroll enabled  # For natural scrolling; set to 'disabled' for traditional scrolling
 }
 
+# Mouse scroll amount
+
+input "9354:33639:Telink_2.4G_Mouse" {
+    scroll_factor 1.0
+}
+
+focus_follows_mouse no
+
 # Start your launcher
 bindsym $mod+d exec fuzzel
 bindsym $mod+Return exec gmrun
@@ -346,8 +358,8 @@ output eDP-1 adaptive_sync on
 output eDP-1 allow_tearing no
 output * bg ~/zzal/stay_motivated.png center '#222222'
 
-seat * hide_cursor 3000
-seat * hide_cursor when-typing enable
+# seat * hide_cursor 3000
+seat * hide_cursor when-typing disable
 
 exec export EXPOSWAYDIR="$HOME/.local/state/exposway/"
 exec export EXPOSWAYMON="$EXPOSWAYDIR/output"
@@ -356,7 +368,7 @@ exec exposwayd
 bindsym --no-repeat $mod+Down exec exposway
 
 # Launch the system upgrade log by default
-exec alacritty -e nvim ~/log/yay/2025
+exec alacritty -e nvim --clean ~/log/yay/2025
 
 # Press a hotkey to move the mouse pointer to (0, 0)
 bindsym $mod+x exec swaymsg "seat * cursor set 0 0"

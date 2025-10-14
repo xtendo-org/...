@@ -45,7 +45,8 @@ end
 
 # Change Ctrl+w to delete up to the last whitespace;
 # use Alt+Backspace for deleting path components.
-bind \cw backward-kill-bigword
+bind \cw backward-kill-token
+bind alt-backspace backward-kill-word
 
 # autojump
 function __aj_err

@@ -1,12 +1,17 @@
 set -x fish_greeting
 
-# set ssh-agent
-if [ -z $SSH_AUTH_SOCK ]
-    if not pgrep ssh-agent > /dev/null
-        ssh-agent -c | head -n 2 | source
-    else
-        set -x SSH_AUTH_SOCK (ls /tmp/ssh-*/agent.*)
-    end
+
+# # set ssh-agent
+# if [ -z $SSH_AUTH_SOCK ]
+#     if not pgrep ssh-agent > /dev/null
+#         ssh-agent -c | head -n 2 | source
+#     else
+#         set -x SSH_AUTH_SOCK (ls /tmp/ssh-*/agent.*)
+#     end
+# end
+
+if [ -z "$SSH_AUTH_SOCK" ]
+    set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 end
 
 set -x PATH $HOME/.local/bin $PATH
