@@ -30,7 +30,6 @@ hi Search ctermbg=11 ctermfg=0
 hi Special ctermbg=NONE ctermfg=5 cterm=bold
 hi Statement ctermbg=NONE ctermfg=9 cterm=italic,bold
 hi String ctermbg=NONE ctermfg=1
-hi Structure ctermfg=4 cterm=none
 hi Todo ctermbg=10 ctermfg=0
 hi Type ctermbg=255 cterm=bold,italic
 
@@ -87,6 +86,7 @@ hi! link hsImportModuleName Structure
 hi link ConId Constant
 hi link hsVarSym Operator
 hi link hsDelimiter Bracket
+hi link hsStructure Keyword
 
 " Markdown
 
@@ -120,12 +120,19 @@ hi DiagnosticUnderlineOk cterm=underline guisp=Green
 
 " Spell
 
-hi SpellBad ctermbg=NONE ctermfg=0 cterm=undercurl guisp=#ff9900
-hi SpellCap ctermbg=224 ctermfg=0 cterm=undercurl
-hi SpellLocal ctermbg=224 ctermfg=0 cterm=undercurl
-hi SpellRare ctermbg=224 ctermfg=0 cterm=undercurl
-hi SpelunkerSpellBad ctermfg=NONE cterm=undercurl guisp=#ff9900
-hi SpelunkerComplexOrCompoundWord ctermbg=NONE cterm=undercurl guisp=Red
+hi UndercurlRed cterm=undercurl guisp=#cf494c
+hi UndercurlGreen cterm=undercurl guisp=#60b442
+hi UndercurlYellow cterm=undercurl guisp=#db9c11
+hi UndercurlBlue cterm=undercurl guisp=#0575d8
+hi UndercurlMagenta cterm=undercurl guisp=#af5ed2
+hi UndercurlCyan cterm=undercurl guisp=#1db6bb
+
+hi! link SpellBad UndercurlRed
+hi! link SpellCap UndercurlYellow
+hi! link SpellLocal UndercurlMagenta
+hi! link SpellRare UndercurlMagenta
+"hi SpelunkerSpellBad ctermfg=NONE cterm=undercurl guisp=#ff9900
+"hi SpelunkerComplexOrCompoundWord ctermbg=NONE cterm=undercurl guisp=Red
 
 " hi Visual ctermbg=231 ctermfg=NONE
 " hi PmenuSel ctermbg=231 ctermfg=NONE

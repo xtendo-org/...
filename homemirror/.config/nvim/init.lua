@@ -126,3 +126,59 @@ local vimrc = vim.fn.stdpath("config") .. "/nvim_init.vim"
 vim.cmd.source(vimrc)
 
 vim.cmd.colorscheme('xtsimple')
+
+-- Find the highlight group under the cursor
+local function show_hl_under_cursor()
+  local fn, api = vim.fn, vim.api
+  local row, col = unpack(api.nvim_win_get_cursor(0))
+  local bufnr = api.nvim_get_current_buf()
+
+  -- 0) Spell at cursor
+  local spell_word, spell_type = unpack(fn.spellbadword())
+  local spell_map = { bad = "SpellBad", caps = "SpellCap", rare = "SpellRare", ["local"] = "SpellLocal" }
+  local spell_group = (spell_word ~= "" and spell_map[spell_type]) or nil
+
+  -- 1) Classic :syntax (resolved after links)
+  local syn_name = fn.synIDattr(fn.synIDtrans(fn.synID(row, col + 1, 1)), 'name')
+  local syn_stack = {}
+  for _, id in ipairs(fn.synstack(row, col + 1)) do
+    table.insert(syn_stack, fn.synIDattr(id, 'name'))
+  end
+
+  -- 2) Tree-sitter captures
+  local ts_caps = {}
+  local ts_ok, ts = pcall(require, 'vim.treesitter')
+  if ts_ok and ts.get_captures_at_pos then
+    for _, cap in ipairs(ts.get_captures_at_pos(0, row - 1, col)) do
+      table.insert(ts_caps, cap.capture)
+    end
+  end
+
+  -- 3) Extmarks (LSP/diagnostics/plugins)
+  local ext = api.nvim_buf_get_extmarks(bufnr, -1, {row - 1, col}, {row - 1, col + 1}, {details = true})
+  local ext_hls = {}
+  for _, item in ipairs(ext) do
+    local details = item[4]
+    local hl = details and (details.hl_group or details.hl_group_link)
+    if not hl and details and details.hl_id then
+      local ok, info = pcall(api.nvim_get_hl, 0, { id = details.hl_id, link = true })
+      if ok and info and info.name then hl = info.name end
+    end
+    if hl then table.insert(ext_hls, hl) end
+  end
+
+  local lines = {
+    "Highlight info @ cursor:",
+    ("           spell: %s"):format(spell_group or "<none>"),
+    ("  syntax (final): %s"):format((syn_name ~= "" and syn_name) or "<none>"),
+    ("    syntax stack: %s"):format(#syn_stack > 0 and table.concat(syn_stack, " -> ") or "<empty>"),
+    ("      treesitter: %s"):format(#ts_caps > 0 and table.concat(ts_caps, ", ") or "<none>"),
+    ("        extmarks: %s"):format(#ext_hls > 0 and table.concat(ext_hls, ", ") or "<none>"),
+  }
+  vim.notify(table.concat(lines, "\n"), vim.log.levels.INFO, { title = "FindHighlightGroup" })
+end
+
+-- User command instead of a keymap
+vim.api.nvim_create_user_command('FindHighlightGroup', function()
+  show_hl_under_cursor()
+end, { desc = 'Show highlight groups/captures/extmarks (incl. spell) under cursor' })

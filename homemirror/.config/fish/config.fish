@@ -11,16 +11,6 @@ set -q FISH_HOSTNAME || set FISH_HOSTNAME (string shorten -m12 (hostname))
 
 # aliases
 alias v "nvim"
-function vs
-    if [ -e Session.vim ]
-      # vim --servername (head --bytes 32 /dev/urandom | b2sum | head -c 32) -S
-        vim --servername (pwd) -S
-    else
-        vim --servername (pwd) -c ':Obsession'
-    end
-end
-
-# aliases
 function nvs
     set -l OBSESSION_PATH "$HOME/.local/share/xtendo.org/vim/session/$(pwd_concise | base64).vim"
     if [ -e $OBSESSION_PATH ]

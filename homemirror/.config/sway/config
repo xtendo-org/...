@@ -202,7 +202,7 @@ mode "resize" {
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    bindsym Print exec $HOME/.../bin/wshot.sh
 
     bindsym --locked XF86Display output eDP-1 toggle
 
@@ -312,10 +312,14 @@ input "9354:33639:Telink_2.4G_Mouse" {
     scroll_factor 1.0
 }
 
+input "4809:4119:SOAI_USB_Gaming_Mouse" {
+    scroll_factor 0.75
+}
+
 focus_follows_mouse no
 
 # Start your launcher
-bindsym $mod+d exec fuzzel
+bindsym $mod+d exec rofi -show window
 bindsym $mod+Return exec gmrun
 bindsym $mod+c exec gnome-terminal
 
@@ -371,7 +375,7 @@ bindsym --no-repeat $mod+Down exec exposway
 exec alacritty -e nvim --clean ~/log/yay/2025
 
 # Press a hotkey to move the mouse pointer to (0, 0)
-bindsym $mod+x exec swaymsg "seat * cursor set 0 0"
+bindsym $mod+Slash exec swaymsg "seat * cursor set 1920 1080"
 
 bindsym $mod+v exec dunstctl close-all
 
