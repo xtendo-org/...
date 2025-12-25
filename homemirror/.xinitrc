@@ -29,7 +29,7 @@ export QT_IM_MODULE="uim"
 gnome-terminal --maximize -e ~/.../bin/attachtmux.sh &
 
 export XSECURELOCK_BLANK_TIMEOUT=5
-xss-lock xsecurelock &
+xss-lock /home/user/.../bin/xmouselock.sh &
 
 xmodmap ~/.Xmodmap
 
