@@ -162,3 +162,5 @@ complete -f -c conda -n '__fish_conda_using_command upgrade' -a '(__fish_conda_p
 complete -f -c conda -n '__fish_conda_using_command update' -a '(__fish_conda_packages)'
 
 # <<< conda initialize <<<
+
+set -x RIPGREP_CONFIG_PATH ~/.config/ripgrep/config

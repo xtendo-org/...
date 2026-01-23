@@ -16,28 +16,28 @@ hi LineNr ctermbg=NONE ctermfg=3
 
 hi Comment ctermbg=NONE ctermfg=1 cterm=italic
 hi Conditional ctermfg=3 cterm=bold
-hi Constant ctermbg=NONE ctermfg=12 cterm=bold
+hi Constant ctermbg=NONE ctermfg=9
 hi clear Function
-hi Function cterm=italic
+hi Function ctermfg=4
 hi Identifier ctermbg=none ctermfg=none cterm=bold
 hi Include ctermfg=1
-hi Keyword ctermbg=NONE ctermfg=3 cterm=bold
+hi Keyword ctermbg=NONE ctermfg=9 cterm=bold
 hi NormalFloat ctermbg=7
 hi Operator ctermfg=3 cterm=bold
 hi PreProc ctermbg=NONE ctermfg=13 cterm=italic,bold
 hi Repeat ctermfg=1 cterm=bold
 hi Search ctermbg=11 ctermfg=0
 hi Special ctermbg=NONE ctermfg=5 cterm=bold
-hi Statement ctermbg=NONE ctermfg=9 cterm=italic,bold
+hi Statement ctermbg=NONE ctermfg=1 cterm=bold
 hi String ctermbg=NONE ctermfg=1
 hi Todo ctermbg=10 ctermfg=0
-hi Type ctermbg=255 cterm=bold,italic
+hi Type ctermfg=13 cterm=bold
 
-hi @function.builtin ctermfg=5 cterm=bold
+hi Builtin ctermfg=10 cterm=bold
 
 " Custom groups
 
-hi SymbolMain ctermfg=4
+hi SymbolMain ctermfg=4 cterm=nocombine,none
 hi SymbolSpecial ctermfg=1 cterm=bold
 hi SymbolAux ctermfg=7
 hi SymbolThreatening ctermbg=10 ctermfg=0
@@ -49,17 +49,16 @@ hi Bracket ctermfg=8 cterm=none
 
 hi @lsp.type.parameter ctermfg=8 cterm=bold
 hi link @lsp.type.function Function
-hi @lsp.type.method ctermfg=6 cterm=nocombine,bold
-hi @lsp.type.variable ctermfg=8
+hi @lsp.type.method ctermfg=12 cterm=bold
+hi link @lsp.type.variable Variable
 hi @lsp.type.keyword ctermfg=white ctermbg=1 cterm=bold
 hi @lsp.type.namespace ctermbg=255 ctermfg=8
-hi @lsp.type.class ctermfg=none cterm=bold
+hi @lsp.type.class ctermfg=2 cterm=bold
 hi @lsp.type.decorator ctermfg=4 ctermfg=none
 hi @lsp.type.enum ctermfg=2 cterm=bold
 hi @lsp.type.enumMember ctermfg=5 cterm=bold
-" hi @lsp.type.type ctermbg=255 cterm=bold,italic
 hi link @lsp.type.type Type
-hi @lsp.type.typeParameter ctermbg=230
+hi @lsp.type.typeParameter ctermfg=13 cterm=bold
 
 hi clear LspReferenceText
 hi LspReferenceText ctermbg=226
@@ -68,29 +67,45 @@ hi LspReferenceText ctermbg=226
 
 hi! link pythonFunction Function
 hi pythonLocal ctermfg=2
-hi pythonBuiltinConstant ctermfg=5 cterm=italic
-hi pythonBuiltinFunction ctermfg=13 cterm=bold,italic
+hi pythonBuiltinConstant ctermfg=5
+hi pythonBuiltinFunction ctermfg=13 cterm=bold
 hi pythonBuiltinException ctermfg=5 cterm=bold
 hi pythonBuiltinModule ctermfg=11 cterm=bold
 hi pythonDottedName ctermfg=4
 hi pythonConventional ctermfg=5 cterm=bold
-hi pythonLower ctermfg=8
-hi pythonUpper ctermfg=4
+"hi pythonLower ctermfg=8
+"hi pythonUpper ctermfg=4
 hi link pythonBracket Bracket
 hi! link pythonAssignmentOperator Operator
+hi @lsp.type.selfParameter.python ctermfg=2 cterm=bold
 
 " Mostly Haskell
 
 hi! link hsImportModuleName Structure
-" hi VarId ctermfg=4
-hi link ConId Constant
-hi link hsVarSym Operator
+hi VarId ctermfg=12
+hi ConId ctermfg=2
+hi hsVarSym ctermfg=3
 hi link hsDelimiter Bracket
 hi link hsStructure Keyword
+hi hsBulitinError ctermbg=225 ctermfg=1 cterm=bold,italic
+hi @lsp.type.variable.haskell ctermfg=0
+hi @lsp.type.method.haskell ctermfg=6
+hi @lsp.type.property.haskell ctermfg=13 cterm=bold
+
+" This is actually type class
+hi @lsp.type.class.haskell ctermfg=12 cterm=bold
+" This is actually type
+hi @lsp.type.enum.haskell ctermfg=10 cterm=bold
+" This is actually constructors
+hi @lsp.type.enumMember.haskell ctermfg=5 cterm=bold
+" This is actually type synonym
+hi @lsp.type.type.haskell ctermfg=10 cterm=bold,underline
+hi @lsp.type.type.haskell ctermfg=2 cterm=none
 
 " Markdown
 
 hi markdownCode cterm=NONE ctermfg=5
+hi markdownCodeBlock cterm=NONE ctermfg=5
 hi markdownCodeDelimiter cterm=NONE ctermfg=2
 
 " Vim-specific
@@ -107,7 +122,7 @@ hi xdefaultsValue ctermbg=NONE ctermfg=7
 hi DirvishGitModified ctermbg=1 ctermfg=5
 
 hi ColorColumn ctermfg=255 ctermbg=0
-hi CursorColumn ctermbg=255 ctermfg=NONE
+hi CursorColumn ctermbg=255
 
 hi CursorLine cterm=NONE ctermbg=255 ctermfg=NONE
 hi Conceal ctermbg=NONE ctermfg=3 cterm=bold

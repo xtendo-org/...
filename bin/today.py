@@ -6,11 +6,22 @@
 
 import datetime
 import os
-import sys
 import subprocess
+import sys
 
 
-def main(title: str):
+def main():
+    argv_bag = set(sys.argv[1:])
+    try:
+        argv_bag.remove("-g")
+    except KeyError:
+        use_gvim = False
+    else:
+        use_gvim = True
+
+    editor = "gvim" if use_gvim else "nvim"
+    title = argv_bag.pop()
+
     today = datetime.date.today()
     home = os.path.expanduser("~")
     text_human_dir = f"{home}/text/human"
@@ -26,7 +37,7 @@ def main(title: str):
 
         full_path = f"{month_dir}/{today.isoformat()}-{title}"
 
-        result = subprocess.run(["nvim", full_path])
+        result = subprocess.run([editor, full_path])
         sys.exit(result.returncode)
 
     finally:
@@ -34,5 +45,4 @@ def main(title: str):
 
 
 if __name__ == "__main__":
-    title = sys.argv[1]
-    main(title)
+    main()

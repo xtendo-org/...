@@ -201,3 +201,35 @@ vim.keymap.set("n", "gf",
   function() vim.lsp.buf.format({ async = true }) end,
   { desc = "LSP format (whole file)" }
 )
+
+vim.highlight.priorities.semantic_tokens = 1
+
+-- suppress semantic highlight for certain Syntax groups
+do
+  -- empty attrs group
+  vim.api.nvim_set_hl(0, "SemNoop", {})
+
+  local function syntax_has_builtin(buf, row0, col0)
+    local pos = vim.inspect_pos(buf, row0, col0, {
+      treesitter = false, extmarks = false, semantic_tokens = false, syntax = true,
+    })
+    for _, it in ipairs(pos.syntax or {}) do
+      if it.hl_group == "Builtin" then return true end
+    end
+    return false
+  end
+
+  vim.api.nvim_create_autocmd("LspTokenUpdate", {
+    callback = function(ev)
+      local t = ev.data.token
+      if t.type ~= "method" then return end
+      if syntax_has_builtin(ev.buf, t.line, t.start_col) then
+        -- overwrite this token with an inert HL at higher semantic priority
+        vim.lsp.semantic_tokens.highlight_token(
+          t, ev.buf, ev.data.client_id, "SemNoop",
+          { priority = vim.hl.priorities.semantic_tokens + 3 } -- > @lsp.type/@lsp.typemod
+        )
+      end
+    end,
+  })
+end

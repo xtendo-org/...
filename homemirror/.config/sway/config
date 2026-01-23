@@ -325,21 +325,26 @@ bindsym $mod+c exec gnome-terminal
 
 # Lock
 
-exec killall swayidle; swayidle -w \
+
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+
+# exec killall swayidle; swayidle -w \
+#     timeout 600 'swaymsg "output * dpms off"' \
+#     resume 'swaymsg "output * dpms on"' \
+#     timeout 1200 "swaylock --daemonize --no-unlock-indicator -c 092341" \
+#     before-sleep "swaylock --daemonize --no-unlock-indicator -c 092341" \
+#     lock "swaylock --daemonize --no-unlock-indicator -c 092341"
+
+exec_always killall -9 swayidle; swayidle -w \
     timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     timeout 1200 "waylock -fork-on-lock" \
-    before-sleep "waylock -fork-on-lock" \
-    lock "waylock -fork-on-lock"
+    before-sleep "waylock -fork-on-lock"
 
-exec_always killall swayidle; swayidle -w \
-    timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    timeout 1200 "waylock -fork-on-lock" \
-    before-sleep "waylock -fork-on-lock" \
-    lock "waylock -fork-on-lock"
-
-bindsym $mod+z exec "waylock -fork-on-lock; sleep 1; killall -USR1 swayidle"
+bindsym $mod+z exec waylock-manual.sh
 
 # Touchpad toggle
 
@@ -360,7 +365,7 @@ bindsym $mod+Left move workspace to output left
 output eDP-1 scale 1.5
 output eDP-1 adaptive_sync on
 output eDP-1 allow_tearing no
-output * bg ~/zzal/stay_motivated.png center '#222222'
+output * bg '#000000' solid_color
 
 # seat * hide_cursor 3000
 seat * hide_cursor when-typing disable
@@ -372,7 +377,7 @@ exec exposwayd
 bindsym --no-repeat $mod+Down exec exposway
 
 # Launch the system upgrade log by default
-exec alacritty -e nvim --clean ~/log/yay/2025
+exec alacritty -e nvim --clean ~/log/yay/2026
 
 # Press a hotkey to move the mouse pointer to (0, 0)
 bindsym $mod+Slash exec swaymsg "seat * cursor set 1920 1080"

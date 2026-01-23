@@ -1,3 +1,5 @@
+map q <Nop>
+
 filetype plugin indent on
 syntax on
 
@@ -369,3 +371,15 @@ augroup END
 " disable PageUp / PageDown in INSERT mode
 inoremap <PageUp>   <Nop>
 inoremap <PageDown> <Nop>
+
+" Do not show *.hie files in netrw
+set wildignore+=*.hie,*.hi
+let g:netrw_list_hide= '.*\.hie$,^\.\.\=/\=$'
+
+set spell
+
+let g:fzf_vim = get(g:, 'fzf_vim', {})
+let g:fzf_vim.rg_command =
+      \ 'rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs'
+let g:rg_command =
+      \ 'rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs'

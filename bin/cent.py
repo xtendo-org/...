@@ -33,6 +33,7 @@ def build_cache_dirs(ptype: ProjectType) -> list[str]:
         case ProjectType.NodeModules:
             return ["node_modules"]
 
+
 def determine_project_type() -> ProjectType:
     if os.path.isfile("stack.yaml"):
         return ProjectType.Stack
@@ -67,7 +68,12 @@ def main():
     project_build_cache = f"{CENTRAL_BUILD_CACHE}/{wd_b64}"
 
     os.makedirs(project_build_cache, exist_ok=True)
-    for d in build_cache_dirs(project_type):
+
+    cache_dirs: list[str] = (
+        sys.argv[1:] if len(sys.argv) > 1 else build_cache_dirs(project_type)
+    )
+
+    for d in cache_dirs:
         abs_path = f"{wd}/{d}"
         new_location = f"{project_build_cache}/{d}"
         if os.path.exists(d):

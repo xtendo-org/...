@@ -4,6 +4,7 @@
 .mypy_cache
 .pyenv-virtualenv
 .stack-work
+.stack-work-*
 .venv
 .vscode
 Cargo.lock
@@ -21,3 +22,6 @@ output
 stack.*.lock
 tags
 target
+/AGENTS.md
+/.stack-root-local/
+/novcs/

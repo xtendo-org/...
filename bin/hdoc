@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ $1 ]; then
   package_str=$(stack ls dependencies | grep "^$1 " | sed -e 's/ /-/')"/"
+  html_path="$(stack path --snapshot-doc-root)/${package_str}index.html"
 else
-  package_str=""
+  html_path="$(stack path --local-doc-root)/index.html"
 fi
-html_path="$(stack path --snapshot-doc-root)/${package_str}index.html"
 echo $html_path
 firefox -P Reset $html_path

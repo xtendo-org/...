@@ -10,7 +10,7 @@ local l_modules = {
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-nvim-lsp',
 
-  {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+  -- {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
 }
 
 return { l_modules = l_modules }
