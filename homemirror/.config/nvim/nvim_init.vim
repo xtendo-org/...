@@ -383,3 +383,20 @@ let g:fzf_vim.rg_command =
       \ 'rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs'
 let g:rg_command =
       \ 'rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs'
+
+" Launch mdwatch.sh
+command! Mdwatch call s:mdwatch_run()
+function! s:mdwatch_run() abort
+  let l:path = expand('%:p')
+  if l:path ==# ''
+    echoerr 'No file path'
+    return
+  endif
+  if has('nvim')
+    call jobstart(['mdwatch.sh', l:path], {'detach': v:true})
+  elseif exists('*job_start')
+    call job_start(['mdwatch.sh', l:path], {'detach': 1})
+  else
+    echoerr 'No job API available'
+  endif
+endfunction

@@ -108,6 +108,11 @@ hi markdownCode cterm=NONE ctermfg=5
 hi markdownCodeBlock cterm=NONE ctermfg=5
 hi markdownCodeDelimiter cterm=NONE ctermfg=2
 
+" Git
+
+hi diffRemoved ctermfg=1
+hi diffAdded ctermfg=2
+
 " Vim-specific
 
 hi MatchParen cterm=bold ctermfg=0 ctermbg=10
