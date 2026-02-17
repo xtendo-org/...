@@ -11,6 +11,15 @@ set -q FISH_HOSTNAME || set FISH_HOSTNAME (string shorten -m12 (hostname))
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-P-c"
 
+if not set -q SSH_ASKPASS
+    systemctl --user show-environment | while read -l line
+        set -l kv (string split -m 1 "=" $line)
+        if test (count $kv) -eq 2
+            set -gx $kv[1] $kv[2]
+        end
+    end
+end
+
 # aliases
 alias v "nvim"
 function nvs
