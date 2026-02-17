@@ -10,6 +10,7 @@ end
 set -q FISH_HOSTNAME || set FISH_HOSTNAME (string shorten -m12 (hostname))
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-P-c"
+set -q XDG_RUNTIME_DIR || export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 if not set -q SSH_ASKPASS
     systemctl --user show-environment | while read -l line
