@@ -12,7 +12,7 @@ function! NetrwMapping()
   nnoremap <silent> <buffer> <c-r> :Ex<CR>
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
   nnoremap <silent> <buffer> <c-p> :CtrlPMRU<CR>
-  nnoremap <silent> <buffer> ' :FZF<CR>
+  nnoremap <silent> <buffer> ' :SafeFiles<CR>
 endfunction
 
 " let g:ctrlp_cmd = 'CtrlP'
@@ -94,7 +94,7 @@ let g:ctrlp_custom_ignore = 'target\|\.stack-work\|\.git\|_pb2\.py\|\.pyi\|\.pyc
 
 function! s:FinishTaskFunction(line1, line2)
   let l:original_search = @/
-  execute a:line1 . ',' . a:line2 . 's/\(\s*-\s*\)\(.*\)/\1<del>\2<\/del>/'
+  execute a:line1 . ',' . a:line2 . 's/\(\s*-\s*\)\(.*\)/\1\~\2\~/'
   let @/ = l:original_search
 endfunction
 command! -range FinishTask call s:FinishTaskFunction(<line1>, <line2>)
@@ -110,7 +110,6 @@ nnoremap <leader>P "+P
 
 nnoremap <silent> <c-l> :TmuxNavigateRight<CR>
 nnoremap <silent> <c-p> :CtrlPMRU<CR>
-nnoremap <silent> ' :FZF<CR>
 
 " Do not wrap around when searching
 set nowrapscan
@@ -384,19 +383,62 @@ let g:fzf_vim.rg_command =
 let g:rg_command =
       \ 'rg --column --line-number --no-heading --color=always --smart-case --no-ignore-vcs'
 
-" Launch mdwatch.sh
-command! Mdwatch call s:mdwatch_run()
-function! s:mdwatch_run() abort
+" Launch mdview.sh
+command! Mdview call s:mdview_run()
+function! s:mdview_run() abort
   let l:path = expand('%:p')
   if l:path ==# ''
     echoerr 'No file path'
     return
   endif
   if has('nvim')
-    call jobstart(['mdwatch.sh', l:path], {'detach': v:true})
+    call jobstart(['mdview.sh', l:path], {'detach': v:true})
   elseif exists('*job_start')
-    call job_start(['mdwatch.sh', l:path], {'detach': 1})
+    call job_start(['mdview.sh', l:path], {'detach': 1})
   else
     echoerr 'No job API available'
   endif
 endfunction
+
+" Copy the file path to the clipboard
+function! CopyCurrentFilePath()
+  let l:path = expand('%')
+  call setreg('+', l:path)
+  echo 'Copied ' . l:path
+endfunction
+
+function! CopyCurrentFileAbsolutePath()
+  let l:path = expand('%:p')
+  call setreg('+', l:path)
+  echo 'Copied ' . l:path
+endfunction
+
+nnoremap <leader>c <Cmd>call CopyCurrentFilePath()<CR>
+nnoremap <leader>C <Cmd>call CopyCurrentFileAbsolutePath()<CR>
+
+" Like :Files but does not scan when the CWD is `$HOME` or `/`
+function! SafeFiles() abort
+  let l:dir = resolve(fnamemodify(getcwd(), ':p'))
+  let l:dir = substitute(l:dir, '/\+$', '', '')
+  if empty(l:dir)
+    let l:dir = '/'
+  endif
+
+  let l:is_blocked =
+        \ l:dir ==# '/' ||
+        \ l:dir ==# '/etc' ||
+        \ l:dir ==# '/tmp' ||
+        \ l:dir =~# '^/home/[^/]\+$'
+
+  if l:is_blocked
+    echohl WarningMsg
+    echom ':Files is disabled in ' . l:dir
+    echohl None
+    return
+  endif
+
+  call fzf#vim#files('', fzf#vim#with_preview(), 0)
+endfunction
+
+command! SafeFiles call SafeFiles()
+nnoremap <silent> ' :SafeFiles<CR>

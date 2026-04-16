@@ -188,14 +188,9 @@ mode "resize" {
 #
 # Utilities:
 #
-    # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
-
-    bindsym --locked Mod4+XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked Mod4+XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
-    bindsym --locked Mod4+XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
+    # bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    # bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
+    # bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
 
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
     # Special keys to adjust brightness via brightnessctl
@@ -252,10 +247,13 @@ for_window {
   [class="vlc"] border normal 1
   [app_id="org.gnome.Terminal"] floating enable
   [app_id="org.gnome.Terminal"] border normal 1
+  [app_id="mpv"] floating enable
+  [app_id="mpv"] border normal 1
   [app_id="io.github.celluloid_player.Celluloid"] floating enable
   [app_id="io.github.celluloid_player.Celluloid"] border normal 1
   [app_id="org.keepassxc.KeePassXC"] floating enable
   [app_id="lxqt-openssh-askpass"] floating enable
+  [app_id="org.gnome.font-viewer"] floating enable
   [app_id="evince"] floating enable
   [app_id="eog"] floating enable
   [app_id="eog"] border csd
@@ -281,7 +279,6 @@ set $XKB_CONFIG_ROOT ~/.config/xkb
 input type:keyboard {
   xkb_layout custom
   xkb_variant xtnav
-  # Capslock key should work as escape key
   # See /usr/share/X11/xkb/rules/xorg.lst for options
   xkb_options ctrl:nocaps
 }
@@ -313,13 +310,13 @@ input "9354:33639:Telink_2.4G_Mouse" {
 }
 
 input "4809:4119:SOAI_USB_Gaming_Mouse" {
-    scroll_factor 0.75
+    scroll_factor 0.5
 }
 
 focus_follows_mouse no
 
 # Start your launcher
-bindsym $mod+d exec rofi -show window
+# bindsym $mod+d exec rofi -show window
 bindsym $mod+Return exec gmrun
 bindsym $mod+c exec gnome-terminal
 
@@ -377,7 +374,7 @@ exec exposwayd
 bindsym --no-repeat $mod+Down exec exposway
 
 # Launch the system upgrade log by default
-exec alacritty -e nvim --clean ~/log/yay/2026
+exec alacritty -e nvim --clean $(~/code/scripts/choose-latest.py ~/log/yay)
 
 # Press a hotkey to move the mouse pointer to (0, 0)
 bindsym $mod+Slash exec swaymsg "seat * cursor set 1920 1080"
@@ -390,5 +387,10 @@ bindsym $mod+v exec dunstctl close-all
 bindsym Ctrl+F12 exec --no-startup-id sh -c \
   'for i in $(seq 1 20); do swaymsg seat "*" cursor press button1; swaymsg seat "*" cursor release button1; sleep 0.02; done'
 
+# Sound volume
+
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ -10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
+bindsym --locked XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
 bindsym --whole-window BTN_EXTRA exec "pactl set-sink-volume @DEFAULT_SINK@ +10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
 bindsym --whole-window BTN_SIDE exec "pactl set-sink-volume @DEFAULT_SINK@ -10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"

@@ -94,6 +94,10 @@ vim.lsp.enable('openscad_lsp')
 if vim.fn.executable("./node_modules/.bin/typescript-language-server") == 1 then
   vim.lsp.config('ts_ls', {
     cmd = { "./node_modules/.bin/typescript-language-server", "--stdio" },
+    on_attach = function(client)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+    end,
   })
   vim.lsp.enable('ts_ls')
 end
@@ -177,9 +181,34 @@ vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua ClearAndHighlight()<CR>', { 
 vim.api.nvim_set_keymap('n', '<leader>R', '<cmd>lua vim.lsp.buf.clear_references()<CR>', { noremap = true, silent = true })
 
 -- Disable the wraparound behavior of "go to prev/next diagnostic"
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ wrap = false })<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ wrap = false })<CR>', { noremap = true, silent = true })
+vim.diagnostic.config({
+  jump = {
+    on_jump = function(diagnostic, bufnr)
+      if not diagnostic then
+        return
+      end
 
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        scope = "cursor",
+        pos = { diagnostic.lnum, diagnostic.col },
+        source = "if_many",
+      })
+    end,
+  },
+})
+
+local function diagnostic_jump(count)
+  return function()
+    vim.diagnostic.jump({
+      count = count,
+      wrap = false,
+    })
+  end
+end
+
+vim.keymap.set("n", "[d", diagnostic_jump(-1), { silent = true, desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", diagnostic_jump(1),  { silent = true, desc = "Next diagnostic" })
 
 ----------------------------------------------------------------------
 -- 1. Stop LSP from hijacking gq and other built-in format commands
@@ -193,14 +222,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.bo[ev.buf].formatexpr = ""   -- keep it empty for this buffer
   end,
 })
-
-----------------------------------------------------------------------
--- 2. Map NORMAL-mode gf → LSP format whole buffer
-----------------------------------------------------------------------
-vim.keymap.set("n", "gf",
-  function() vim.lsp.buf.format({ async = true }) end,
-  { desc = "LSP format (whole file)" }
-)
 
 vim.highlight.priorities.semantic_tokens = 1
 
@@ -233,3 +254,47 @@ do
     end,
   })
 end
+
+require("conform").setup({
+  formatters_by_ft = {
+    javascript = { "prettierd" },
+    javascriptreact = { "prettierd" },
+    typescript = { "prettierd" },
+    typescriptreact = { "prettierd" },
+  },
+
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+})
+
+-- LSP-aware format command that falls back to conform.nvim
+local js_ts_fts = {
+  javascript = true,
+  javascriptreact = true,
+  typescript = true,
+  typescriptreact = true,
+}
+
+local function format_with_lsp_then_conform()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local ft = vim.bo[bufnr].filetype
+
+  if not js_ts_fts[ft] then
+    vim.lsp.buf.format({ bufnr = bufnr })
+    return
+  end
+
+  require("conform").format({
+    bufnr = bufnr,
+    lsp_format = "never",
+  })
+end
+
+----------------------------------------------------------------------
+-- 2. Map NORMAL-mode gf → LSP format whole buffer
+----------------------------------------------------------------------
+vim.keymap.set("n", "<leader>ss", function() require("fzf-lua").lsp_workspace_symbols() end)
+vim.keymap.set("n", "<leader>so", function() require("fzf-lua").lsp_document_symbols() end)

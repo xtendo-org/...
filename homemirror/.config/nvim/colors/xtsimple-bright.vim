@@ -107,6 +107,7 @@ hi @lsp.type.type.haskell ctermfg=2 cterm=none
 hi markdownCode cterm=NONE ctermfg=5
 hi markdownCodeBlock cterm=NONE ctermfg=5
 hi markdownCodeDelimiter cterm=NONE ctermfg=2
+hi @markup.strikethrough ctermfg=248
 
 " Git
 
