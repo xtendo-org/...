@@ -163,7 +163,7 @@ end
 
 vim.g.airline_section_y = "%{v:lua.LspStatus()}"
 
--- Some `q` bindings to run LSP actions
+-- Some `q` and `g` bindings to run LSP actions
 
 vim.api.nvim_set_keymap('n', 'qr', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qq', '<cmd>lua vim.lsp.buf.code_action({ filter = function(a) return a.isPreferred end, apply = true })<CR>', { noremap = true, silent = true })
@@ -180,7 +180,7 @@ end
 vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua ClearAndHighlight()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>R', '<cmd>lua vim.lsp.buf.clear_references()<CR>', { noremap = true, silent = true })
 
--- Disable the wraparound behavior of "go to prev/next diagnostic"
+-- LSP Diagnostic
 vim.diagnostic.config({
   jump = {
     on_jump = function(diagnostic, bufnr)
@@ -202,7 +202,7 @@ local function diagnostic_jump(count)
   return function()
     vim.diagnostic.jump({
       count = count,
-      wrap = false,
+      -- wrap = false,
     })
   end
 end
@@ -210,8 +210,7 @@ end
 vim.keymap.set("n", "[d", diagnostic_jump(-1), { silent = true, desc = "Previous diagnostic" })
 vim.keymap.set("n", "]d", diagnostic_jump(1),  { silent = true, desc = "Next diagnostic" })
 
-----------------------------------------------------------------------
--- 1. Stop LSP from hijacking gq and other built-in format commands
+-- Stop LSP from hijacking gq and other built-in format commands
 ----------------------------------------------------------------------
 -- Make it global, but also reset it every time an LSP attaches
 -- (some servers / plugins set it again)
@@ -255,17 +254,19 @@ do
   })
 end
 
-require("conform").setup({
+local conform = require("conform")
+
+conform.setup({
   formatters_by_ft = {
-    javascript = { "prettierd" },
-    javascriptreact = { "prettierd" },
-    typescript = { "prettierd" },
-    typescriptreact = { "prettierd" },
+    javascript = { "eslint_d", "prettierd" },
+    javascriptreact = { "eslint_d", "prettierd" },
+    typescript = { "eslint_d", "prettierd" },
+    typescriptreact = { "eslint_d", "prettierd" },
   },
 
   format_on_save = {
     -- These options will be passed to conform.format()
-    timeout_ms = 500,
+    timeout_ms = 1000,
     lsp_format = "fallback",
   },
 })
@@ -278,23 +279,91 @@ local js_ts_fts = {
   typescriptreact = true,
 }
 
-local function format_with_lsp_then_conform()
+local function format_lsp_or_conform()
   local bufnr = vim.api.nvim_get_current_buf()
   local ft = vim.bo[bufnr].filetype
 
   if not js_ts_fts[ft] then
-    vim.lsp.buf.format({ bufnr = bufnr })
+    vim.lsp.buf.format({ bufnr = bufnr, async = true })
     return
   end
 
-  require("conform").format({
+  conform.format({
     bufnr = bufnr,
     lsp_format = "never",
   })
 end
 
-----------------------------------------------------------------------
--- 2. Map NORMAL-mode gf → LSP format whole buffer
-----------------------------------------------------------------------
+-- Map NORMAL-mode gf → LSP format whole buffer
+vim.keymap.set("n", "gf",
+  format_lsp_or_conform,
+  { desc = "LSP format (whole file)" }
+)
+
 vim.keymap.set("n", "<leader>ss", function() require("fzf-lua").lsp_workspace_symbols() end)
 vim.keymap.set("n", "<leader>so", function() require("fzf-lua").lsp_document_symbols() end)
+
+-- Configure nvim-lint
+local lint = require("lint")
+local function configure_nvim_lint()
+
+  vim.keymap.set("n", "ql", function()
+    lint.try_lint()
+  end, { desc = "Run lint" })
+
+  vim.keymap.set("n", "qf", function()
+    local buf = vim.api.nvim_get_current_buf()
+    local filename = vim.api.nvim_buf_get_name(buf)
+    local eslint_d = "./node_modules/.bin/eslint_d"
+
+    if filename == "" then
+      return
+    end
+
+    local input = table.concat(vim.api.nvim_buf_get_lines(buf, 0, -1, false), "\n")
+    if vim.bo[buf].endofline then
+      input = input .. "\n"
+    end
+
+    conform.format({
+      bufnr = buf,
+      lsp_format = "never",
+    })
+
+    vim.system({
+      eslint_d,
+      "--stdin",
+      "--fix-to-stdout",
+      "--stdin-filename",
+      filename,
+    }, { text = true, stdin = input }, function(res)
+      vim.schedule(function()
+        if res.code ~= 0 then
+          vim.notify(res.stderr ~= "" and res.stderr or res.stdout, vim.log.levels.ERROR)
+          return
+        end
+
+        local output = res.stdout
+        if output == input then
+          lint.try_lint()
+          return
+        end
+
+        local view = vim.fn.winsaveview()
+        local lines = vim.split(output, "\n", { plain = true, trimempty = false })
+        local has_eol = output:sub(-1) == "\n"
+
+        if has_eol then
+          table.remove(lines, #lines)
+        end
+
+        vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+        vim.bo[buf].endofline = has_eol
+        vim.fn.winrestview(view)
+        lint.try_lint()
+      end)
+    end)
+  end)
+end
+
+configure_nvim_lint()

@@ -111,8 +111,12 @@ hi @markup.strikethrough ctermfg=248
 
 " Git
 
-hi diffRemoved ctermfg=1
-hi diffAdded ctermfg=2
+hi diffRemoved  ctermfg=1
+hi diffAdded    ctermfg=2
+
+hi GitGutterDelete  ctermfg=1
+hi GitGutterAdd     ctermfg=2
+hi GitGutterChange  ctermfg=3
 
 " Vim-specific
 
