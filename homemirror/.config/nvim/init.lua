@@ -182,3 +182,42 @@ end
 vim.api.nvim_create_user_command('FindHighlightGroup', function()
   show_hl_under_cursor()
 end, { desc = 'Show highlight groups/captures/extmarks (incl. spell) under cursor' })
+
+-- oil.nvim
+-- <https://github.com/stevearc/oil.nvim>
+local oil = require("oil")
+oil.setup({
+  keymaps = {
+    ["<CR>"] = "actions.select",
+    ["<C-r>"] = "actions.refresh",
+    ["."] = {
+      callback = function()
+        -- Get the entry under the cursor
+        local entry = oil.get_cursor_entry()
+        if not entry then return end
+
+        -- Get the full path
+        local dir = oil.get_current_dir()
+        local full_path = dir .. entry.name
+
+        -- Feed the path into the command-line (:)
+        vim.api.nvim_feedkeys(":e " .. full_path, "n", false)
+      end,
+      desc = "Fill command line with file path (Vinegar style)",
+    },
+  },
+
+  use_default_keymaps = false,
+
+  view_options = {
+    natural_order = "fast",
+  },
+
+  win_options = {
+    signcolumn = "yes:2",
+  },
+})
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+require('oil-git-status').setup()

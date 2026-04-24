@@ -93,7 +93,7 @@ vim.lsp.enable('openscad_lsp')
 
 if vim.fn.executable("./node_modules/.bin/typescript-language-server") == 1 then
   vim.lsp.config('ts_ls', {
-    cmd = { "./node_modules/.bin/typescript-language-server", "--stdio" },
+    cmd = { "pnpx", "typescript-language-server", "--stdio" },
     on_attach = function(client)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
@@ -168,6 +168,8 @@ vim.g.airline_section_y = "%{v:lua.LspStatus()}"
 vim.api.nvim_set_keymap('n', 'qr', '<cmd>lua vim.lsp.buf.rename()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qq', '<cmd>lua vim.lsp.buf.code_action({ filter = function(a) return a.isPreferred end, apply = true })<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'qa', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
+
+vim.keymap.set("n", "qd", function() vim.diagnostic.open_float() end, { desc = "Open float of LSP diagnostic" })
 
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', { noremap = true, silent = true })
@@ -264,6 +266,14 @@ conform.setup({
     typescriptreact = { "eslint_d", "prettierd" },
   },
 
+  -- formatters = {
+  --   eslint_d = {
+  --     command = "pnpm",
+  --     args = { "exec", "eslint_d", "--stdin", "--stdin-filename", "$FILENAME" },
+  --     stdin = true,
+  --   },
+  -- },
+
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 1000,
@@ -305,7 +315,20 @@ vim.keymap.set("n", "<leader>so", function() require("fzf-lua").lsp_document_sym
 
 -- Configure nvim-lint
 local lint = require("lint")
+
 local function configure_nvim_lint()
+  -- 1. Configure the default eslint_d linter to use pnpm
+  lint.linters.eslint_d = {
+    cmd = "pnpm",
+    args = { "exec", "eslint_d", "--format", "json", "--stdin", "--stdin-filename", function() return vim.api.nvim_buf_get_name(0) end },
+    stdin = true,
+    append_fname = false,
+    stream = "stdout",
+    ignore_exitcode = true,
+    parser = require("lint.parser").from_errorformat("%f:%l:%c: %m", {
+      source = "eslint_d",
+    }),
+  }
 
   vim.keymap.set("n", "ql", function()
     lint.try_lint()
@@ -314,7 +337,10 @@ local function configure_nvim_lint()
   vim.keymap.set("n", "qf", function()
     local buf = vim.api.nvim_get_current_buf()
     local filename = vim.api.nvim_buf_get_name(buf)
-    local eslint_d = "./node_modules/.bin/eslint_d"
+
+    -- 2. Update the command to use pnpm instead of a hardcoded path
+    local cmd = "pnpm"
+    local args = { "exec", "eslint_d", "--stdin", "--fix-to-stdout", "--stdin-filename", filename }
 
     if filename == "" then
       return
@@ -325,18 +351,13 @@ local function configure_nvim_lint()
       input = input .. "\n"
     end
 
-    conform.format({
+    require("conform").format({
       bufnr = buf,
       lsp_format = "never",
     })
 
-    vim.system({
-      eslint_d,
-      "--stdin",
-      "--fix-to-stdout",
-      "--stdin-filename",
-      filename,
-    }, { text = true, stdin = input }, function(res)
+    -- 3. Update vim.system to use the pnpm command structure
+    vim.system(vim.list_extend({ cmd }, args), { text = true, stdin = input }, function(res)
       vim.schedule(function()
         if res.code ~= 0 then
           vim.notify(res.stderr ~= "" and res.stderr or res.stdout, vim.log.levels.ERROR)

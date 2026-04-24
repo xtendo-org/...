@@ -358,8 +358,14 @@ vnoremap <leader>cu :<C-U>call UrlEncodeSelection()<CR>
 let g:spelunker_check_type = 1
 
 " https://neovim.io/doc/user/pi_netrw.html#g%3Anetrw_sort_sequence
-let g:netrw_sort_options='n'
-let g:netrw_sort_by='extension'
+"let g:netrw_sort_sequence = '[\/]$,*'
+"let g:netrw_sort_options = 'i'
+"let g:netrw_sort_options='V'
+"let g:netrw_sort_by='extension'
+"let g:netrw_sort_sequence = '[\/]$,*'
+"let g:netrw_sort_options = '-V'
+"let g:netrw_sort_sequence = '[\/]$,*'
+let g:netrw_list_cmd = "ls -v --group-directories-first -F"
 
 " Buffer cleanup: On entering any buffer, set it to delete itself when hidden
 augroup AutoBufHiddenDelete
