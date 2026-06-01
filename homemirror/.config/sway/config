@@ -316,7 +316,7 @@ input "4809:4119:SOAI_USB_Gaming_Mouse" {
 focus_follows_mouse no
 
 # Start your launcher
-# bindsym $mod+d exec rofi -show window
+bindsym $mod+d exec rofi -show window
 bindsym $mod+Return exec gmrun
 bindsym $mod+c exec gnome-terminal
 

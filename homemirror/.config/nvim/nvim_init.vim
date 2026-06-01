@@ -373,9 +373,11 @@ augroup AutoBufHiddenDelete
   autocmd BufEnter * setlocal bufhidden=delete
 augroup END
 
-" disable PageUp / PageDown in INSERT mode
-inoremap <PageUp>   <Nop>
-inoremap <PageDown> <Nop>
+" Remap Home/End/PageUp/PageDown in INSERT mode
+inoremap <Home>     ‘
+inoremap <End>      ’
+inoremap <PageUp>   “
+inoremap <PageDown> ”
 
 " Do not show *.hie files in netrw
 set wildignore+=*.hie,*.hi
