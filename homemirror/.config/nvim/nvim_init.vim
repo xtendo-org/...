@@ -194,6 +194,7 @@ nnoremap <leader>zj a↓<ESC>
 nnoremap <leader>zk a↑<ESC>
 nnoremap <leader>zl a→<ESC>
 nnoremap <leader>: aː<ESC>
+nnoremap <leader>. a…<ESC>
 
 """ Begin LSP
 
@@ -378,6 +379,12 @@ inoremap <Home>     ‘
 inoremap <End>      ’
 inoremap <PageUp>   “
 inoremap <PageDown> ”
+inoremap <Up> ↗
+inoremap <Down> ↘
+
+" Add Unicode quotation marks to surround.vim
+let g:surround_{char2nr('q')} = "‘\r’"
+let g:surround_{char2nr('Q')} = "“\r”"
 
 " Do not show *.hie files in netrw
 set wildignore+=*.hie,*.hi

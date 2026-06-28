@@ -22,8 +22,10 @@ set -x PATH $HOME/.../bin $PATH
 set PNPM_PACKAGES "$HOME/.pnpm-packages"
 set PATH $PATH $PNPM_PACKAGES/bin
 
-set -gx PNPM_HOME "/home/user/.local/share/pnpm"
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
+
+set -x PATH $HOME/.local/share/pnpm/bin $PATH
 
 set -gx FISH_HOSTNAME (string shorten -m12 (hostname))
 
@@ -55,7 +57,7 @@ if [ -d ~/.ghcup ]
 end
 
 if [ -d ~/.deno ]
-    set -x PATH $HOME"/.ghcup/bin" $PATH
+    set -x PATH $HOME"/.deno/bin" $PATH
 end
 
 # aliases

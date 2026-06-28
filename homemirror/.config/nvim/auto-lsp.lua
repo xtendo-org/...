@@ -64,6 +64,11 @@ vim.lsp.enable('ruff')
 -- end
 vim.lsp.enable('basedpyright')
 
+vim.lsp.config('somesass_ls', {
+  filetypes = { "scss", "sass" },
+})
+vim.lsp.enable('somesass_ls')
+
 vim.lsp.config('hls', {
   settings = {
     haskell = {
@@ -264,6 +269,7 @@ conform.setup({
     javascriptreact = { "eslint_d", "prettierd" },
     typescript = { "eslint_d", "prettierd" },
     typescriptreact = { "eslint_d", "prettierd" },
+    scss = { "prettierd" }
   },
 
   -- formatters = {
@@ -287,6 +293,7 @@ local js_ts_fts = {
   javascriptreact = true,
   typescript = true,
   typescriptreact = true,
+  scss = true,
 }
 
 local function format_lsp_or_conform()

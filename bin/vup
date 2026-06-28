@@ -1,2 +1,9 @@
 #!/bin/bash
-volset +10
+set -euo pipefail
+
+if pactl get-sink-mute @DEFAULT_SINK@ | rg -q 'yes'; then
+    pactl set-sink-mute @DEFAULT_SINK@ 0
+    volset +0
+else
+    volset +10
+fi

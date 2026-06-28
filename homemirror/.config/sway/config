@@ -1,4 +1,5 @@
 include /etc/sway/config.d/*
+include ~/.config/sway/theme-current.conf
 
 exec --no-startup-id fcitx5 -r -d
 
@@ -214,13 +215,15 @@ bar {
     # The default just shows the current date and time.
     status_command qw-nothread +RTS -C3600 -V3600 -Z --no-automatic-heap-samples --io-manager=native
 
+
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-        # statusline #000000
-        # background #ffffff
-        # inactive_workspace #cccccc #cccccc #5c5c5c
+        background $bar_bg
+        statusline $bar_fg
+        separator  $bar_sep
+
+        focused_workspace  $ws_focus_bg $ws_focus_bg $ws_focus_fg
+        inactive_workspace $ws_bg       $ws_bg       $ws_fg
+        urgent_workspace   $urgent_bg   $urgent_bg   $urgent_fg
     }
 
     tray_output none
@@ -390,7 +393,7 @@ bindsym Ctrl+F12 exec --no-startup-id sh -c \
 # Sound volume
 
 bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-bindsym --locked XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ -10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
-bindsym --locked XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ +10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
-bindsym --whole-window BTN_EXTRA exec "pactl set-sink-volume @DEFAULT_SINK@ +10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
-bindsym --whole-window BTN_SIDE exec "pactl set-sink-volume @DEFAULT_SINK@ -10%; pactl get-sink-volume @DEFAULT_SINK@ | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' | xargs dunstify -a volumecontrol"
+bindsym --locked XF86AudioLowerVolume exec ~/.../bin/vdn
+bindsym --locked XF86AudioRaiseVolume exec ~/.../bin/vup
+bindsym --whole-window BTN_SIDE exec ~/.../bin/vdn
+bindsym --whole-window BTN_EXTRA exec ~/.../bin/vup
