@@ -1,0 +1,4 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR __fish_initialized:4300
+SETUVAR cgitc_revision:9c882722b845e4b9cd03c0a73c31457da325b88d

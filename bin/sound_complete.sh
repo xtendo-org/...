@@ -8,11 +8,11 @@ case "$1" in
       *"Text Channels"*)
         ;;
       *)
-        mplayer /usr/share/sounds/freedesktop/stereo/message-new-instant.oga
+        ffplay -nodisp -autoexit -loglevel quiet /usr/share/sounds/freedesktop/stereo/message-new-instant.oga
         ;;
     esac
     ;;
   *)
-    mplayer /usr/share/sounds/freedesktop/stereo/message-new-instant.oga
+    ffplay -nodisp -autoexit -loglevel quiet /usr/share/sounds/freedesktop/stereo/message-new-instant.oga
     ;;
 esac
