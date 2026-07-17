@@ -1,7 +1,5 @@
 #!/bin/bash
 set -euo pipefail
 
-pactl set-sink-volume @DEFAULT_SINK@ "$1%"
-pactl get-sink-volume @DEFAULT_SINK@ \
-    | rg -o -m 1 '^[^/]* /\s+([0-9]+%)' -r '$1' \
-    | xargs dunstify -a volumecontrol
+wpctl set-volume @DEFAULT_SINK@ "$1"
+wpctl get-volume @DEFAULT_SINK@ | xargs -d '\n' dunstify -a volumecontrol

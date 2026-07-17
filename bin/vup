@@ -1,9 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-if pactl get-sink-mute @DEFAULT_SINK@ | rg -q 'yes'; then
-    pactl set-sink-mute @DEFAULT_SINK@ 0
-    volset +0
+if wpctl get-volume @DEFAULT_SINK@ | rg -q 'MUTED'; then
+    wpctl set-mute @DEFAULT_SINK@ 0
 else
-    volset +10
+    volset 10%+
 fi

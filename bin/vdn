@@ -1,2 +1,2 @@
 #!/bin/bash
-volset -10
+volset 10%-
