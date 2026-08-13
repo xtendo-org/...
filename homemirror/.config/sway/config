@@ -337,11 +337,7 @@ bindsym $mod+c exec gnome-terminal
 #     before-sleep "swaylock --daemonize --no-unlock-indicator -c 092341" \
 #     lock "swaylock --daemonize --no-unlock-indicator -c 092341"
 
-exec_always killall -9 swayidle; swayidle -w \
-    timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    timeout 1200 "waylock -fork-on-lock" \
-    before-sleep "waylock -fork-on-lock"
+exec ~/.../scripts/waylock-init.sh
 
 bindsym $mod+z exec waylock-manual.sh
 
