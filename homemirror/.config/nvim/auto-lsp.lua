@@ -62,6 +62,11 @@ vim.lsp.enable('ruff')
 --     })
 --   end
 -- end
+
+vim.lsp.config('basedpyright', {
+  cmd = { 'uv', 'run', 'basedpyright-langserver', '--stdio' },
+})
+
 vim.lsp.enable('basedpyright')
 
 vim.lsp.config('somesass_ls', {

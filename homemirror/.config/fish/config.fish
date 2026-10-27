@@ -117,3 +117,5 @@ end
 
 # eza
 abbr --add --global -- ez 'eza --color=always --icons=always --group-directories-first'
+
+export PROTON_PASS_LINUX_KEYRING=dbus
