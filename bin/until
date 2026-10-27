@@ -1,24 +1,29 @@
 #!/usr/bin/env python
 
-from collections.abc import Callable
-import itertools
 import datetime
+import itertools
+import logging
 import sys
 import time
+from collections.abc import Callable
+
+logger = logging.getLogger(__name__)
 
 
 def debug(routine: Callable[[], None]):
     try:
         routine()
     except Exception:
-        import pdb
-        import sys
+        _ = sys.stdout.write("\n\n")
+        import pdb  # noqa: T100
         import traceback
 
         extype, value, tb = sys.exc_info()
         _ = extype, value
         traceback.print_exc()
         pdb.post_mortem(tb)
+
+        logger.exception("debug")
 
 
 def parse_hms(duration: str) -> int:
@@ -40,7 +45,7 @@ def parse_hms(duration: str) -> int:
     return (time_list[0] * 60 + time_list[1]) * 60 + time_list[2]
 
 
-def hms(seconds: int | float):
+def hms(seconds: float):
     if isinstance(seconds, float):
         seconds = int(seconds)
     hours, remainder = divmod(seconds, 3600)
@@ -73,16 +78,23 @@ if __name__ == "__main__":
 
     while True:
         now = datetime.datetime.now()
-        delta = (target - now).total_seconds()
-        if delta <= 0:
+        passed = (now - begin).total_seconds()
+        left = (target - now).total_seconds()
+        if left <= 0:
             _ = sys.stdout.write("\n")
             break
 
-        subsecond = delta % 1
+        subsecond = left % 1
 
         now_s = now.strftime("%H:%M:%S")
         begin_s = begin.strftime("%H:%M:%S")
         target_s = target.strftime("%H:%M:%S")
 
-        _ = sys.stdout.write(f"[{now_s}] {begin_s} -({hms(delta)})-> {target_s}\r")
-        time.sleep(subsecond)
+        _ = sys.stdout.write(
+            f"\r[{now_s}] {begin_s} -({hms(passed)}|{hms(left)})" + f"-> {target_s}"
+        )
+        try:
+            time.sleep(subsecond)
+        except BaseException:
+            _ = sys.stdout.write("\n")
+            raise
