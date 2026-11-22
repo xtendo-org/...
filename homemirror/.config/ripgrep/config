@@ -1,0 +1,4 @@
+--smart-case
+--hidden
+--no-ignore-vcs
+--ignore-file=/home/user/.config/ripgrep/ignore

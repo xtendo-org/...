@@ -1,0 +1,9 @@
+.git
+.stack-root-*
+.stack-work
+.stack-work-*
+.venv
+Session.vim
+dist
+dist-newstyle
+node_modules
